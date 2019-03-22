@@ -42,7 +42,7 @@ gem "sidekiq-failures"
 gem "sitemap_generator"
 gem "image_processing", "~> 1.2"
 
-group :development, :test do
+gem_group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console
   gem "rspec-rails"
   gem "factory_bot_rails"
@@ -52,13 +52,19 @@ group :development, :test do
   gem "rails-controller-testing"
 end
 
-group :development, :test, :staging do
+gem_group :development, :test, :staging do
   gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
 end
 
-group :development do
+gem_group :development do
   gem "derailed_benchmarks"
   gem "rails-erd", require: false
   gem "i18n-tasks", "~> 0.9.6"
   gem "i18n_generators", "~> 2.1", ">= 2.1.1"
+end
+
+after_bundle do
+  git :init
+  git add: '.'
+  git commit: "-a -m 'Initial commit'"
 end
