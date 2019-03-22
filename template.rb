@@ -1,3 +1,6 @@
+gsub_file "Gemfile", /^gem\s+["']sass-rails["'].*$/,''
+
+gem "sassc-rails"
 gem "aasm"
 gem "meta-tags"
 gem "http"
@@ -20,7 +23,7 @@ gem "omniauth-google-oauth2"
 gem "rolify"
 # gem "devise_masquerade"
 # gem "devise-two-factor"
-# gem "devise_token_auth", ">= 0.1.43.beta1"
+# gem "devise_token_auth", "~> 0.2"
 gem "pundit"
 # gem "recaptcha"
 
