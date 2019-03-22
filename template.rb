@@ -53,7 +53,7 @@ gem_group :development, :test do
 end
 
 gem_group :development, :test, :staging do
-  gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
+  gem "faker", "1.9.3"
 end
 
 gem_group :development do
