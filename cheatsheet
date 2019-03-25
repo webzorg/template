@@ -1,0 +1,10 @@
+# quickly generate new project without js and bundling for speed
+rm -rf test_rails_app; rails new test_rails_app -J -B; ls -alh test_rails_app
+
+# # ~/.railsrc
+#--skip-bundle
+--skip-spring
+--skip-test
+--database=postgresql
+--webpacker=stimulus
+--template=~/www/template/template.rb
