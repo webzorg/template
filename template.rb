@@ -107,6 +107,7 @@ def add_gems
     gem 'rails-erd', require: false
     gem 'i18n-tasks', '~> 0.9.6'
     gem 'i18n_generators', '~> 2.1', '>= 2.1.1'
+    gem 'rubocop'
   end
 end
 
@@ -116,9 +117,16 @@ end
 
 def copy_base_files
   base_path = File.join(Dir.home, "www", "template")
-  files_to_copy = %w[Procfile
-                     .env] # Procfile.dev
-  files_to_copy.each { |file| copy_file File.join(base_path, ".env"), file }
+  files_to_copy = %w[
+    .rubocop.yml
+    Procfile
+    Procfile.dev
+    .env
+    .bundle/config
+  ]
+  files_to_copy.each do |file|
+    copy_file File.join(base_path, file), file
+  end
 end
 
 ############################ HELPER METHODS ############################
@@ -136,6 +144,8 @@ after_bundle do
   copy_base_files
 
   git :init
-  git add: '.'
+  git add: "."
   git commit: "-a -m 'Initial commit'"
+
+  bundle_command "exec rubocop --auto-correct --safe-auto-correct"
 end
