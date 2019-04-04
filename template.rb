@@ -89,6 +89,7 @@ def add_gems
   gem 'image_processing', '~> 1.2'
 
   gem_group :development, :test do
+    gem 'bullet'
     gem 'awesome_print'
     gem 'rspec-rails'
     gem 'factory_bot_rails'
