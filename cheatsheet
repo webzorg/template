@@ -1,0 +1,15 @@
+# quickly generate new project without js and bundling for speed
+rm -rf test_rails_app; rails new test_rails_app -J -B; ls -alh test_rails_app
+
+# references
+https://github.com/TanookiLabs/tanooki-rails-template/blob/master/rails-kickoff-template.rb
+https://github.com/excid3/jumpstart/blob/master/template.rb
+https://github.com/RailsApps/rails-composer/blob/master/composer.rb
+
+# # ~/.railsrc
+#--skip-bundle
+--skip-spring
+--skip-test
+--database=postgresql
+--webpacker=stimulus
+--template=~/www/template/template.rb

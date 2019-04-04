@@ -1,6 +1,0 @@
-#--skip-bundle
---skip-spring
---skip-test
---database=postgresql
---webpacker=stimulus
---template=~/www/template/template.rb
