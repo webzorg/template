@@ -109,6 +109,7 @@ def add_gems
     gem 'i18n-tasks', '~> 0.9.6'
     gem 'i18n_generators', '~> 2.1', '>= 2.1.1'
     gem 'rubocop'
+    gem 'rubocop-performance'
   end
 end
 
