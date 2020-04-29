@@ -190,6 +190,7 @@ copy_base_files
 # add yarn packages
 `yarn add alertifyjs autosize bootstrap bootstrap.native lodash photoswipe`
 
+# bundle_command "install"
 after_bundle do
   git :init
   git add: "."
@@ -199,6 +200,5 @@ after_bundle do
   git commit: "-a -m 'apply rubocop safe-auto-correct'"
 end
 
-generate(:controller, "home index --no-helper --no-assets --no-controller-specs --no-request-specs --no-view-specs --skip-routes")
 rails_command("db:create")
 rails_command("db:migrate")
