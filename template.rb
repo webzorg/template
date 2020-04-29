@@ -141,6 +141,7 @@ def add_gems
     gem 'database_cleaner'
     # gem 'shoulda-matchers'
     # gem 'rails-controller-testing'
+    gem "dotenv-rails"
   end
 
   gem_group :development, :test, :staging do
@@ -174,6 +175,11 @@ def copy_base_files
 
   files_to_copy.each { |file| copy_file file }
   dirs_to_copy.each  { |dir|  directory dir, force: true }
+
+  # move master key
+  inject_into_file ".env", "\nRAILS_MASTER_KEY=#{File.read('config/master.key')}"
+  File.delete("config/master.key")
+  inject_into_file ".env", "\nRAILS_APP_NAME=#{Dir.pwd.split('/').last}"
 end
 
 ############################## Main Flow ###############################
