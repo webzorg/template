@@ -1,0 +1,30 @@
+---
+:concurrency: 25
+
+:queues:
+  - default
+  - mailers
+
+  - <%= ENV["RAILS_APP_NAME"] %>_development_default
+  - <%= ENV["RAILS_APP_NAME"] %>_development_mailers
+  - <%= ENV["RAILS_APP_NAME"] %>_development_active_storage_analysis
+
+  - <%= ENV["RAILS_APP_NAME"] %>_staging_default
+  - <%= ENV["RAILS_APP_NAME"] %>_staging_mailers
+  - <%= ENV["RAILS_APP_NAME"] %>_staging_active_storage_analysis
+
+  - <%= ENV["RAILS_APP_NAME"] %>_production_default
+  - <%= ENV["RAILS_APP_NAME"] %>_production_mailers
+  - <%= ENV["RAILS_APP_NAME"] %>_production_active_storage_analysis
+
+  - scheduled_jobs
+
+development:
+  :verbose: true
+  # :logfile: ./log/sidekiq.log
+
+staging:
+  :verbose: true
+  :concurrency: 5
+
+production:

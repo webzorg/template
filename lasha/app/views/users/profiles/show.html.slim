@@ -1,0 +1,53 @@
+.container
+  .row
+    .col-lg-4.col-md-6.mx-auto
+      h4
+        = image_tag current_user.avatar_gravatar(40), width: 40, height: 40, class: "rounded"
+        '
+        = @profile.full_name
+        - if @profile.partner?
+          small = " (#{t(:partner)})"
+      br
+
+      dl.row
+        dt.col-sm-6 = t(:first_name)
+        dd.col-sm-6 = @profile.first_name
+
+        dt.col-sm-6 = t(:last_name)
+        dd.col-sm-6 = @profile.last_name
+
+        - if current_user.partner?
+          dt.col-sm-6 = t(:company_name)
+          dd.col-sm-6 = @profile.company_name
+
+          dt.col-sm-6 = t(:phone_number)
+          dd.col-sm-6
+            = content_tag :div, data: { controller: "general" }
+              - if @profile.phone_number_verified?
+                = @profile.phone_number
+                .badge.badge-success = t(:phone_number_verified)
+              - elsif @profile.phone_number.blank?
+                .badge.badge-danger = t(:please_update_your_phone_number)
+              - else
+                = @profile.phone_number
+                = content_tag :span, class: "badge badge-warning", data: { target: "general.phoneNumberVerificationLabel" }
+                  = t(:phone_number_unverified)
+
+                = form_with url: sms_send_verification_code_path, html: { class: "form-inline mt-2 collapse #{form_visible?(:send_verification_code, current_user)}", method: :patch, data: { type: :json, target: "general.smsSendCodeForm",   action: "ajax:success->general#smsSendSuccess   ajax:error->general#errors" } } do |f|
+                  .form-group = f.submit t(:send_verification_code), data: { disable_with: t(:please_wait) }, class: "btn btn-sm btn-primary btn-block"
+
+                = form_with url: sms_verify_code_path, html: { class: "form-inline mt-2 collapse #{form_visible?(:verify_code, current_user)}", method: :patch, data: { type: :json, target: "general.smsVerifyCodeForm", action: "ajax:success->general#smsVerifySuccess ajax:error->general#errors" } } do |f|
+                  .form-group = f.text_field :verification_code, class: "form-control", placeholder: t(:verification_code)
+                  .form-group = f.submit t(:verify_verification_code), data: { disable_with: t(:please_wait) }, class: "btn btn-sm btn-success btn-block mt-2"
+
+                = form_with url: sms_resend_verification_code_path, html: { class: "form-inline mt-2 collapse #{form_visible?(:resend_verification_code, current_user)}", method: :patch, data: { type: :json, target: "general.smsResendCodeForm", action: "ajax:success->general#smsResendSuccess ajax:error->general#errors" } } do |f|
+                  .form-group = f.submit t(:resend_verification_code), data: { disable_with: t(:please_wait) }, class: "btn btn-sm btn-warning btn-block"
+
+        dt.col-sm-6 = t(:email)
+        dd.col-sm-6 = @profile.email
+
+      .btn-toolbar
+        .btn-group.mr-2.mb-2
+          = link_to t(:change_password), profile_change_password_path, class: "btn btn-primary"
+        .btn-group.mr-2.mb-2
+          = link_to t(:edit_profile), edit_profile_path, class: "btn btn-primary"

@@ -1,0 +1,24 @@
+.container
+  .row
+    .col-lg-4.col-md-6.mx-auto
+      = render "shared/user_type_switcher", local_vars: { user_type_switcher_header: t(:sign_in) }
+
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .form-group
+          = f.label :email
+          br
+          = f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email"
+        .form-group
+          = f.label :password
+          br
+          = f.password_field :password, class: "form-control", autocomplete: "current-password"
+
+        - if devise_mapping.rememberable?
+          .custom-control.custom-checkbox
+            = f.check_box :remember_me, class: "custom-control-input"
+            = f.label :remember_me, for: "user_remember_me", class: "custom-control-label"
+          br
+        .actions
+          = f.submit t("devise.shared.links.sign_in"), class: "btn btn-primary btn-block btn-lg"
+
+  = render "shared/sign_in_up_footer"

@@ -1,0 +1,9 @@
+h2.text-center Showing #{@data[:model]}
+
+dl.row
+  - @data[:attributes].each do |attribute, _v|
+    - value = @object.read_attribute(attribute)
+    dt.col-sm-3.text-right = attribute
+    dd.col-sm-9 = value.present? ? value : " - "
+
+= render partial: "lasha/crud/navigation"

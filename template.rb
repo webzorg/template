@@ -1,3 +1,55 @@
+require "pry"
+require "rails/generators/migration.rb"
+source_paths.unshift(File.dirname(__FILE__))
+
+APPLICATION_RB = <<-'APPLICATION_RB'
+    config.generators do |g|
+      g.assets            false
+      g.helper            false
+      # g.test_framework    nil
+      g.system_tests      nil
+      g.jbuilder          false
+    end
+
+    config.app_name = ENV["RAILS_APP_NAME"]
+    config.api_only_mode = ActiveModel::Type::Boolean.new.cast(ENV["API_ONLY_MODE"])
+
+    config.i18n.default_locale = :ka
+    config.i18n.available_locales = [:ka, :en]
+    config.i18n.fallbacks = [en: :ka, ka: :en]
+
+    config.sass.preferred_syntax = :sass
+    config.generators.javascript_engine = :js
+
+    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_name_prefix = "#{Rails.configuration.app_name}_#{Rails.env}"
+
+    config.action_mailer.delivery_method = :sendgrid_actionmailer
+    config.action_mailer.sendgrid_actionmailer_settings = {
+      api_key: Rails.application.credentials.dig(:sendgrid_key),
+      raise_delivery_errors: true
+    }
+
+    config.action_mailer.default_url_options = {
+      host: Rails.application.credentials.dig(Rails.env, :host)
+    }
+
+    config.action_cable.allowed_request_origins = [
+      "https://#{Rails.application.credentials.dig(Rails.env, :host)}",
+      /https:\/\/#{Rails.application.credentials.dig(Rails.env, :host)}.*/
+    ]
+
+    config.cache_store = :redis_cache_store, {
+      expires_in: 1.hour,
+      driver: :hiredis,
+      url: ENV.fetch("REDISCLOUD_IVORY_URL") { ENV.fetch("REDIS_URL") { "redis://localhost:6379" } }
+    }
+
+    config.eager_load_paths << Rails.root.join("lib", "modules")
+
+    config.middleware.insert 0, Rack::UTF8Sanitizer
+APPLICATION_RB
+
 ########################################################################
 ############################ HELPER METHODS ############################
 def inject_text_after(filename, comment, after)
@@ -16,7 +68,13 @@ def inject_text_before(filename, comment, before)
   end
 end
 
-def nicely_format_gemfile
+def rework_application_rb
+  inject_into_file "config/application.rb", APPLICATION_RB, after: "# the framework and any gems in your application.\n\n"
+  gsub_file "config/application.rb", "# Don't generate system test files.", ""
+  gsub_file "config/application.rb", "config.generators.system_tests = nil", ""
+end
+
+def rework_gemfile
   # remove sass-rails in favor of sassc-rails
   gsub_file "Gemfile", /^# Use SCSS for stylesheets/, ''
   gsub_file "Gemfile", /^gem\s+["']sass-rails["'].*$/, ''
@@ -43,16 +101,16 @@ def nicely_format_gemfile
 end
 
 def add_gems
+  gem "lasha", path: "lasha"
+
   # General
-  gem 'sassc-rails'
-  gem 'aasm'
   gem 'meta-tags'
-  gem 'http'
-  gem 'pagy'
-  gem 'slim-rails'
+  # gem 'http'
+  gem 'rest-client'
+  gem 'oj'
   gem 'font-awesome-sass', '~> 5.6.1'
-  gem 'autoprefixer-rails'
   gem 'paper_trail'
+  gem 'notifications'
 
   # Services
   gem 'sendgrid-actionmailer'
@@ -60,14 +118,8 @@ def add_gems
   gem 'gravatar_image_tag'
 
   # Security
-  gem 'devise'
-  gem 'omniauth-facebook'
-  gem 'omniauth-google-oauth2'
-  gem 'rolify'
-  gem 'pundit'
   # gem 'devise_masquerade'
   # gem 'devise-two-factor'
-  # gem 'devise_token_auth', "~> 0.2"
   # gem 'recaptcha'
 
   # Debugging & Optimization
@@ -79,24 +131,16 @@ def add_gems
   gem 'rails-i18n'
   # gem 'globalize', github: 'globalize/globalize'
 
-  # Mechanical Line
-  gem 'redis', '~> 4.0'
-  gem 'hiredis'
-  gem 'sidekiq'
-  gem 'sidekiq-cron'
-  gem 'sidekiq-failures'
-  gem 'sitemap_generator'
-  gem 'image_processing', '~> 1.2'
-
   gem_group :development, :test do
+    gem 'pry-rails'
     gem 'bullet'
     gem 'awesome_print'
     gem 'rspec-rails'
     gem 'factory_bot_rails'
     gem 'capybara'
     gem 'database_cleaner'
-    gem 'shoulda-matchers'
-    gem 'rails-controller-testing'
+    # gem 'shoulda-matchers'
+    # gem 'rails-controller-testing'
   end
 
   gem_group :development, :test, :staging do
@@ -104,6 +148,13 @@ def add_gems
   end
 
   gem_group :development do
+    # capistrano
+    gem "capistrano",         require: false
+    gem "capistrano-bundler", require: false
+    gem "capistrano-rails",   require: false
+    gem "capistrano-rvm",     require: false
+    gem "capistrano3-puma",   require: false
+
     gem 'derailed_benchmarks'
     gem 'rails-erd', require: false
     gem 'i18n-tasks', '~> 0.9.6'
@@ -118,36 +169,36 @@ def remove_base_files
 end
 
 def copy_base_files
-  base_path = File.join(Dir.home, "www", "template")
-  files_to_copy = %w[
-    .rubocop.yml
-    Procfile
-    Procfile.dev
-    .env
-    .bundle/config
-  ]
-  files_to_copy.each do |file|
-    copy_file File.join(base_path, file), file
-  end
+  files_to_copy = %w[.rubocop.yml Procfile Procfile.dev .env .bundle/config]
+  dirs_to_copy = %w[app config db lasha]
+
+  files_to_copy.each { |file| copy_file file }
+  dirs_to_copy.each  { |dir|  directory dir, force: true }
 end
 
 ############################## Main Flow ###############################
 ########################################################################
+environment "config.application_name = Rails.application.class.module_parent_name"
+rework_application_rb
 
 add_gems
+rework_gemfile
+
+remove_base_files
+copy_base_files
+
+# add yarn packages
+`yarn add alertifyjs autosize bootstrap bootstrap.native lodash photoswipe`
 
 after_bundle do
-  nicely_format_gemfile
-
-  # application name
-  environment "config.application_name = Rails.application.class.parent_name"
-
-  remove_base_files
-  copy_base_files
-
   git :init
   git add: "."
   git commit: "-a -m 'Initial commit'"
 
-  bundle_command "exec rubocop --auto-correct --safe-auto-correct"
+  bundle_command "exec rubocop --safe-auto-correct"
+  git commit: "-a -m 'apply rubocop safe-auto-correct'"
 end
+
+generate(:controller, "home index --no-helper --no-assets --no-controller-specs --no-request-specs --no-view-specs --skip-routes")
+rails_command("db:create")
+rails_command("db:migrate")
