@@ -165,10 +165,6 @@ def add_gems
   end
 end
 
-def remove_base_files
-  remove_file "app/assets/stylesheets/application.css"
-end
-
 def copy_base_files
   files_to_copy = %w[.rubocop.yml Procfile Procfile.dev .env .bundle/config]
   dirs_to_copy = %w[app config db lasha]
@@ -178,8 +174,15 @@ def copy_base_files
 
   # move master key
   inject_into_file ".env", "\nRAILS_MASTER_KEY=#{File.read('config/master.key')}"
-  File.delete("config/master.key")
   inject_into_file ".env", "\nRAILS_APP_NAME=#{Dir.pwd.split('/').last}"
+end
+
+def remove_base_files
+  remove_file "app/assets/stylesheets/application.css"
+  remove_file "app/views/layouts/application.html.erb"
+  remove_file "app/views/layouts/mailer.html.erb"
+  remove_file "app/views/layouts/mailer.text.erb"
+  remove_file "config/master.key"
 end
 
 ############################## Main Flow ###############################
@@ -187,11 +190,18 @@ end
 environment "config.application_name = Rails.application.class.module_parent_name"
 rework_application_rb
 
+# # development
+# config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+# config.hosts += ["www.wishmaster.ge", "wishmaster.ge"]
+
+# production/staging
+# config.require_master_key = true
+
 add_gems
 rework_gemfile
 
-remove_base_files
 copy_base_files
+remove_base_files
 
 # add yarn packages
 `yarn add alertifyjs autosize bootstrap bootstrap.native lodash photoswipe`
