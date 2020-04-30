@@ -1,0 +1,30 @@
+---
+:concurrency: 25
+
+:queues:
+  - default
+  - mailers
+
+  - <%= Rails.configuration.app_name %>_development_default
+  - <%= Rails.configuration.app_name %>_development_mailers
+  - <%= Rails.configuration.app_name %>_development_active_storage_analysis
+
+  - <%= Rails.configuration.app_name %>_staging_default
+  - <%= Rails.configuration.app_name %>_staging_mailers
+  - <%= Rails.configuration.app_name %>_staging_active_storage_analysis
+
+  - <%= Rails.configuration.app_name %>_production_default
+  - <%= Rails.configuration.app_name %>_production_mailers
+  - <%= Rails.configuration.app_name %>_production_active_storage_analysis
+
+  - scheduled_jobs
+
+development:
+  :verbose: true
+  # :logfile: ./log/sidekiq.log
+
+staging:
+  :verbose: true
+  :concurrency: 5
+
+production:
