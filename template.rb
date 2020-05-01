@@ -1,5 +1,4 @@
-require "pry"
-require "rails/generators/migration.rb"
+require "pry-byebug"
 source_paths.unshift(File.dirname(__FILE__))
 
 APPLICATION_RB = <<-'APPLICATION_RB'
@@ -54,17 +53,17 @@ APPLICATION_RB
 ############################ HELPER METHODS ############################
 def inject_text_after(filename, comment, after)
   inject_into_file filename, after: "#{after}\n" do
-  <<-RUBY
-#{comment}
-  RUBY
+    <<~RUBY
+      #{comment}
+    RUBY
   end
 end
 
 def inject_text_before(filename, comment, before)
   inject_into_file filename, before: "#{before}\n" do
-  <<-RUBY
-#{comment}
-  RUBY
+    <<~RUBY
+      #{comment}
+    RUBY
   end
 end
 
@@ -83,25 +82,28 @@ def rework_gemfile
   gsub_file "Gemfile", /#\s.*\n/, "\n"  # remove comments
   gsub_file "Gemfile", /\n^\s*\n/, "\n" # remove multiple spaces
 
-  inject_text_before("Gemfile", "\n################################################################################", "gem 'sassc-rails'")
-  inject_text_before("Gemfile", "# General", "gem 'sassc-rails'")
-  inject_text_after("Gemfile", "\n# Services", "gem 'paper_trail'")
+  inject_text_before("Gemfile", "\n################################################################################", "gem 'lasha', path: 'lasha'")
+  inject_text_before("Gemfile", "# General", "gem 'lasha', path: 'lasha'")
+  inject_text_before("Gemfile", "\n# Services", "gem 'sendgrid-actionmailer'")
   inject_text_after("Gemfile", "\n# Security", "gem 'gravatar_image_tag'")
-  security_commented_gems = "# gem 'devise_masquerade'
-# gem 'devise-two-factor'
-# gem 'devise_token_auth', '~> 0.2'
-# gem 'recaptcha'
-"
-  inject_text_after("Gemfile", security_commented_gems, "gem 'pundit'")
+  security_commented_gems = <<~RUBY
+    # gem 'devise_masquerade'
+    # gem 'devise-two-factor'
+    # gem 'devise_token_auth', '~> 0.2'
+    # gem 'recaptcha'
+  RUBY
+  inject_text_after("Gemfile", security_commented_gems, "\n# Security")
+
   inject_text_before("Gemfile", "# Debugging & Optimization", "gem 'active_record_query_trace'")
+
   inject_text_after("Gemfile", "\n# I18n", "gem 'rack-utf8_sanitizer'")
   inject_text_after("Gemfile", "\n# Mechanical Line", "gem 'rails-i18n'")
   inject_text_after("Gemfile", "# gem 'globalize', github: 'globalize/globalize'", "gem 'rails-i18n'")
-  inject_text_after("Gemfile", " ", "gem 'image_processing', '~> 1.2'")
+  inject_text_after("Gemfile", " ", "end")
 end
 
 def add_gems
-  gem "lasha", path: "lasha"
+  gem 'lasha', path: 'lasha'
 
   # General
   gem 'meta-tags'
@@ -187,15 +189,14 @@ end
 
 ############################## Main Flow ###############################
 ########################################################################
+environment "config.require_master_key = true"
 environment "config.application_name = Rails.application.class.module_parent_name"
 rework_application_rb
 
-# # development
-# config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
-# config.hosts += ["www.wishmaster.ge", "wishmaster.ge"]
-
-# production/staging
-# config.require_master_key = true
+# development
+environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: :development
+environment "# config.hosts += ['www.domain.com', 'domain.com']", env: :development
+environment "# # Rails.application.credentials.send(Rails.env).dig(:host)", env: :development
 
 add_gems
 rework_gemfile
