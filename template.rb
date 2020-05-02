@@ -49,6 +49,24 @@ APPLICATION_RB = <<-'APPLICATION_RB'
     config.middleware.insert 0, Rack::UTF8Sanitizer
 APPLICATION_RB
 
+APPLICATION_JS = <<~APPLICATION_JS
+  window.alertify = require("alertifyjs")
+  window.PhotoSwipe = require("photoswipe/dist/photoswipe.min")
+  window.PhotoSwipeUI_Default = require("photoswipe/dist/photoswipe-ui-default.min")
+  window.autosize = require("autosize/dist/autosize.min.js")
+  require("bootstrap.native/dist/bootstrap-native-v4")
+  require("modules/photo-swipe-dom-initializer")
+
+  document.addEventListener("turbolinks:load", function() {
+    BSN.initCallback(document.body);
+    // helpers.fadeOutEffectAndHide(document.getElementById("before-page-spinner"));
+
+    autosize(document.querySelectorAll("textarea"));
+
+    // initPhotoSwipeFromDOM(".thumbnail-list-wrapper");
+  });
+APPLICATION_JS
+
 ########################################################################
 ############################ HELPER METHODS ############################
 def inject_text_after(filename, comment, after)
@@ -71,6 +89,10 @@ def rework_application_rb
   inject_into_file "config/application.rb", APPLICATION_RB, after: "# the framework and any gems in your application.\n\n"
   gsub_file "config/application.rb", "# Don't generate system test files.", ""
   gsub_file "config/application.rb", "config.generators.system_tests = nil", ""
+end
+
+def rework_application_js
+  inject_into_file "app/javascript/packs/application.js", APPLICATION_JS
 end
 
 def rework_gemfile
@@ -206,6 +228,8 @@ remove_base_files
 
 # add yarn packages
 `yarn add alertifyjs autosize bootstrap bootstrap.native lodash photoswipe`
+
+rework_application_js
 
 # bundle_command "install"
 after_bundle do
