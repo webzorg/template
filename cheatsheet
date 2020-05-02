@@ -15,6 +15,10 @@
 #--webpacker=stimulus
 #--template=~/www/template/template.rb
 
+# cloud init status report
+cat /var/lib/cloud/instance/boot-finished
+cat /var/lib/cloud/data/result.json
+
 ####################
 
 # Used as the base secret for all MessageVerifiers in Rails, including the one protecting cookies.

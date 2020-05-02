@@ -1,0 +1,138 @@
+#cloud-config
+# mounts:
+#   - [ /dev/disk/by-id/scsi-0DO_Volume_geth-node-volume2, /mnt/data, "ext4", "defaults,nofail,discard", "0", "0" ]
+
+users:
+  - name: devops
+    groups: sudo
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) ALL"]
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCYcdhoFMqUYdDD+ZCWIsT6uJU843lOaFX7lpNePlYM lasha@deskgen
+
+packages:
+  - git
+  - htop
+  - nethogs
+  - ufw
+  - wget
+  - curl
+  - net-tools
+  - fail2ban
+  - nginx
+  - nodejs
+  - postgresql
+  - postgresql-contrib
+  - libpq-dev
+
+write_files:
+  # - path: "/etc/systemd/system/custom_template.service"
+  #   content: |
+  #     [Unit]
+  #     Description=
+  #     After=network.target
+
+  #     [Service]
+  #     Type=simple
+  #     User=devops
+  #     WorkingDirectory=
+
+  #     # EnvironmentFile=/etc/environment
+
+  #     ExecStart=
+
+  #     Restart=always
+  #     RestartSec=30
+
+  #     [Install]
+  #     WantedBy=default.target
+  - path: /etc/nginx/sites-available/%{app_name}
+    content: |
+      server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        # listen 443 default_server;
+        # listen [::]:443 default_server;
+
+        # ssl                 on;
+        # ssl_certificate     /etc/ssl/%{app_name}.com.pem;
+        # ssl_certificate_key /etc/ssl/%{app_name}.com.key;
+
+        root /var/www/%{app_name}/current/public;
+
+        index index.html;
+
+        server_name _;
+        # server_name %{app_name}.com;
+
+        error_page 403 /403.html;
+        location /403.html {
+          root /var/www/%{app_name}/current/public;
+          allow all;
+          access_log off;
+        }
+
+        location / {
+          # include /var/www/%{app_name}/current/lib/fail2ban/denied_hosts;
+          proxy_cache_bypass $http_secret_header;
+          try_files $uri @application;
+        }
+
+        location @application {
+          proxy_pass http://127.0.0.1:3000;
+          proxy_set_header Host $host;
+          #proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          #proxy_set_header X-Forwarded-Proto $scheme;
+          #proxy_set_header X-Forwarded-Ssl on;
+          #proxy_set_header X-Forwarded-Port $server_port;
+          #proxy_set_header X-Forwarded-Host $host;
+        }
+
+        location /cable {
+          proxy_pass http://unix:///var/www/%{app_name}/shared/tmp/sockets/puma.sock;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+        }
+      }
+
+runcmd:
+  # Format Volume
+  # - mkfs.ext4 -F /dev/disk/by-id/scsi-0DO_Volume_geth-node-volume2
+
+  # Does same as (mounts:)
+  # - mkdir -p /mnt/cardano-volume
+  # - mount -o discard,defaults /dev/disk/by-id/scsi-0DO_Volume_cardano-volume /mnt/cardano-volume
+  # - echo "/dev/disk/by-id/scsi-0DO_Volume_cardano-volume /mnt/cardano-volume ext4 defaults,nofail,discard 0 0" | tee -a /etc/fstab
+
+  # Setup Postgresql
+  - sudo -u postgres psql -U postgres postgres -c "CREATE USER devops SUPERUSER;"
+  - sudo -u postgres psql -U postgres postgres -c "CREATE DATABASE devops WITH OWNER devops;"
+  # Secure SSHD
+  - [sed, -i, -e, "s/PermitRootLogin yes/PermitRootLogin no/g",                /etc/ssh/sshd_config]
+  - [sed, -i, -e, "s/#PasswordAuthentication yes/PasswordAuthentication no/g", /etc/ssh/sshd_config]
+  # - [sed, -i, -e, "s/color_scheme=0/color_scheme=5/g",                    $HOME/.config/htop/htoprc]
+  - [systemctl, restart, sshd]
+  - [rm, -f, /root/.ssh/authorized_keys]
+  - [rm, /etc/nginx/sites-enabled/default]
+  - [ln, -s, /etc/nginx/sites-available/%{app_name}, /etc/nginx/sites-enabled/]
+  # Secure UFW
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow ssh
+  - ufw enable
+  - [gpg2, --recv-keys, 409B6B1796C275462A1703113804BB82D39DC0E3, 7D2BAF1CF37B13E2069D6956105BD0E739499BDB]
+  - /bin/su -s /bin/bash -c "\curl -sSL https://get.rvm.io | bash -s stable" - devops
+  - "/bin/su -s /bin/bash --login -c 'rvm install %{ruby_version}' - devops"
+  - "/bin/su -s /bin/bash -c 'rvm use --default %{ruby_version}' - devops"
+  - "/bin/su -s /bin/bash -c 'gem install bundler' - devops"
+
+chpasswd:
+  list: |
+    root:123456
+    devops:123456
+
+power_state:
+  timeout: 0
+  message: Cloud-init Rebooting...
+  mode: reboot

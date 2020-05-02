@@ -186,6 +186,7 @@ def add_gems
     gem 'i18n_generators', '~> 2.1', '>= 2.1.1'
     gem 'rubocop'
     gem 'rubocop-performance'
+    gem 'droplet_kit'
   end
 end
 
