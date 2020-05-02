@@ -1,14 +1,17 @@
 # config valid only for current version of Capistrano
-lock "3.11.2"
+lock "~> 3.13.0"
 
-set :application, "wishmaster"
-set :repo_url, "git@github.com:webzorg/wishmaster.git"
+RAILS_APP_NAME = ENV["RAILS_APP_NAME"]
+raise "RAILS_APP_NAME can't be blank" if RAILS_APP_NAME.blank?
+
+set :application, RAILS_APP_NAME
+set :repo_url, "git@github.com:webzorg/#{RAILS_APP_NAME}.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/wishmaster"
+set :deploy_to, "/var/www/#{RAILS_APP_NAME}"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh

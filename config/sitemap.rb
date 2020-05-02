@@ -17,9 +17,9 @@ SitemapGenerator::Sitemap.create do
   #
   # Add '/articles'
 
-  add about_path,                 priority: 1.0, changefreq: "weekly"
-  add contact_path,               priority: 0.9, changefreq: "weekly"
-  add terms_path,                 priority: 0.9, changefreq: "weekly"
+  # add about_path,                 priority: 1.0, changefreq: "weekly"
+  # add contact_path,               priority: 0.9, changefreq: "weekly"
+  # add terms_path,                 priority: 0.9, changefreq: "weekly"
   add new_user_registration_path, priority: 0.6, changefreq: "weekly"
   add new_user_session_path,      priority: 0.5, changefreq: "weekly"
 
