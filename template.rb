@@ -239,6 +239,9 @@ after_bundle do
 
   bundle_command "exec rubocop --safe-auto-correct"
   git commit: "-a -m 'apply rubocop safe-auto-correct'"
+
+  git remote: "add origin git@github.com:webzorg/#{Dir.pwd.split('/').last}.git"
+  git remote: "-v"
 end
 
 rails_command("db:create")
