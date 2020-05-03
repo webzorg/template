@@ -11,6 +11,11 @@
 3
   create VPS and set it up
   rails devops:setup
+4
+  ssh to dropplet to confirm signature / create passwords
+5
+  deploy
+  cap production deploy --trace
 
 # # references
 # https://github.com/TanookiLabs/tanooki-rails-template/blob/master/rails-kickoff-template.rb
@@ -28,6 +33,7 @@
 # cloud init status report
 cat /var/lib/cloud/instance/boot-finished
 cat /var/lib/cloud/data/result.json
+cat /var/log/cloud-init-output.log
 
 ####################
 

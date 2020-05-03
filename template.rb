@@ -193,10 +193,11 @@ def add_gems
 end
 
 def copy_base_files
-  files_to_copy = %w[.rubocop.yml Procfile Procfile.dev .env .bundle/config Capfile]
+  files_to_copy = %w[.gitignore .rubocop.yml Procfile Procfile.dev .env .bundle/config Capfile]
   dirs_to_copy = %w[app config db lasha lib]
+  force_overwrite = %[.gitignore]
 
-  files_to_copy.each { |file| copy_file file }
+  files_to_copy.each { |file| copy_file file, force: force_overwrite.include?(file) }
   dirs_to_copy.each  { |dir|  directory dir, force: true }
 
   # move master key

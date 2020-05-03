@@ -22,7 +22,6 @@ packages:
   - nginx
   - nodejs
   - postgresql
-  - postgresql-contrib
   - libpq-dev
   - gawk
   - g++
@@ -47,8 +46,6 @@ packages:
 
 write_files:
   - path: /var/www/%{app_name}/shared/config/database.yml
-    owner: devops:devops
-    # permissions: "0644"
     content: |
       default: &default
         adapter: postgresql
@@ -151,23 +148,31 @@ runcmd:
   - [rm, /etc/nginx/sites-enabled/default]
   - [ln, -s, /etc/nginx/sites-available/%{app_name}, /etc/nginx/sites-enabled/]
   # Secure UFW
-  - ufw default deny incoming
-  - ufw default allow outgoing
-  - ufw allow ssh
-  - ufw enable
-  - /bin/su -s /bin/bash -c "gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB" - devops
-  - /bin/su -s /bin/bash -c "\curl -sSL https://get.rvm.io | bash -s stable" - devops
-  - /bin/su -s /bin/bash -c "source ~/.profile" - devops
-  - /bin/su -s /bin/bash -c "rvm autolibs disable" - devops
-  - /bin/su -s /bin/bash -c "rvm install %{ruby_version}" - devops
-  - /bin/su -s /bin/bash -c "rvm use --default %{ruby_version}" - devops
-  - /bin/su -s /bin/bash -c "gem install bundler" - devops
+  - [ufw, default, deny, incoming]
+  - [ufw, default, allow, outgoing]
+  - [ufw, allow, ssh]
+  - [ufw, enable]
+  - [/bin/su, -s, /bin/bash, -c, "gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB", -, devops]
+  - [/bin/su, -s, /bin/bash, -c, '\curl -sSL https://get.rvm.io | bash -s stable', -, devops]
+  - [/bin/su, -s, /bin/bash, -c, "source ~/.profile", -, devops]
+  - [/bin/su, -s, /bin/bash, -c, "rvm autolibs disable", -, devops]
+  - [/bin/su, -s, /bin/bash, -c, "rvm install %{ruby_version}", -, devops]
+  - [/bin/su, -s, /bin/bash, -c, "rvm use --default %{ruby_version}", -, devops]
+  - [/bin/su, -s, /bin/bash, -c, "gem install bundler", -, devops]
   # Setup Postgresql
-  - /bin/su -s /bin/bash -c "psql -U postgres postgres -c 'CREATE USER devops SUPERUSER;'" - postgres
-  - /bin/su -s /bin/bash -c "psql -U postgres postgres -c 'CREATE DATABASE devops WITH OWNER devops;'" - postgres
+  - [/bin/su, -s, /bin/bash, -c, "psql -U postgres postgres -c 'CREATE USER devops SUPERUSER;'", -, postgres]
+  - [/bin/su, -s, /bin/bash, -c, "psql -U postgres postgres -c 'CREATE DATABASE devops WITH OWNER devops;'", -, postgres]
   # App/capistrano related
-  - [mkdir, /var/www/%{app_name}]
-  - [chown, devops:devops, /var/www/%{app_name}]
+  # - [mkdir, /var/www/%{app_name}]
+  # - [mkdir, /var/www/%{app_name}/shared]
+  - [mkdir, /var/www/%{app_name}/shared/log]
+  - [mkdir, /var/www/%{app_name}/shared/tmp]
+  - [mkdir, /var/www/%{app_name}/shared/tmp/pids]
+  - [mkdir, /var/www/%{app_name}/shared/tmp/cache]
+  - [mkdir, /var/www/%{app_name}/shared/tmp/sockets]
+  - [mkdir, /var/www/%{app_name}/shared/public]
+  - [mkdir, /var/www/%{app_name}/shared/public/system]
+  - [chown, -R, "devops:devops", /var/www/%{app_name}]
 
 chpasswd:
   list: |
