@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock "~> 3.13.0"
 
-RAILS_APP_NAME = ENV["RAILS_APP_NAME"]
-raise "RAILS_APP_NAME can't be blank" if RAILS_APP_NAME.blank?
+RAILS_APP_NAME = Dir.pwd.split('/').last
+raise "RAILS_APP_NAME can't be blank" if RAILS_APP_NAME.nil?
 
 set :application, RAILS_APP_NAME
 set :repo_url, "git@github.com:webzorg/#{RAILS_APP_NAME}.git"
