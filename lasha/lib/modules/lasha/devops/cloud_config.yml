@@ -46,6 +46,23 @@ packages:
   - libssl-dev
 
 write_files:
+  - path: /var/www/%{app_name}/shared/config/database.yml
+    owner: devops:devops
+    # permissions: "0644"
+    content: |
+      default: &default
+        adapter: postgresql
+        encoding: unicode
+        pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+      staging:
+        <<: *default
+        database: %{app_name}_staging
+
+      production:
+        <<: *default
+        database: %{app_name}_production
+
   # - path: "/etc/systemd/system/custom_template.service"
   #   content: |
   #     [Unit]
@@ -66,6 +83,7 @@ write_files:
 
   #     [Install]
   #     WantedBy=default.target
+
   - path: /etc/nginx/sites-available/%{app_name}
     content: |
       server {
@@ -148,6 +166,9 @@ runcmd:
   # Setup Postgresql
   - /bin/su -s /bin/bash -c "psql -U postgres postgres -c 'CREATE USER devops SUPERUSER;'" - postgres
   - /bin/su -s /bin/bash -c "psql -U postgres postgres -c 'CREATE DATABASE devops WITH OWNER devops;'" - postgres
+  # App/capistrano related
+  - [mkdir, /var/www/%{app_name}]
+  - [chown, devops:devops, /var/www/%{app_name}]
 
 chpasswd:
   list: |

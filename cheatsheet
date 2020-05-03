@@ -2,6 +2,16 @@
 # rm -rf test_rails_app; rails new test_rails_app --skip-spring --skip-test --database=postgresql --webpacker=stimulus --template=~/www/template/template.rb
 # rm -rf test_rails_app; rails new test_rails_app -J -B; ls -alh test_rails_app
 
+1
+  create project with the template, example:
+  rails new test_rails_app --skip-spring --skip-test --database=postgresql --webpacker=stimulus --template=~/www/template/template.rb
+2
+  (create github repo if doesn't exist)
+  push project to github
+3
+  create VPS and set it up
+  rails devops:setup
+
 # # references
 # https://github.com/TanookiLabs/tanooki-rails-template/blob/master/rails-kickoff-template.rb
 # https://github.com/excid3/jumpstart/blob/master/template.rb
