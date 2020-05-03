@@ -24,6 +24,26 @@ packages:
   - postgresql
   - postgresql-contrib
   - libpq-dev
+  - gawk
+  - g++
+  - gcc
+  - autoconf
+  - automake
+  - bison
+  - libc6-dev
+  - libffi-dev
+  - libgdbm-dev
+  - libncurses5-dev
+  - libsqlite3-dev
+  - libtool
+  - libyaml-dev
+  - make
+  - pkg-config
+  - sqlite3
+  - zlib1g-dev
+  - libgmp-dev
+  - libreadline-dev
+  - libssl-dev
 
 write_files:
   # - path: "/etc/systemd/system/custom_template.service"
@@ -105,9 +125,6 @@ runcmd:
   # - mount -o discard,defaults /dev/disk/by-id/scsi-0DO_Volume_cardano-volume /mnt/cardano-volume
   # - echo "/dev/disk/by-id/scsi-0DO_Volume_cardano-volume /mnt/cardano-volume ext4 defaults,nofail,discard 0 0" | tee -a /etc/fstab
 
-  # Setup Postgresql
-  - sudo -u postgres psql -U postgres postgres -c "CREATE USER devops SUPERUSER;"
-  - sudo -u postgres psql -U postgres postgres -c "CREATE DATABASE devops WITH OWNER devops;"
   # Secure SSHD
   - [sed, -i, -e, "s/PermitRootLogin yes/PermitRootLogin no/g",                /etc/ssh/sshd_config]
   - [sed, -i, -e, "s/#PasswordAuthentication yes/PasswordAuthentication no/g", /etc/ssh/sshd_config]
@@ -121,11 +138,16 @@ runcmd:
   - ufw default allow outgoing
   - ufw allow ssh
   - ufw enable
-  - [gpg2, --recv-keys, 409B6B1796C275462A1703113804BB82D39DC0E3, 7D2BAF1CF37B13E2069D6956105BD0E739499BDB]
+  - /bin/su -s /bin/bash -c "gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB" - devops
   - /bin/su -s /bin/bash -c "\curl -sSL https://get.rvm.io | bash -s stable" - devops
-  - "/bin/su -s /bin/bash --login -c 'rvm install %{ruby_version}' - devops"
-  - "/bin/su -s /bin/bash -c 'rvm use --default %{ruby_version}' - devops"
-  - "/bin/su -s /bin/bash -c 'gem install bundler' - devops"
+  - /bin/su -s /bin/bash -c "source ~/.profile" - devops
+  - /bin/su -s /bin/bash -c "rvm autolibs disable" - devops
+  - /bin/su -s /bin/bash -c "rvm install %{ruby_version}" - devops
+  - /bin/su -s /bin/bash -c "rvm use --default %{ruby_version}" - devops
+  - /bin/su -s /bin/bash -c "gem install bundler" - devops
+  # Setup Postgresql
+  - /bin/su -s /bin/bash -c "psql -U postgres postgres -c 'CREATE USER devops SUPERUSER;'" - postgres
+  - /bin/su -s /bin/bash -c "psql -U postgres postgres -c 'CREATE DATABASE devops WITH OWNER devops;'" - postgres
 
 chpasswd:
   list: |

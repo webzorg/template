@@ -2,7 +2,6 @@ namespace :devops do
   desc "Setup deployment VPS"
   task setup: :environment do
     client = Lasha::Devops::Client.new
-    client.delete_droplet
     result_hash = client.create_droplet
 
     abort "Something went wrong" unless result_hash[:droplet].is_a? DropletKit::Droplet

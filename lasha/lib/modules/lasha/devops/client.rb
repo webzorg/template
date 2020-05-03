@@ -60,14 +60,14 @@ class Lasha::Devops::Client
     self.droplet = client.droplets.all.select { |d| d.name.eql?(params[:name]) }.first
   end
 
-  def delete_droplet(params=droplet_params)
-    droplet = fetch_droplet(params)
+  # def delete_droplet(params=droplet_params)
+  #   droplet = fetch_droplet(params)
 
-    return if droplet.blank?
+  #   return if droplet.blank?
 
-    @client.droplets.delete(id: droplet.id)
-    sleep 5
-  end
+  #   @client.droplets.delete(id: droplet.id)
+  #   sleep 10
+  # end
 
   def regions
     regions = client.regions.all
