@@ -187,6 +187,8 @@ def add_gems
     gem 'rubocop'
     gem 'rubocop-performance'
     gem 'droplet_kit'
+    gem 'ed25519'
+    gem 'bcrypt_pbkdf'
   end
 end
 
@@ -238,7 +240,7 @@ after_bundle do
   git add: "."
   git commit: "-a -m 'Initial commit'"
 
-  bundle_command "exec rubocop --safe-auto-correct"
+  bundle_command "exec rubocop --safe-auto-correct -c .rubocop.yml"
   git commit: "-a -m 'apply rubocop safe-auto-correct'"
 
   git remote: "add origin git@github.com:webzorg/#{Dir.pwd.split('/').last}.git"

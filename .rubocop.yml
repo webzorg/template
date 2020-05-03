@@ -3,6 +3,11 @@ require: rubocop-performance
 AllCops:
   Exclude:
     - "**/*.slim"
+    - "vendor/**/*"
+    - "node_modules/**/*"
+    - "db/*"
+    - "db/fixtures/**/*"
+    - "tmp/**/*"
 
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
@@ -10,6 +15,9 @@ Layout/IndentationConsistency:
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
+
+Style/FormatString:
+  AutoCorrect: false
 
 Metrics/LineLength:
   Max: 120
