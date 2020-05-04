@@ -177,11 +177,11 @@ runcmd:
   - [mkdir, /var/www/%{app_name}/shared/public]
   - [mkdir, /var/www/%{app_name}/shared/public/system]
   - [chown, -R, "devops:devops", /var/www/%{app_name}]
+  - [echo, "pi:newpassword", |, chpasswd]
 
 chpasswd:
   list: |
     root:123456
-    devops:123456
 
 power_state:
   timeout: 0
