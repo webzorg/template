@@ -124,6 +124,27 @@ def rework_gemfile
   inject_text_after("Gemfile", " ", "end")
 end
 
+def env_touch(environment = "development")
+  filename = case environment
+             when "development" then ".env"
+             else ".env_#{environment}"
+             end
+
+  File.open(filename, "w") do |file|
+    file.puts <<~ENV_TEMPLATE
+      # DATABASE_URL="postgres://user:pass@localhost:5432/name_development"
+      # API_ONLY_MODE=false
+      RACK_ENV=#{environment}
+      RAILS_ENV=#{environment}
+      MAINTENANCE_PAGE_URL=https://s3.eu-central-1.amazonaws.com/<appname>-public-read-only/maintenance-mode.html
+      RAILS_MAX_THREADS=25
+      PORT=3000
+    ENV_TEMPLATE
+    file.puts "RAILS_MASTER_KEY=#{File.read('config/master.key')}"
+    file.puts "RAILS_APP_NAME=#{Dir.pwd.split('/').last}"
+  end
+end
+
 def add_gems
   gem 'lasha', path: 'lasha'
 
@@ -193,16 +214,16 @@ def add_gems
 end
 
 def copy_base_files
-  files_to_copy = %w[.gitignore .rubocop.yml Procfile Procfile.dev .env .bundle/config Capfile]
+  files_to_copy = %w[.gitignore .rubocop.yml Procfile Procfile.dev .bundle/config Capfile]
   dirs_to_copy = %w[app config db lasha lib]
   force_overwrite = %[.gitignore]
 
   files_to_copy.each { |file| copy_file file, force: force_overwrite.include?(file) }
   dirs_to_copy.each  { |dir|  directory dir, force: true }
 
-  # move master key
-  inject_into_file ".env", "\nRAILS_MASTER_KEY=#{File.read('config/master.key')}"
-  inject_into_file ".env", "\nRAILS_APP_NAME=#{Dir.pwd.split('/').last}"
+  # touch env & move master key
+  env_touch("development")
+  env_touch("production")
 end
 
 def remove_base_files

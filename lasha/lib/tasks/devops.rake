@@ -6,6 +6,7 @@ namespace :devops do
 
     abort "Something went wrong" unless result_hash[:droplet].is_a? DropletKit::Droplet
 
+    File.delete(".env_production") if File.exists?(".env_production")
     ssh_config = lambda { |app_name, droplet_ip|
       <<~SSH_CONFIG
 

@@ -45,6 +45,10 @@ packages:
   - libssl-dev
 
 write_files:
+  - path: /etc/environment
+    content: |+
+      %{etc_env}
+
   - path: /var/www/%{app_name}/shared/config/database.yml
     content: |
       default: &default

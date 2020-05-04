@@ -24,6 +24,8 @@
 /config/master.key
 
 .env
+.env_staging
+.env_production
 
 public/sitemap.xml.gz/public/packs
 /public/packs-test

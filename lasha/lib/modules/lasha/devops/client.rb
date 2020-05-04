@@ -9,7 +9,8 @@ class Lasha::Devops::Client
     @cloud_config = YAML.load(
       File.read(File.expand_path("cloud_config.yml", __dir__)) % {
         app_name: Rails.application.config.app_name,
-        ruby_version: RUBY_VERSION
+        ruby_version: RUBY_VERSION,
+        etc_env: (File.read(Rails.root.join(".env_production")).indent(6).strip if Rails.root.join(".env_production").exist?)
       }
     )
     # @volume_name = "geth-node-volume2"
