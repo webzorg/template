@@ -267,6 +267,7 @@ after_bundle do
 
   git remote: "add origin git@github.com:webzorg/#{Dir.pwd.split('/').last}.git"
   git remote: "-v"
+  git push: "origin master"
 end
 
 rails_command("db:create")
