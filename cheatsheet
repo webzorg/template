@@ -35,7 +35,7 @@ cat /var/lib/cloud/instance/boot-finished
 cat /var/lib/cloud/data/result.json
 cat /var/log/cloud-init-output.log
 
-####################
+###########################################################################################
 
 # Used as the base secret for all MessageVerifiers in Rails, including the one protecting cookies.
 secret_key_base:
@@ -76,3 +76,7 @@ staging:
 production:
   host: "wishmaster.ge"
   # db_url: "postgres://user:pass@host:5432/app_development"
+
+###########################################################################################
+
+# mkpasswd -m sha-512 # whois package

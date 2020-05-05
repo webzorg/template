@@ -177,11 +177,11 @@ runcmd:
   - [mkdir, /var/www/%{app_name}/shared/public]
   - [mkdir, /var/www/%{app_name}/shared/public/system]
   - [chown, -R, "devops:devops", /var/www/%{app_name}]
-  - [echo, "devops:123456", "|", chpasswd]
 
 chpasswd:
   list: |
-    root:123456
+    root:$6$3ic.5.JBEd$w4fiaUcuuNVYEPiIzt62VDzfQC/jw8891rTRgIGLT0YRAKYN.bvjUjDhB71xu1umYyLUzrciyemAS2qeSiTWJ1
+    devops:$6$JQY22uVQLzx$O/tXdevFnIDT0/72fxC.XelyMd4gLU7VHyTTqS4Ja1nl3UBwMN.CZ4MC6GO58BncNvGyvAe7j7M1hzqEdEYGw/
 
 power_state:
   timeout: 0
