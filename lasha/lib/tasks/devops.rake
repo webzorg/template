@@ -13,6 +13,7 @@ namespace :devops do
         Host #{app_name}
           HostName #{droplet_ip}
           User devops
+          ServerAliveInterval 60
       SSH_CONFIG
     }
 
@@ -21,7 +22,8 @@ namespace :devops do
 
     `sed -i "/Host #{app_name}/!b;n;c\\\tHostName #{droplet_ip}" ~/.ssh/config`
 
-    if result_hash[:already_exists].blank?
+    ssh_config_file = File.new("#{Dir.home}/.ssh/config")
+    if result_hash[:already_exists].blank? && !ssh_config_file.read.include?("Host #{app_name}")
       File.open("#{Dir.home}/.ssh/config", "a") do |f|
         f.puts ssh_config.call(app_name, droplet_ip)
       end
