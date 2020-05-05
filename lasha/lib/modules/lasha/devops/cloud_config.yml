@@ -279,11 +279,15 @@ runcmd:
   - [mkdir, /var/www/%{app_name}/shared/public]
   - [mkdir, /var/www/%{app_name}/shared/public/system]
   - [chown, -R, "devops:devops", /var/www/%{app_name}]
-  - [curl, -sS, https://dl.yarnpkg.com/debian/pubkey.gpg, "|", sudo, apt-key, add, "-"]
+  - [curl, -sS, "https://dl.yarnpkg.com/debian/pubkey.gpg", "|", sudo, apt-key, add, "-"]
   - [echo, "deb https://dl.yarnpkg.com/debian/ stable main", "|", sudo, tee, /etc/apt/sources.list.d/yarn.list]
-  - [apt, update, "&&", apt, install, yarn]
+  - [apt, update]
+  - [apt, install, yarn]
   - [systemctl, daemon-reload]
   - [systemctl, enable, puma.service]
+  - [ln, -s, /var/www/%{app_name}, /home/devops/%{app_name}]
+  - [ln, -s, /var/www/%{app_name}/current, /home/devops/%{app_name}/current]
+  - [chown, -R, "devops:devops", /home/devops/*]
 
 chpasswd:
   list: |

@@ -34,6 +34,7 @@
 cat /var/lib/cloud/instance/boot-finished
 cat /var/lib/cloud/data/result.json
 cat /var/log/cloud-init-output.log
+tail -f /var/log/cloud-init-output.log
 
 ###########################################################################################
 
