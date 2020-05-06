@@ -210,6 +210,7 @@ def add_gems
     gem 'droplet_kit'
     gem 'ed25519'
     gem 'bcrypt_pbkdf'
+    gem 'mailcatcher'
   end
 end
 
@@ -244,6 +245,9 @@ rework_application_rb
 environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: :development
 environment "# config.hosts += ['www.domain.com', 'domain.com']", env: :development
 environment "# # Rails.application.credentials.send(Rails.env).dig(:host)", env: :development
+# # mailcatcher
+environment "config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }", env: :development
+environment "config.action_mailer.delivery_method = :smtp", env: :development
 
 add_gems
 rework_gemfile

@@ -7,7 +7,7 @@ sitemap_refresher:
 
 ################ Sitemap ################
 # Run sitemap generator everyday at 5:00 AM
-day_end_closing:
-  cron: "0 5 * * *"
-  class: "DayEndClosingWorker"
-  queue: scheduled_jobs
+# day_end_closing:
+#   cron: "0 5 * * *"
+#   class: "DayEndClosingWorker"
+#   queue: scheduled_jobs

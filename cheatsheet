@@ -12,8 +12,10 @@
   create VPS and set it up
   rails devops:setup
 4
-  ssh to dropplet to confirm signature / create passwords
+  add credentials using template below
 5
+  ssh to dropplet to confirm signature / create passwords
+6
   deploy
   cap production deploy --trace
 

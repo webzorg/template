@@ -3,10 +3,13 @@
 class DeviseCreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
-      t.string :first_name,    default: ""
-      t.string :last_name,     default: ""
-      t.string :company_name,  default: ""
-      t.string :phone_number,  default: ""
+      t.string   :first_name,    default: ""
+      t.string   :last_name,     default: ""
+      t.string   :company_name,  default: ""
+      t.string   :phone_number,  default: ""
+      t.datetime :last_activity_at
+      t.datetime :last_api_activity_at
+      t.json     :tokens
 
       # OmniAuth to user
       t.string :provider, default: "email"

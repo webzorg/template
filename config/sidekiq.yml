@@ -5,17 +5,17 @@
   - default
   - mailers
 
-  - <%= Rails.configuration.app_name %>_development_default
-  - <%= Rails.configuration.app_name %>_development_mailers
-  - <%= Rails.configuration.app_name %>_development_active_storage_analysis
+  - <%= Dir.pwd.split("/").last %>_development_default
+  - <%= Dir.pwd.split("/").last %>_development_mailers
+  - <%= Dir.pwd.split("/").last %>_development_active_storage_analysis
 
-  - <%= Rails.configuration.app_name %>_staging_default
-  - <%= Rails.configuration.app_name %>_staging_mailers
-  - <%= Rails.configuration.app_name %>_staging_active_storage_analysis
+  - <%= Dir.pwd.split("/").last %>_staging_default
+  - <%= Dir.pwd.split("/").last %>_staging_mailers
+  - <%= Dir.pwd.split("/").last %>_staging_active_storage_analysis
 
-  - <%= Rails.configuration.app_name %>_production_default
-  - <%= Rails.configuration.app_name %>_production_mailers
-  - <%= Rails.configuration.app_name %>_production_active_storage_analysis
+  - <%= Dir.pwd.split("/").last %>_production_default
+  - <%= Dir.pwd.split("/").last %>_production_mailers
+  - <%= Dir.pwd.split("/").last %>_production_active_storage_analysis
 
   - scheduled_jobs
 
