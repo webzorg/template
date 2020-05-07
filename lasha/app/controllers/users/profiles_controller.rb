@@ -51,7 +51,7 @@ class Users::ProfilesController < ApplicationController
 
     def profile_params
       params_local = %i[first_name last_name email]
-      params_local.push(*:company_name, :phone_number, :address) if current_user.partner?
+      # params_local.push(*:company_name, :phone_number, :address) if current_user.partner?
 
       params.require(:user).permit(params_local)
     end

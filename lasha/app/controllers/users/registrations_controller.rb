@@ -6,15 +6,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   skip_after_action :verify_authorized
 
-  prepend_before_action :redirect_if_authorized, only: %i[new new_partner create]
+  prepend_before_action :redirect_if_authorized, only: %i[new create] # new_partner
 
   def new
-    preset_new_params_for(:client)
+    preset_new_params_for
   end
 
-  def new_partner
-    preset_new_params_for(:partner)
-  end
+  # def new_partner
+  #   preset_new_params_for(:partner)
+  # end
 
   def create
     @user = User.new(registration_params)
@@ -25,12 +25,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.save && role_valid
       # bypass_sign_in(@user) # not compatible with confirmable
       redirect_to new_user_session_path, notice: I18n.t("devise.confirmations.send_instructions")
-    elsif role_sym.eql?(:client) || !role_valid
-      preset_new_params_for(:client)
+    # elsif role_sym.eql?(:client) || !role_valid
+    #   preset_new_params_for(:client)
+    #   render :new
+    # elsif role_sym.eql?(:partner) || !role_valid
+    #   preset_new_params_for(:partner)
+    #   render :new_partner
+    else
+      preset_new_params_for
       render :new
-    elsif role_sym.eql?(:partner) || !role_valid
-      preset_new_params_for(:partner)
-      render :new_partner
     end
   end
 
@@ -60,9 +63,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-    def preset_new_params_for(role)
+    def preset_new_params_for(role=nil)
       @user ||= User.new
-      @role = role
+      # @role = role
     end
 
     def registration_params
@@ -74,9 +77,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         password_confirmation
       ]
 
-      if params[:user][:role] == "partner"
-        params_local += %i[company_name phone_number address]
-      end
+      # if params[:user][:role] == "partner"
+      #   params_local += %i[company_name phone_number address]
+      # end
       params.require(:user).permit(params_local)
     end
 
