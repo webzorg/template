@@ -1,4 +1,4 @@
-# class Admin::WishesController < Admin::ApplicationController
+class Admin::WishesController < Admin::ApplicationController
 #   before_action :set_object, only: %i[show edit update destroy]
 #   before_action do
 #     Lasha.setup_data(
@@ -96,4 +96,4 @@
 #     def object_params
 #       params.require(current_model(:symbol)).permit(CONFIG[:strong_params])
 #     end
-# end
+end
