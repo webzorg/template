@@ -23,6 +23,7 @@ packages:
   - nodejs
   - postgresql
   - libpq-dev
+  - redis
   - gawk
   - g++
   - gcc
