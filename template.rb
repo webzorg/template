@@ -167,6 +167,7 @@ def add_gems
   # gem 'devise_masquerade'
   # gem 'devise-two-factor'
   # gem 'recaptcha'
+  gem "paper_trail"
 
   # Debugging & Optimization
   gem 'active_record_query_trace'
@@ -272,6 +273,9 @@ after_bundle do
 
   rails_command("action_text:install")
   git commit: "-a -m 'install action_text'"
+
+  rails_command("generate paper_trail:install --with-changes")
+  git commit: "-a -m 'add papertrail'"
 
   git remote: "add origin git@github.com:webzorg/#{Dir.pwd.split('/').last}.git"
   git remote: "-v"
