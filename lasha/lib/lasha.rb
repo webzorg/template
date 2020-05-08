@@ -24,8 +24,8 @@ require "sitemap_generator"
 require "image_processing"
 
 module Lasha
-  INDEX_ACTIONS = %i[new show edit destroy]
-  READ_ONLY_ATTRIBUTES = %w[id created_at updated_at]
+  INDEX_ACTIONS = %i[new show edit destroy].freeze
+  READ_ONLY_ATTRIBUTES = %w[id created_at updated_at].freeze
 
   class << self
     def setup_data(
@@ -43,19 +43,15 @@ module Lasha
         model: set_or_guess_model(model, collection),
         collection: collection,
         attributes: attributes.with_indifferent_access,
-        attributes_index: attributes.reject { |key, value| value[:skip_index] }.keys,
+        attributes_index: attributes.reject { |_key, value| value[:skip_index] }.keys,
         actions: set_or_guess_actions(actions, controller),
         scope_filters: scope_filters
       }
 
       # @object setter if it is defined
-      if controller.instance_variable_defined?(:@object)
-        data_hash[:object] = controller.instance_variable_get(:@object)
-      end
+      data_hash[:object] = controller.instance_variable_get(:@object) if controller.instance_variable_defined?(:@object)
 
-      if controller.action_name.to_sym == :new
-        data_hash[:object] = data_hash[:model].send(:new)
-      end
+      data_hash[:object] = data_hash[:model].send(:new) if controller.action_name.to_sym == :new
 
       validate_index_data(**data_hash)
 
@@ -71,11 +67,11 @@ module Lasha
         )
 
       controller.data = data_hash
-    # rescue ArgumentError => e
-    #   puts "******** index_data argument error report"
-    #   puts "Class:   #{e.class}"
-    #   puts "Message: #{e.message}"
-    #   puts e.backtrace
+      # rescue ArgumentError => e
+      #   puts "******** index_data argument error report"
+      #   puts "Class:   #{e.class}"
+      #   puts "Message: #{e.message}"
+      #   puts e.backtrace
     end
 
     private
@@ -120,7 +116,7 @@ module Lasha
             next if (value - INDEX_ACTIONS).blank?
 
             raise_args_error("Uknown index action supplied")
-          # when :namespace
+            # when :namespace
           end
         end
       end

@@ -6,11 +6,9 @@ class Users::ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @profile.update_without_password(profile_params)
@@ -21,8 +19,7 @@ class Users::ProfilesController < ApplicationController
     end
   end
 
-  def change_password
-  end
+  def change_password; end
 
   def update_password
     if @profile.update(update_password_params)
@@ -35,6 +32,7 @@ class Users::ProfilesController < ApplicationController
 
   def clean_notifications
     raise "wrong place" unless current_user
+
     Notification.where(user_id: current_user.id).delete_all
     redirect_back fallback_location: root_path
   end

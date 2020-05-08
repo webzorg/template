@@ -27,15 +27,11 @@ module LashaApplicationHelper
     render partial: "lasha/shared/bootstrap_nav", locals: { pagy: pagy }
   end
 
-  def smart_label_text(column_name, column_data)
-    I18n.t(column_data[:label].present? ? column_data[:label] : column_name)
-  end
-
   def smart_form_field(f, data, column_name)
     column_data = data[:attributes][column_name]
     column_type = column_data ? column_data[:type] : :text_field
     html_options = {
-      id: "fg_#{column_name}",
+      # id: "fg_#{column_name}",
       disabled: column_data[:disabled] && action_name == "edit"
     }
     field_options = [column_type, column_name]
@@ -54,6 +50,10 @@ module LashaApplicationHelper
       field_options += [
         options_for_select(column_data[:collection], selected: data[:object].public_send(column_name)),
         { include_blank: true }
+      ]
+    when :datetime_select
+      field_options += [
+        { ampm: false, minute_step: 15 }
       ]
     end
 

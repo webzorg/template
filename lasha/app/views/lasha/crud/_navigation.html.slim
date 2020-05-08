@@ -4,7 +4,8 @@
       = link_to :new, url_for(controller: "#{@data[:namespace]}/#{controller_name}", action: :new), class: "btn btn-md btn-success"
 
     -else
-      = link_to t(:back), url_for(action: :index), class: "mx-2 btn btn-md btn-secondary"
+      - unless action_name.to_sym.eql?(:index)
+        = link_to t(:back), url_for(action: :index), class: "mx-2 btn btn-md btn-secondary"
 
       - if action_name.to_sym.eql?(:show) && @data[:actions].include?(:edit)
         = link_to t(:edit), object_path_generator(:edit, @data[:object], @data), class: "mx-2 btn btn-md btn-warning"

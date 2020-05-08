@@ -10,7 +10,9 @@ class Lasha::Devops::Client
       File.read(File.expand_path("cloud_config.yml", __dir__)) % {
         app_name: Rails.application.config.app_name,
         ruby_version: RUBY_VERSION,
-        etc_env: (File.read(Rails.root.join(".env_production")).indent(6).strip if Rails.root.join(".env_production").exist?)
+        etc_env: (if Rails.root.join(".env_production").exist?
+                    File.read(Rails.root.join(".env_production")).indent(6).strip
+                  end)
       }
     )
     # @volume_name = "geth-node-volume2"
@@ -57,7 +59,7 @@ class Lasha::Devops::Client
     end
   end
 
-  def fetch_droplet(params=droplet_params)
+  def fetch_droplet(params = droplet_params)
     self.droplet = client.droplets.all.select { |d| d.name.eql?(params[:name]) }.first
   end
 

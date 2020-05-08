@@ -4,13 +4,13 @@ class TreesController < ApplicationController
     @object = Tree.new(tree_params)
   end
 
-  STRONG_PARAMS = %i[title content toggler aasm_state]
+  STRONG_PARAMS = %i[title content toggler aasm_state].freeze
 
   before_action do
     collection = if action_name.to_sym.eql?(:index)
-      Tree.all.order(created_at: :desc)
-    else
-      Tree.none
+                   Tree.all.order(created_at: :desc)
+                 else
+                   Tree.none
     end
 
     (@data ||= {}).merge!(
@@ -19,10 +19,10 @@ class TreesController < ApplicationController
         collection: collection,
         attributes: {
           title: {
-            type: :text_field,
+            type: :text_field
           },
           content: {
-            type: :text_area,
+            type: :text_area
           },
           toggler: {
             type: :check_box,
@@ -35,17 +35,13 @@ class TreesController < ApplicationController
     )
   end
 
-  def index
-  end
+  def index; end
 
-  def show
-  end
+  def show; end
 
-  def new
-  end
+  def new; end
 
-  def edit
-  end
+  def edit; end
 
   def create
     if @object.save

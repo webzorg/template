@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Tree, type: :model do
   let(:trees) { create_list(:tree, 150) }

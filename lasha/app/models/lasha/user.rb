@@ -17,7 +17,7 @@ class Lasha::User < ApplicationRecord
 
   include DeviseTokenAuth::Concerns::ActiveRecordSupport
   include DeviseTokenAuth::Concerns::User
-  devise :omniauthable #, omniauth_providers: %i[facebook google_oauth2]
+  devise :omniauthable # , omniauth_providers: %i[facebook google_oauth2]
 
   has_one_attached :avatar
 
@@ -103,12 +103,15 @@ class Lasha::User < ApplicationRecord
 
     def gravatar_image_url(email, gravatar_overrides = {})
       email = email.strip.downcase if email.is_a? String
-      GravatarImageTag::gravatar_url(email, gravatar_overrides)
+      GravatarImageTag.gravatar_url(email, gravatar_overrides)
     end
 
     def touch_last_activity
       touch :last_activity_at
     end
 
-    def send_confirmation_notification?; true; end # monkey patch for devise_token_auth
+    # monkey patch for devise_token_auth
+    def send_confirmation_notification?
+      true
+    end
 end

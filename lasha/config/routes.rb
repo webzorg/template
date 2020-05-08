@@ -21,17 +21,21 @@ Rails.application.routes.draw do
   end
 
   # omniauth_callbacks does't support scoping
-  devise_for :users, only: :omniauth_callbacks, controllers: {
-    omniauth_callbacks: "users/omniauth_callbacks"
-  } if db_ready?
+  if db_ready?
+    devise_for :users, only: :omniauth_callbacks, controllers: {
+      omniauth_callbacks: "users/omniauth_callbacks"
+    }
+  end
 
   scope "(:locale)", locale: /ka|en/ do
-    devise_for :users, skip: %i[omniauth_callbacks sessions registrations passwords confirmations], controllers: {
-      # confirmations: "users/confirmations",
-      # passwords:     "users/passwords",
-      # registrations: "users/registrations",
-      # sessions:      "users/sessions"
-    } if db_ready?
+    if db_ready?
+      devise_for :users, skip: %i[omniauth_callbacks sessions registrations passwords confirmations], controllers: {
+        # confirmations: "users/confirmations",
+        # passwords:     "users/passwords",
+        # registrations: "users/registrations",
+        # sessions:      "users/sessions"
+      }
+    end
     as :user do
       scope nil, module: :users do
         # Confirmations
@@ -54,7 +58,7 @@ Rails.application.routes.draw do
         # patch  "users",                to: "registrations#update",      as: :user_registration
         # put    "users",                to: "registrations#update"
         # delete "users",                to: "registrations#destroy"
-        post   "registration",           to: "registrations#create"
+        post   "registration", to: "registrations#create"
 
         # Sessions
         get    "login",  to: "sessions#new",     as: :new_user_session
@@ -72,14 +76,16 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      mount_devise_token_auth_for "User", at: "auth", skip: %i[omniauth_callbacks unlocks], controllers: {
-        confirmations:      "api/v1/devise_token_auth/confirmations",
-        passwords:          "api/v1/devise_token_auth/passwords",
-        # omniauth_callbacks: "devise_token_auth/omniauth_callbacks",
-        registrations:      "api/v1/devise_token_auth/registrations",
-        sessions:           "api/v1/devise_token_auth/sessions",
-        token_validations:  "api/v1/devise_token_auth/token_validations"
-      } if db_ready?
+      if db_ready?
+        mount_devise_token_auth_for "User", at: "auth", skip: %i[omniauth_callbacks unlocks], controllers: {
+          confirmations: "api/v1/devise_token_auth/confirmations",
+          passwords: "api/v1/devise_token_auth/passwords",
+          # omniauth_callbacks: "devise_token_auth/omniauth_callbacks",
+          registrations: "api/v1/devise_token_auth/registrations",
+          sessions: "api/v1/devise_token_auth/sessions",
+          token_validations: "api/v1/devise_token_auth/token_validations"
+        }
+      end
     end
   end
 end

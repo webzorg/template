@@ -268,6 +268,7 @@ runcmd:
   # Setup Postgresql
   - [/bin/su, -s, /bin/bash, -c, "psql -U postgres postgres -c 'CREATE USER devops SUPERUSER;'", -, postgres]
   - [/bin/su, -s, /bin/bash, -c, "psql -U postgres postgres -c 'CREATE DATABASE devops WITH OWNER devops;'", -, postgres]
+  - [/bin/su, -s, /bin/bash, -c, "psql -U postgres postgres -c 'CREATE DATABASE %{app_name}_production WITH OWNER devops;'", -, postgres]
   # App/capistrano related
   # - [mkdir, /var/www/%{app_name}]
   # - [mkdir, /var/www/%{app_name}/shared]
@@ -286,8 +287,6 @@ runcmd:
   - [systemctl, daemon-reload]
   - [systemctl, enable, puma.service]
   - [ln, -s, /var/www/%{app_name}, /home/devops/%{app_name}]
-  - [chown, -R, "devops:devops", /home/devops/]
-  - [createdb, -U, devops, "%{app_name}_production"]
 
 chpasswd:
   list: |

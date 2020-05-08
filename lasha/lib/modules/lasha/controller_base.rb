@@ -6,7 +6,7 @@ module Lasha
     include Pagy::Backend
 
     included do
-      # TODO pending potential removal
+      # TODO: pending potential removal
       # prepend_before_action { @data ||= {} }
       attr_accessor :data
 
@@ -24,22 +24,22 @@ module Lasha
       user_signed_in? ? super : not_found
     end
 
-    def current_model(return_type=:class)
+    def current_model(return_type: :class)
       case return_type
       when :class
-        controller_name.classify.constantize
+        Object.const_get controller_path.classify
       when :symbol
-        controller_name.singularize.to_sym
+        controller_path.parameterize.singularize.underscore.to_sym
       when :string
-        controller_name.singularize
+        controller_path.singularize
       else
         raise "current_model was given a wrong return type"
       end
     end
 
-    def current_collection(collection=current_model.all.order(created_at: :desc))
+    def current_collection
       if action_name.to_sym.eql?(:index)
-        collection
+        current_model.all.order(created_at: :desc)
       else
         current_model.none
       end

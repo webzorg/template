@@ -4,7 +4,7 @@ class LashaMailer < LashaApplicationMailer
     mail(
       to: destination_email,
       subject: subject,
-      template_path: "mailers/lasha",
+      template_path: "mailers/lasha"
       # template_name: "notify"
     )
   end

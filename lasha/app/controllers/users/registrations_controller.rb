@@ -6,33 +6,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   skip_after_action :verify_authorized
 
-  prepend_before_action :redirect_if_authorized, only: %i[new create] # new_partner
+  prepend_before_action :redirect_if_authorized, only: %i[new create]
 
   def new
-    preset_new_params_for
+    preset_new_params
   end
-
-  # def new_partner
-  #   preset_new_params_for(:partner)
-  # end
 
   def create
     @user = User.new(registration_params)
-    role_sym = params[:user][:role].to_sym
 
-    role_valid = @user.validate_and_initialize_role(role_sym)
-
-    if @user.save && role_valid
+    if @user.save
       # bypass_sign_in(@user) # not compatible with confirmable
       redirect_to new_user_session_path, notice: I18n.t("devise.confirmations.send_instructions")
-    # elsif role_sym.eql?(:client) || !role_valid
-    #   preset_new_params_for(:client)
-    #   render :new
-    # elsif role_sym.eql?(:partner) || !role_valid
-    #   preset_new_params_for(:partner)
-    #   render :new_partner
     else
-      preset_new_params_for
+      preset_new_params
       render :new
     end
   end
@@ -63,9 +50,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-    def preset_new_params_for(role=nil)
+    def preset_new_params
       @user ||= User.new
-      # @role = role
     end
 
     def registration_params
@@ -77,9 +63,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         password_confirmation
       ]
 
-      # if params[:user][:role] == "partner"
-      #   params_local += %i[company_name phone_number address]
-      # end
+      # params_local += %i[] if params[:user][:role] == ""
       params.require(:user).permit(params_local)
     end
 

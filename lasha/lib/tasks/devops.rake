@@ -6,7 +6,7 @@ namespace :devops do
 
     abort "Something went wrong" unless result_hash[:droplet].is_a? DropletKit::Droplet
 
-    File.delete(".env_production") if File.exists?(".env_production")
+    File.delete(".env_production") if File.exist?(".env_production")
     ssh_config = lambda { |app_name, droplet_ip|
       <<~SSH_CONFIG
 
@@ -17,7 +17,7 @@ namespace :devops do
       SSH_CONFIG
     }
 
-    app_name    = client.droplet_params[:name]
+    app_name = client.droplet_params[:name]
     droplet_ip = client.droplet_ip
 
     `sed -i "/Host #{app_name}/!b;n;c\\\tHostName #{droplet_ip}" ~/.ssh/config`
