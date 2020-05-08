@@ -270,6 +270,9 @@ after_bundle do
   bundle_command "exec rubocop --safe-auto-correct -c .rubocop.yml"
   git commit: "-a -m 'apply rubocop safe-auto-correct'"
 
+  rails_command("action_text:install")
+  git commit: "-a -m 'install action_text'"
+
   git remote: "add origin git@github.com:webzorg/#{Dir.pwd.split('/').last}.git"
   git remote: "-v"
   git push: "origin master"

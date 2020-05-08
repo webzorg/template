@@ -1,8 +1,10 @@
 class Calendar::Event < ApplicationRecord
   belongs_to :user
 
-  validates :name, :description, :start_time, presence: true
+  validates :name, :start_time, presence: true
   validate :validate_start_time
+
+  has_rich_text :description
 
   private
 

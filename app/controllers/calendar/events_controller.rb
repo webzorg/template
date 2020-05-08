@@ -16,7 +16,7 @@ class Calendar::EventsController < ApplicationController
           type: :text_field,
         },
         description: {
-          type: :text_area,
+          type: :rich_text_area,
         },
         start_time: {
           type: :datetime_select,
