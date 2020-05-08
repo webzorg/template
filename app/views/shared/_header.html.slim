@@ -6,6 +6,8 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
     #nav_main.collapse.navbar-collapse
       ul.navbar-nav.mr-auto.mt-2.mt-md-0
       ul.navbar-nav
+        / - if current_user
+          li.nav-item = link_to t(:calendar), calendar_root_path, class: "nav-link"
         / li.nav-item = link_to t(:about),    about_path,    class: "nav-link"
         / li.nav-item = link_to t(:contact),  contact_path,  class: "nav-link"
         / li.nav-item.dropdown

@@ -1,0 +1,14 @@
+.row
+  .col-sm-12.text-center
+    - if action_name.to_sym.eql?(:index) && @data[:actions].include?(:new)
+      = link_to :new, url_for(controller: "#{@data[:namespace]}/#{controller_name}", action: :new), class: "btn btn-md btn-success"
+
+    -else
+      - unless action_name.to_sym.eql?(:index)
+        = link_to t(:back), url_for(action: :index), class: "mx-2 btn btn-md btn-secondary"
+
+      - if action_name.to_sym.eql?(:show) && @data[:actions].include?(:edit)
+        = link_to t(:edit), object_path_generator(:edit, @data[:object], @data), class: "mx-2 btn btn-md btn-warning"
+
+      - elsif action_name.to_sym.eql?(:edit) && @data[:actions].include?(:show)
+        = link_to t(:show), object_path_generator(:show, @data[:object], @data), class: "mx-2 btn btn-md btn-info"

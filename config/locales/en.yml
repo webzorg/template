@@ -1,10 +1,18 @@
 ---
 en:
+  helpers:
+    label:
+      calendar_event:
+        name:
+        description:
+        start_time: 'Start time (CET)'
+
   time:
     formats:
       # default: "%a, %d %b %Y, %H:%M:%S %z"
       # long: "%d %B %Y, %H:%M"
       # short: "%d %b, %H:%M"
+      calendar_month_view_item: "%b"
       subscription_expiration: "%a, %d %b %Y"
   '':
     send_instructions: Send instructions

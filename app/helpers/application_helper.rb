@@ -1,7 +1,6 @@
 module ApplicationHelper
   include Pagy::Frontend
 
-
   # = render partial: "shared/bootstrap_nav", locals: { pagy: @pagy }
   def pagy_helper(pagy, smart_hide: true)
     render partial: "lasha/shared/bootstrap_nav", locals: { pagy: pagy, smart_hide: smart_hide }
@@ -20,6 +19,7 @@ module ApplicationHelper
     "
       <script>
         document.addEventListener('turbolinks:load', function() {
+          alertify.dismissAll();
           #{flash_messages.join}
         });
       </script>

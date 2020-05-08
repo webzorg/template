@@ -1,0 +1,22 @@
+= form_for @data[:object], html: { class: "col-sm-12" } do |f|
+  - if @data[:object].errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@data[:object].errors.count, "error")} prohibited this tree from being saved:"
+      ul
+        - @data[:object].errors.full_messages.each do |message|
+          li = message
+
+  - @data[:attributes].each do |column_name, column_data|
+    = content_tag :div, class: form_group_wrapper_class(@data, column_name)
+      - if is_check_box?(@data, column_name)
+        = smart_form_field(f, @data, column_name)
+        = f.label column_name, class: "custom-control-label"
+      - else
+        div = f.label column_name
+        = smart_form_field(f, @data, column_name)
+      / if help text
+      / small id="passwordHelpBlock" class="form-text text-muted">
+      /   Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+
+  br
+  .mb-3.text-center = f.submit class: "btn btn-primary"

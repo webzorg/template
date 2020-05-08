@@ -1,5 +1,6 @@
 class User < Lasha::User
   has_many :notifications, dependent: :destroy
+  has_many :events, class_name: "Calendar::Event"
 
   def web_notifications
     # # Notification.create(

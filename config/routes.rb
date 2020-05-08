@@ -19,6 +19,11 @@ Rails.application.routes.draw do
     # get :contact, controller: :home
     # get :terms,   controller: :home
 
+    namespace :calendar do
+      root to: "events#index"
+      resources :events
+    end
+
     # namespace :api do
     #   namespace :v1 do
     #   end
