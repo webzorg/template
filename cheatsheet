@@ -48,6 +48,7 @@ sendgrid_key:
 
 admin_mail: "labulashvili@gmail.com"
 info_mail: "labulashvili@gmail.com"
+from_email: "labulashvili@gmail.com"
 
 aws:
   access_key_id:

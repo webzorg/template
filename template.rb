@@ -13,7 +13,7 @@ APPLICATION_RB = <<-'APPLICATION_RB'
     config.app_name = ENV["RAILS_APP_NAME"]
     config.api_only_mode = ActiveModel::Type::Boolean.new.cast(ENV["API_ONLY_MODE"])
 
-    config.i18n.default_locale = :ka
+    config.i18n.default_locale = :en
     config.i18n.available_locales = [:ka, :en]
     config.i18n.fallbacks = [en: :ka, ka: :en]
 
