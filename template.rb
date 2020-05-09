@@ -25,17 +25,17 @@ APPLICATION_RB = <<-'APPLICATION_RB'
 
     config.action_mailer.delivery_method = :sendgrid_actionmailer
     config.action_mailer.sendgrid_actionmailer_settings = {
-      api_key: Rails.application.credentials.dig(:sendgrid_key),
+      api_key: Rails.application.credentials[:sendgrid_key],
       raise_delivery_errors: true
     }
 
     config.action_mailer.default_url_options = {
-      host: Rails.application.credentials.dig(Rails.env, :host)
+      host: Rails.application.credentials.send(Rails.env)[:host]
     }
 
     config.action_cable.allowed_request_origins = [
-      "https://#{Rails.application.credentials.dig(Rails.env, :host)}",
-      /https:\/\/#{Rails.application.credentials.dig(Rails.env, :host)}.*/
+      "https://#{Rails.application.credentials.send(Rails.env)[:host]}",
+      /https:\/\/#{Rails.application.credentials.send(Rails.env)[:host]}.*/
     ]
 
     config.cache_store = :redis_cache_store, {
@@ -246,7 +246,7 @@ rework_application_rb
 # development
 environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: :development
 environment "# config.hosts += ['www.domain.com', 'domain.com']", env: :development
-environment "# # Rails.application.credentials.send(Rails.env).dig(:host)", env: :development
+environment "# # Rails.application.credentials.send(Rails.env)[:host]", env: :development
 # # mailcatcher
 environment "config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }", env: :development
 environment "config.action_mailer.delivery_method = :smtp", env: :development
