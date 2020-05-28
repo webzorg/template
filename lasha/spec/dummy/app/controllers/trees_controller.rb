@@ -1,39 +1,64 @@
 class TreesController < ApplicationController
-  prepend_before_action :set_tree, only: %i[show edit update destroy]
-  prepend_before_action only: :create do
-    @object = Tree.new(tree_params)
-  end
-
-  STRONG_PARAMS = %i[title content toggler aasm_state].freeze
-
+  # before_action :set_paper_trail_whodunnit
+  before_action :set_object, only: %i[show edit update destroy]
   before_action do
-    collection = if action_name.to_sym.eql?(:index)
-                   Tree.all.order(created_at: :desc)
-                 else
-                   Tree.none
-    end
-
-    (@data ||= {}).merge!(
-      Lasha.setup_data(
+    Lasha.setup_data(
+      CONFIG[:data].merge!(
         controller: self,
-        collection: collection,
-        attributes: {
-          title: {
-            type: :text_field
-          },
-          content: {
-            type: :text_area
-          },
-          toggler: {
-            type: :check_box,
-            skip_index: true
-          }
-        },
-        pagy_items: 10,
-        scope_filters: true
+        collection: current_collection,
       )
     )
   end
+
+    CONFIG = {
+    data: {
+      attributes: {
+        title: {
+          type: :text_field
+        },
+        content: {
+          type: :rich_text_area
+        },
+        toggler: {
+          type: :check_box,
+          skip_index: true
+        }
+        # start_time: {
+        #   type: :datetime_select,
+        # }
+        # wish_category_id: {
+        #   type: :select,
+        #   collection: WishCategory.all.map { |u| [u.name, u.id] },
+        #   skip_index: true
+        # },
+        # wish_urgency_id: {
+        #   type: :select,
+        #   collection: WishUrgency.all.map { |u| [u.name, u.id] },
+        #   skip_index: true
+        # },
+        # user_id: {
+        #   type: :select,
+        #   label: "owner",
+        #   collection: User.all.map { |u| [u.email, u.id] },
+        #   override_value: ->(object) { object.public_send(:user).email },
+        #   disabled: true,
+        #   skip_index: true
+        # },
+        # selec_example: {
+        #   type: :select,
+        #   collection: User.all.map { |u| [u.email, u.id] },
+        # }
+      },
+      pagy_items: 10,
+      scope_filters: false
+    },
+    strong_params: %i[
+      title
+      content
+      toggler
+      aasm_state
+    ]
+  }
 
   def index; end
 
@@ -44,16 +69,22 @@ class TreesController < ApplicationController
   def edit; end
 
   def create
+    @object = current_model.public_send(:new, object_params.merge(user_id: current_user.id))
+    authorize(@object)
+
     if @object.save
-      redirect_to @object, notice: "Tree was successfully created."
+      redirect_to url_for(action: :show, id: @object), notice: "#{current_model.model_name.human} was successfully created."
     else
+      @data[:object] = @object
       render :new
     end
   end
 
   def update
-    if @object.update(tree_params)
-      redirect_to @object, notice: "Tree was successfully updated."
+    authorize(@object)
+
+    if @object.update(object_params)
+      redirect_to url_for(action: :show, id: @object), notice: "#{current_model.model_name.human} was successfully updated."
     else
       render :edit
     end
@@ -66,12 +97,19 @@ class TreesController < ApplicationController
 
   private
 
-    def set_tree
-      @object = Tree.find(params[:id])
-      # @data = { object: @object }
+    def set_object
+      @object = current_model.public_send(:find, params[:id])
     end
 
-    def tree_params
-      params.require(:tree).permit(STRONG_PARAMS)
+    def object_params
+      params.require(current_model(return_type: :symbol)).permit(CONFIG[:strong_params])
+    end
+
+    def current_collection
+      if action_name.to_sym.eql?(:index)
+        policy_scope(current_model)
+      else
+        current_model.none
+      end
     end
 end
