@@ -1,0 +1,7 @@
+- if @options_for_select.first.any?
+  = select_tag "wow_character[#{@item_name}]", options_for_select(*@options_for_select), \
+    { include_blank: " - Select the item here -", id: "wow_character_#{@item_name}", class: "custom-select" }
+- else
+  .text-center No results
+
+

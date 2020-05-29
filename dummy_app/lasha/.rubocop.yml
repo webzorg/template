@@ -1,0 +1,15 @@
+require: rubocop-performance
+
+AllCops:
+  Exclude:
+    - "**/*.slim"
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Metrics/LineLength:
+  Max: 120

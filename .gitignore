@@ -44,11 +44,9 @@ yarn-debug.log*
 lasha/log/*.log
 lasha/pkg/
 
-lasha/node_modules
-!lasha/spec/dummy/node_modules
-lasha/spec/dummy/db/*.sqlite3
-lasha/spec/dummy/db/*.sqlite3-journal
-lasha/spec/dummy/log/*.log
-lasha/spec/dummy/yarn-error.log
-lasha/spec/dummy/storage/
-lasha/spec/dummy/tmp/
+dummy_app/public/packs
+dummy_app/public/packs-test
+dummy_app/node_modules
+dummy_app/yarn-error.log
+dummy_app/yarn-debug.log*
+dummy_app/.yarn-integrity

@@ -1,0 +1,7 @@
+.container
+  h2.text-center New #{@data[:model].model_name.human}
+
+  .container
+    = render "form"
+
+  = render partial: "navigation"

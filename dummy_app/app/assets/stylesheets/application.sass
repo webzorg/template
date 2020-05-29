@@ -1,0 +1,102 @@
+@import "lasha_application"
+// @import "bootstrap/scss/bootstrap"
+@import "font-awesome-sprockets"
+@import "font-awesome"
+@import "sticky-footer"
+@import "alertifyjs/build/css/alertify.min"
+@import "colors"
+// @import "notifications"
+@import "bootstrap-social"
+// @import "photoswipe/src/css/default-skin/default-skin"
+// @import "photoswipe/src/css/main"
+// @import "photoswipe-main-settings"
+// @import "flicker"
+// @import "star-rating"
+// @import "loader"
+
+@import "simple_calendar"
+@import "trix/dist/trix"
+@import "actiontext.scss"
+
+// @include media-breakpoint-up(sm)
+// @include media-breakpoint-up(md)
+// @include media-breakpoint-up(lg)
+// @include media-breakpoint-up(xl)
+
+// // dropdown on hover
+// .dropdown:hover > .dropdown-menu
+//   display: block
+
+// settings style
+.cog
+  border: 1px solid transparent
+  border-radius: 5em
+  opacity: 0.9
+  &:hover
+    color: $white
+    border-color: $black
+    background-color: $black
+    opacity: 1
+
+.thumbnail-list-wrapper
+  .thumbnail-wrapper
+    display: inline-block
+    margin: 2px
+    overflow: hidden
+
+    figcaption
+      display: none
+
+    img
+      object-fit: contain
+
+#overrider
+  .checkbox-btn-group > .btn
+    border-left-width: .25em
+    border-color: $red
+    background-color: $gray-light
+    color: $black
+    cursor: pointer
+
+    &:last-child
+      border-radius: 0
+    &.active
+      border-color: $green
+      box-shadow: inset .1em .1em 5px $black-opaque-lesser
+
+.cursor-default
+  cursor: default
+
+// button tweak for sm-screen vertical stacking
+// @include media-breakpoint-down(sm)
+//   .btn
+//     margin-bottom: 5px
+
+// Fixes bootstrap nav-brand container overlap
+@include media-breakpoint-down(xs)
+  .container
+    margin-left: 0
+    margin-right: 0
+
+// Masquerade alert shouldn't have a bottom margin
+body > .alert
+  margin-bottom: 0
+
+////////////////////////////////////////
+// remove outline in firefox
+button:focus,
+a:focus, a:active,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner
+  outline: none !important
+
+select:-moz-focusring
+  color: transparent
+  text-shadow: 0 0 0 #000
+
+img
+  user-select: none

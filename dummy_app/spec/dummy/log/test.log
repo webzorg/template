@@ -1,0 +1,971 @@
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (111.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "lasha_test"[0m
+  [1m[35m (334.8ms)[0m  [1m[35mCREATE DATABASE "lasha_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "action_text_rich_texts" CASCADE[0m
+  [1m[35m (11.2ms)[0m  [1m[35mCREATE TABLE "action_text_rich_texts" ("id" bigserial primary key, "name" character varying NOT NULL, "body" text, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_action_text_rich_texts_uniqueness" ON "action_text_rich_texts"  ("record_type", "record_id", "name")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_attachments" CASCADE[0m
+  [1m[35m (8.3ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE  INDEX  "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments"  ("blob_id")[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_active_storage_attachments_uniqueness" ON "active_storage_attachments"  ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_blobs" CASCADE[0m
+  [1m[35m (8.3ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "byte_size" bigint NOT NULL, "checksum" character varying NOT NULL, "created_at" timestamp NOT NULL)[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_active_storage_blobs_on_key" ON "active_storage_blobs"  ("key")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "gardens" CASCADE[0m
+  [1m[35m (9.7ms)[0m  [1m[35mCREATE TABLE "gardens" ("id" bigserial primary key, "name" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "trees" CASCADE[0m
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "trees" ("id" bigserial primary key, "title" text, "content" text, "toggler" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "aasm_state" character varying)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (9.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (4.6ms)[0m  [1m[35mALTER TABLE "active_storage_attachments" ADD CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200529201559)[0m
+  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20190802125348),
+(20190912204757),
+(20190912205616),
+(20200529192528),
+(20200529201558);
+
+[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-05-29 21:04:58.275447"], ["updated_at", "2020-05-29 21:04:58.275447"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "5e834b556a1a4c44030e365a575331542e5818d2"], ["created_at", "2020-05-29 21:04:58.284039"], ["updated_at", "2020-05-29 21:04:58.284039"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.5ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.385854"], ["updated_at", "2020-05-29 21:04:58.385854"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.387846"], ["updated_at", "2020-05-29 21:04:58.387846"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.389192"], ["updated_at", "2020-05-29 21:04:58.389192"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.390482"], ["updated_at", "2020-05-29 21:04:58.390482"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.392008"], ["updated_at", "2020-05-29 21:04:58.392008"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.394144"], ["updated_at", "2020-05-29 21:04:58.394144"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.395804"], ["updated_at", "2020-05-29 21:04:58.395804"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.397531"], ["updated_at", "2020-05-29 21:04:58.397531"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.399453"], ["updated_at", "2020-05-29 21:04:58.399453"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.401129"], ["updated_at", "2020-05-29 21:04:58.401129"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.402371"], ["updated_at", "2020-05-29 21:04:58.402371"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.403553"], ["updated_at", "2020-05-29 21:04:58.403553"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.405680"], ["updated_at", "2020-05-29 21:04:58.405680"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.407209"], ["updated_at", "2020-05-29 21:04:58.407209"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.408498"], ["updated_at", "2020-05-29 21:04:58.408498"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.410271"], ["updated_at", "2020-05-29 21:04:58.410271"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.412061"], ["updated_at", "2020-05-29 21:04:58.412061"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.413491"], ["updated_at", "2020-05-29 21:04:58.413491"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.415403"], ["updated_at", "2020-05-29 21:04:58.415403"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.417417"], ["updated_at", "2020-05-29 21:04:58.417417"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.419207"], ["updated_at", "2020-05-29 21:04:58.419207"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.420520"], ["updated_at", "2020-05-29 21:04:58.420520"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.421793"], ["updated_at", "2020-05-29 21:04:58.421793"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.423115"], ["updated_at", "2020-05-29 21:04:58.423115"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.424438"], ["updated_at", "2020-05-29 21:04:58.424438"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.425808"], ["updated_at", "2020-05-29 21:04:58.425808"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.427851"], ["updated_at", "2020-05-29 21:04:58.427851"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.429620"], ["updated_at", "2020-05-29 21:04:58.429620"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.431113"], ["updated_at", "2020-05-29 21:04:58.431113"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.432766"], ["updated_at", "2020-05-29 21:04:58.432766"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.434254"], ["updated_at", "2020-05-29 21:04:58.434254"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.435527"], ["updated_at", "2020-05-29 21:04:58.435527"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.437344"], ["updated_at", "2020-05-29 21:04:58.437344"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.439725"], ["updated_at", "2020-05-29 21:04:58.439725"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.441473"], ["updated_at", "2020-05-29 21:04:58.441473"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.443017"], ["updated_at", "2020-05-29 21:04:58.443017"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.444920"], ["updated_at", "2020-05-29 21:04:58.444920"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.446498"], ["updated_at", "2020-05-29 21:04:58.446498"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.448353"], ["updated_at", "2020-05-29 21:04:58.448353"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.7ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.450559"], ["updated_at", "2020-05-29 21:04:58.450559"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.452837"], ["updated_at", "2020-05-29 21:04:58.452837"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.454179"], ["updated_at", "2020-05-29 21:04:58.454179"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.455487"], ["updated_at", "2020-05-29 21:04:58.455487"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.456802"], ["updated_at", "2020-05-29 21:04:58.456802"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.457939"], ["updated_at", "2020-05-29 21:04:58.457939"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.459032"], ["updated_at", "2020-05-29 21:04:58.459032"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.460847"], ["updated_at", "2020-05-29 21:04:58.460847"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.462985"], ["updated_at", "2020-05-29 21:04:58.462985"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.464785"], ["updated_at", "2020-05-29 21:04:58.464785"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.466552"], ["updated_at", "2020-05-29 21:04:58.466552"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.467941"], ["updated_at", "2020-05-29 21:04:58.467941"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.469412"], ["updated_at", "2020-05-29 21:04:58.469412"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.471020"], ["updated_at", "2020-05-29 21:04:58.471020"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.472948"], ["updated_at", "2020-05-29 21:04:58.472948"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.474388"], ["updated_at", "2020-05-29 21:04:58.474388"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.475802"], ["updated_at", "2020-05-29 21:04:58.475802"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.477382"], ["updated_at", "2020-05-29 21:04:58.477382"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.478671"], ["updated_at", "2020-05-29 21:04:58.478671"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.479842"], ["updated_at", "2020-05-29 21:04:58.479842"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.481590"], ["updated_at", "2020-05-29 21:04:58.481590"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.496930"], ["updated_at", "2020-05-29 21:04:58.496930"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.498880"], ["updated_at", "2020-05-29 21:04:58.498880"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.500950"], ["updated_at", "2020-05-29 21:04:58.500950"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (2.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.503369"], ["updated_at", "2020-05-29 21:04:58.503369"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.507910"], ["updated_at", "2020-05-29 21:04:58.507910"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.509711"], ["updated_at", "2020-05-29 21:04:58.509711"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.511483"], ["updated_at", "2020-05-29 21:04:58.511483"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.512888"], ["updated_at", "2020-05-29 21:04:58.512888"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.514177"], ["updated_at", "2020-05-29 21:04:58.514177"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.515848"], ["updated_at", "2020-05-29 21:04:58.515848"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.518487"], ["updated_at", "2020-05-29 21:04:58.518487"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.520170"], ["updated_at", "2020-05-29 21:04:58.520170"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.521515"], ["updated_at", "2020-05-29 21:04:58.521515"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.523002"], ["updated_at", "2020-05-29 21:04:58.523002"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.524605"], ["updated_at", "2020-05-29 21:04:58.524605"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.527076"], ["updated_at", "2020-05-29 21:04:58.527076"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.529238"], ["updated_at", "2020-05-29 21:04:58.529238"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.530679"], ["updated_at", "2020-05-29 21:04:58.530679"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.532642"], ["updated_at", "2020-05-29 21:04:58.532642"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.534069"], ["updated_at", "2020-05-29 21:04:58.534069"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.535515"], ["updated_at", "2020-05-29 21:04:58.535515"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.536781"], ["updated_at", "2020-05-29 21:04:58.536781"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.538420"], ["updated_at", "2020-05-29 21:04:58.538420"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.540967"], ["updated_at", "2020-05-29 21:04:58.540967"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.542905"], ["updated_at", "2020-05-29 21:04:58.542905"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.544326"], ["updated_at", "2020-05-29 21:04:58.544326"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.545604"], ["updated_at", "2020-05-29 21:04:58.545604"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.546870"], ["updated_at", "2020-05-29 21:04:58.546870"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.548247"], ["updated_at", "2020-05-29 21:04:58.548247"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.550218"], ["updated_at", "2020-05-29 21:04:58.550218"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.552170"], ["updated_at", "2020-05-29 21:04:58.552170"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.553667"], ["updated_at", "2020-05-29 21:04:58.553667"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.554826"], ["updated_at", "2020-05-29 21:04:58.554826"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.556039"], ["updated_at", "2020-05-29 21:04:58.556039"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.557542"], ["updated_at", "2020-05-29 21:04:58.557542"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.5ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.559261"], ["updated_at", "2020-05-29 21:04:58.559261"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.561449"], ["updated_at", "2020-05-29 21:04:58.561449"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.562902"], ["updated_at", "2020-05-29 21:04:58.562902"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.564392"], ["updated_at", "2020-05-29 21:04:58.564392"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.566040"], ["updated_at", "2020-05-29 21:04:58.566040"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.567306"], ["updated_at", "2020-05-29 21:04:58.567306"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.568559"], ["updated_at", "2020-05-29 21:04:58.568559"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.569801"], ["updated_at", "2020-05-29 21:04:58.569801"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.571177"], ["updated_at", "2020-05-29 21:04:58.571177"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.572862"], ["updated_at", "2020-05-29 21:04:58.572862"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.574247"], ["updated_at", "2020-05-29 21:04:58.574247"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.576457"], ["updated_at", "2020-05-29 21:04:58.576457"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.578468"], ["updated_at", "2020-05-29 21:04:58.578468"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.580091"], ["updated_at", "2020-05-29 21:04:58.580091"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.581783"], ["updated_at", "2020-05-29 21:04:58.581783"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.583862"], ["updated_at", "2020-05-29 21:04:58.583862"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.585854"], ["updated_at", "2020-05-29 21:04:58.585854"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.587241"], ["updated_at", "2020-05-29 21:04:58.587241"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.589487"], ["updated_at", "2020-05-29 21:04:58.589487"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.592017"], ["updated_at", "2020-05-29 21:04:58.592017"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.595854"], ["updated_at", "2020-05-29 21:04:58.595854"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.599541"], ["updated_at", "2020-05-29 21:04:58.599541"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.602094"], ["updated_at", "2020-05-29 21:04:58.602094"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.606037"], ["updated_at", "2020-05-29 21:04:58.606037"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.5ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.609329"], ["updated_at", "2020-05-29 21:04:58.609329"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.614276"], ["updated_at", "2020-05-29 21:04:58.614276"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.617445"], ["updated_at", "2020-05-29 21:04:58.617445"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.620884"], ["updated_at", "2020-05-29 21:04:58.620884"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.623163"], ["updated_at", "2020-05-29 21:04:58.623163"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.626230"], ["updated_at", "2020-05-29 21:04:58.626230"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.630339"], ["updated_at", "2020-05-29 21:04:58.630339"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.633115"], ["updated_at", "2020-05-29 21:04:58.633115"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.635528"], ["updated_at", "2020-05-29 21:04:58.635528"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.638782"], ["updated_at", "2020-05-29 21:04:58.638782"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.641176"], ["updated_at", "2020-05-29 21:04:58.641176"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.643994"], ["updated_at", "2020-05-29 21:04:58.643994"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.646716"], ["updated_at", "2020-05-29 21:04:58.646716"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.650616"], ["updated_at", "2020-05-29 21:04:58.650616"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.653524"], ["updated_at", "2020-05-29 21:04:58.653524"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.655952"], ["updated_at", "2020-05-29 21:04:58.655952"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.657874"], ["updated_at", "2020-05-29 21:04:58.657874"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.660058"], ["updated_at", "2020-05-29 21:04:58.660058"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.663315"], ["updated_at", "2020-05-29 21:04:58.663315"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.665386"], ["updated_at", "2020-05-29 21:04:58.665386"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.667430"], ["updated_at", "2020-05-29 21:04:58.667430"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.670288"], ["updated_at", "2020-05-29 21:04:58.670288"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.673118"], ["updated_at", "2020-05-29 21:04:58.673118"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.676801"], ["updated_at", "2020-05-29 21:04:58.676801"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.679365"], ["updated_at", "2020-05-29 21:04:58.679365"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.682100"], ["updated_at", "2020-05-29 21:04:58.682100"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.685525"], ["updated_at", "2020-05-29 21:04:58.685525"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.689293"], ["updated_at", "2020-05-29 21:04:58.689293"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.692279"], ["updated_at", "2020-05-29 21:04:58.692279"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.695105"], ["updated_at", "2020-05-29 21:04:58.695105"], ["aasm_state", "delicious"]]
+  [1m[35m (1.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:04:58.697781"], ["updated_at", "2020-05-29 21:04:58.697781"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  Rendering /home/webgen/www/template/lasha/app/views/mailers/lasha/notify.html.slim within layouts/lasha_mailer_layout
+  Rendered /home/webgen/www/template/lasha/app/views/mailers/lasha/notify.html.slim within layouts/lasha_mailer_layout (Duration: 41.8ms | Allocations: 11122)
+LashaMailer#notify: processed outbound mail in 5075.2ms
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  Rendering /home/webgen/www/template/lasha/app/views/mailers/lasha/notify.html.slim within layouts/lasha_mailer_layout
+  Rendered /home/webgen/www/template/lasha/app/views/mailers/lasha/notify.html.slim within layouts/lasha_mailer_layout (Duration: 0.0ms | Allocations: 6)
+LashaMailer#notify: processed outbound mail in 1.6ms
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.844800"], ["updated_at", "2020-05-29 21:05:03.844800"], ["aasm_state", "delicious"]]
+  [1m[35m (0.9ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.847723"], ["updated_at", "2020-05-29 21:05:03.847723"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.849827"], ["updated_at", "2020-05-29 21:05:03.849827"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.851871"], ["updated_at", "2020-05-29 21:05:03.851871"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.855233"], ["updated_at", "2020-05-29 21:05:03.855233"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.857910"], ["updated_at", "2020-05-29 21:05:03.857910"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.859676"], ["updated_at", "2020-05-29 21:05:03.859676"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.861539"], ["updated_at", "2020-05-29 21:05:03.861539"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.863910"], ["updated_at", "2020-05-29 21:05:03.863910"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.866200"], ["updated_at", "2020-05-29 21:05:03.866200"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.868002"], ["updated_at", "2020-05-29 21:05:03.868002"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.869718"], ["updated_at", "2020-05-29 21:05:03.869718"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.871803"], ["updated_at", "2020-05-29 21:05:03.871803"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.873325"], ["updated_at", "2020-05-29 21:05:03.873325"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.874722"], ["updated_at", "2020-05-29 21:05:03.874722"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.875955"], ["updated_at", "2020-05-29 21:05:03.875955"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.877925"], ["updated_at", "2020-05-29 21:05:03.877925"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.880508"], ["updated_at", "2020-05-29 21:05:03.880508"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.882458"], ["updated_at", "2020-05-29 21:05:03.882458"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.884328"], ["updated_at", "2020-05-29 21:05:03.884328"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.886539"], ["updated_at", "2020-05-29 21:05:03.886539"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.888683"], ["updated_at", "2020-05-29 21:05:03.888683"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.890183"], ["updated_at", "2020-05-29 21:05:03.890183"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.891499"], ["updated_at", "2020-05-29 21:05:03.891499"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.892758"], ["updated_at", "2020-05-29 21:05:03.892758"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.893952"], ["updated_at", "2020-05-29 21:05:03.893952"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.895100"], ["updated_at", "2020-05-29 21:05:03.895100"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.896430"], ["updated_at", "2020-05-29 21:05:03.896430"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.7ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.897933"], ["updated_at", "2020-05-29 21:05:03.897933"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.900242"], ["updated_at", "2020-05-29 21:05:03.900242"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.902035"], ["updated_at", "2020-05-29 21:05:03.902035"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.904430"], ["updated_at", "2020-05-29 21:05:03.904430"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.906295"], ["updated_at", "2020-05-29 21:05:03.906295"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.907688"], ["updated_at", "2020-05-29 21:05:03.907688"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.908958"], ["updated_at", "2020-05-29 21:05:03.908958"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.910452"], ["updated_at", "2020-05-29 21:05:03.910452"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.912898"], ["updated_at", "2020-05-29 21:05:03.912898"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (1.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.915125"], ["updated_at", "2020-05-29 21:05:03.915125"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.919336"], ["updated_at", "2020-05-29 21:05:03.919336"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.921524"], ["updated_at", "2020-05-29 21:05:03.921524"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.922965"], ["updated_at", "2020-05-29 21:05:03.922965"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.924458"], ["updated_at", "2020-05-29 21:05:03.924458"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.926329"], ["updated_at", "2020-05-29 21:05:03.926329"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.928025"], ["updated_at", "2020-05-29 21:05:03.928025"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.929492"], ["updated_at", "2020-05-29 21:05:03.929492"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.931095"], ["updated_at", "2020-05-29 21:05:03.931095"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.932820"], ["updated_at", "2020-05-29 21:05:03.932820"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.934276"], ["updated_at", "2020-05-29 21:05:03.934276"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.935573"], ["updated_at", "2020-05-29 21:05:03.935573"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.936858"], ["updated_at", "2020-05-29 21:05:03.936858"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.938083"], ["updated_at", "2020-05-29 21:05:03.938083"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.939259"], ["updated_at", "2020-05-29 21:05:03.939259"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.940476"], ["updated_at", "2020-05-29 21:05:03.940476"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.941713"], ["updated_at", "2020-05-29 21:05:03.941713"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.942938"], ["updated_at", "2020-05-29 21:05:03.942938"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.945056"], ["updated_at", "2020-05-29 21:05:03.945056"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.946582"], ["updated_at", "2020-05-29 21:05:03.946582"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.948244"], ["updated_at", "2020-05-29 21:05:03.948244"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.951010"], ["updated_at", "2020-05-29 21:05:03.951010"], ["aasm_state", "delicious"]]
+  [1m[35m (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.953843"], ["updated_at", "2020-05-29 21:05:03.953843"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.955291"], ["updated_at", "2020-05-29 21:05:03.955291"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.957010"], ["updated_at", "2020-05-29 21:05:03.957010"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.958638"], ["updated_at", "2020-05-29 21:05:03.958638"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.960302"], ["updated_at", "2020-05-29 21:05:03.960302"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.962270"], ["updated_at", "2020-05-29 21:05:03.962270"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.963810"], ["updated_at", "2020-05-29 21:05:03.963810"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.965715"], ["updated_at", "2020-05-29 21:05:03.965715"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Hazel"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.967351"], ["updated_at", "2020-05-29 21:05:03.967351"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.969073"], ["updated_at", "2020-05-29 21:05:03.969073"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.970389"], ["updated_at", "2020-05-29 21:05:03.970389"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.971627"], ["updated_at", "2020-05-29 21:05:03.971627"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.972991"], ["updated_at", "2020-05-29 21:05:03.972991"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.974217"], ["updated_at", "2020-05-29 21:05:03.974217"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.975433"], ["updated_at", "2020-05-29 21:05:03.975433"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.977272"], ["updated_at", "2020-05-29 21:05:03.977272"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.978945"], ["updated_at", "2020-05-29 21:05:03.978945"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.980448"], ["updated_at", "2020-05-29 21:05:03.980448"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.982492"], ["updated_at", "2020-05-29 21:05:03.982492"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.984226"], ["updated_at", "2020-05-29 21:05:03.984226"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.986176"], ["updated_at", "2020-05-29 21:05:03.986176"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.987681"], ["updated_at", "2020-05-29 21:05:03.987681"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.989104"], ["updated_at", "2020-05-29 21:05:03.989104"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.990348"], ["updated_at", "2020-05-29 21:05:03.990348"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.992118"], ["updated_at", "2020-05-29 21:05:03.992118"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.994758"], ["updated_at", "2020-05-29 21:05:03.994758"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.996557"], ["updated_at", "2020-05-29 21:05:03.996557"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.998218"], ["updated_at", "2020-05-29 21:05:03.998218"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:03.999988"], ["updated_at", "2020-05-29 21:05:03.999988"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.001603"], ["updated_at", "2020-05-29 21:05:04.001603"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.003139"], ["updated_at", "2020-05-29 21:05:04.003139"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.004464"], ["updated_at", "2020-05-29 21:05:04.004464"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.005758"], ["updated_at", "2020-05-29 21:05:04.005758"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.007067"], ["updated_at", "2020-05-29 21:05:04.007067"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.008805"], ["updated_at", "2020-05-29 21:05:04.008805"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.011627"], ["updated_at", "2020-05-29 21:05:04.011627"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.014034"], ["updated_at", "2020-05-29 21:05:04.014034"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.016630"], ["updated_at", "2020-05-29 21:05:04.016630"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.018635"], ["updated_at", "2020-05-29 21:05:04.018635"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.020258"], ["updated_at", "2020-05-29 21:05:04.020258"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.021590"], ["updated_at", "2020-05-29 21:05:04.021590"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.022989"], ["updated_at", "2020-05-29 21:05:04.022989"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.024492"], ["updated_at", "2020-05-29 21:05:04.024492"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.027226"], ["updated_at", "2020-05-29 21:05:04.027226"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.029375"], ["updated_at", "2020-05-29 21:05:04.029375"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.030859"], ["updated_at", "2020-05-29 21:05:04.030859"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.032731"], ["updated_at", "2020-05-29 21:05:04.032731"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.034386"], ["updated_at", "2020-05-29 21:05:04.034386"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.036005"], ["updated_at", "2020-05-29 21:05:04.036005"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.037545"], ["updated_at", "2020-05-29 21:05:04.037545"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.039647"], ["updated_at", "2020-05-29 21:05:04.039647"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.5ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.041651"], ["updated_at", "2020-05-29 21:05:04.041651"], ["aasm_state", "delicious"]]
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.045217"], ["updated_at", "2020-05-29 21:05:04.045217"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.047912"], ["updated_at", "2020-05-29 21:05:04.047912"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.049887"], ["updated_at", "2020-05-29 21:05:04.049887"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.051502"], ["updated_at", "2020-05-29 21:05:04.051502"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.054000"], ["updated_at", "2020-05-29 21:05:04.054000"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.056232"], ["updated_at", "2020-05-29 21:05:04.056232"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.058343"], ["updated_at", "2020-05-29 21:05:04.058343"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Walnut"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.060040"], ["updated_at", "2020-05-29 21:05:04.060040"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.061440"], ["updated_at", "2020-05-29 21:05:04.061440"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.062714"], ["updated_at", "2020-05-29 21:05:04.062714"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.063898"], ["updated_at", "2020-05-29 21:05:04.063898"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.065543"], ["updated_at", "2020-05-29 21:05:04.065543"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.067577"], ["updated_at", "2020-05-29 21:05:04.067577"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.069614"], ["updated_at", "2020-05-29 21:05:04.069614"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Damson"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.071069"], ["updated_at", "2020-05-29 21:05:04.071069"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Nectarine"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.072359"], ["updated_at", "2020-05-29 21:05:04.072359"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Pear"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.074125"], ["updated_at", "2020-05-29 21:05:04.074125"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.5ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.075664"], ["updated_at", "2020-05-29 21:05:04.075664"], ["aasm_state", "delicious"]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.077809"], ["updated_at", "2020-05-29 21:05:04.077809"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Almond"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.079619"], ["updated_at", "2020-05-29 21:05:04.079619"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Peach"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.082484"], ["updated_at", "2020-05-29 21:05:04.082484"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.084862"], ["updated_at", "2020-05-29 21:05:04.084862"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.088473"], ["updated_at", "2020-05-29 21:05:04.088473"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mulberry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.090030"], ["updated_at", "2020-05-29 21:05:04.090030"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.091461"], ["updated_at", "2020-05-29 21:05:04.091461"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.092852"], ["updated_at", "2020-05-29 21:05:04.092852"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Medlar"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.094086"], ["updated_at", "2020-05-29 21:05:04.094086"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Plum"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.095302"], ["updated_at", "2020-05-29 21:05:04.095302"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.096596"], ["updated_at", "2020-05-29 21:05:04.096596"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.098270"], ["updated_at", "2020-05-29 21:05:04.098270"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.099922"], ["updated_at", "2020-05-29 21:05:04.099922"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.3ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.101756"], ["updated_at", "2020-05-29 21:05:04.101756"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.103376"], ["updated_at", "2020-05-29 21:05:04.103376"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.104923"], ["updated_at", "2020-05-29 21:05:04.104923"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apple"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.106275"], ["updated_at", "2020-05-29 21:05:04.106275"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Cherry"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.107647"], ["updated_at", "2020-05-29 21:05:04.107647"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.4ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Apricot"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.109107"], ["updated_at", "2020-05-29 21:05:04.109107"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (0.2ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Fig"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.111298"], ["updated_at", "2020-05-29 21:05:04.111298"], ["aasm_state", "delicious"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTree Create (2.1ms)[0m  [1m[32mINSERT INTO "trees" ("title", "content", "toggler", "created_at", "updated_at", "aasm_state") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Mirabelle"], ["content", "MyText"], ["toggler", false], ["created_at", "2020-05-29 21:05:04.113003"], ["updated_at", "2020-05-29 21:05:04.113003"], ["aasm_state", "delicious"]]
+  [1m[35m (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/trees" for 127.0.0.1 at 2020-05-30 01:05:04 +0400
+Processing by TreesController#index as HTML
+Completed 500 Internal Server Error in 634ms (ActiveRecord: 0.0ms | Allocations: 451515)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m

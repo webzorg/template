@@ -1,0 +1,35 @@
+.container
+  h2.text-center Showing #{@data[:model].model_name.human}
+
+  dl.row
+    - @data[:attributes].each do |attribute, _v|
+      - value = @data[:object].public_send(attribute)
+      dt.col-sm-3.text-right = @data[:model].human_attribute_name attribute
+      dd.col-sm-9 == value.present? ? value : " - "
+
+  = render partial: "calendar/events/navigation"
+
+.container
+  h2.text-center Signup for this event
+
+  = form_with url: wow_event_signups_path, object: @event_signup_data[:object], local: true, html: { class: "col-sm-12" } do |f|
+    - if @event_signup_data[:object].errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@event_signup_data[:object].errors.count, "error")} prohibited this tree from being saved:"
+        ul
+          - @event_signup_data[:object].errors.full_messages.each do |message|
+            li = message
+
+    = f.hidden_field :calendar_event_id, value: @event_signup_data[:object].calendar_event_id
+
+    - @event_signup_data[:attributes].each do |column_name, column_data|
+      = content_tag :div, class: form_group_wrapper_class(@data, column_name)
+        - if is_check_box?(@event_signup_data, column_name)
+          = smart_form_field(f, @event_signup_data, column_name)
+          = f.label column_name, class: "custom-control-label"
+        - else
+          div = f.label column_name
+          = smart_form_field(f, @event_signup_data, column_name)
+
+    br
+    .mb-3.text-center = f.submit class: "btn btn-primary"

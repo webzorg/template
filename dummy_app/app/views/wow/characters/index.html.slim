@@ -1,0 +1,33 @@
+.container
+  h2.text-center #{@data[:model].model_name.human.pluralize} Index
+
+  = pagy_helper(@data[:pagy])
+  = render partial: "lasha/shared/scope_filters"
+
+  .row
+    .col-sm-12
+      .table-responsive
+        table.table.table-bordered.table-hover.table-sm
+          thead
+            tr
+              - @data[:attributes_index].each do |attribute|
+                th.text-center = sort_link(@data[:ransack], attribute, {}, class: "text-reset text-decoration-none")
+              - (@data[:actions] - [:new]).size.times do
+                th.text-center
+
+          tbody
+            - @data[:collection].each do |item|
+              tr
+                - @data[:attributes_index].each do |attribute|
+                  - attribute = item.read_attribute(attribute)
+                  - if attribute.is_a? ActiveSupport::TimeWithZone
+                    td = l attribute, format: :short
+                  - else
+                    td = attribute
+
+                - (@data[:actions] - [:new]).each do |action|
+                  td[style="width: 0"] = index_actions_link_helper(action, item, @data, policy(item).send("#{action}?"))
+
+  = pagy_helper(@data[:pagy])
+
+  = render partial: "navigation"

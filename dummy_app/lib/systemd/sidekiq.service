@@ -1,0 +1,13 @@
+[Unit]
+Description=Start Sidekiq
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/environment
+WorkingDirectory=%h/leftovers/current
+ExecStart=%h/.rvm/bin/rvm default do bundle exec sidekiq
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

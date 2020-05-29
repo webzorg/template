@@ -1,0 +1,20 @@
+.container
+  .row
+    .col-lg-4.col-md-6.mx-auto
+      = render "shared/user_type_switcher", local_vars: { user_type_switcher_header: t(:partner_sign_up) }
+
+      = form_for @user, url: registration_path do |f|
+        = render "shared/errors", object: @user
+        = f.hidden_field :role, value: @role
+
+        .form-group = f.text_field :first_name,                placeholder: User.human_attribute_name(:first_name), required: true, autofocus: true, class: "form-control"
+        .form-group = f.text_field :last_name,                 placeholder: User.human_attribute_name(:last_name), required: true,    class: "form-control"
+        .form-group = f.text_field :company_name,              placeholder: User.human_attribute_name(:company_name), required: true, class: "form-control"
+        .form-group = f.text_field :phone_number,              placeholder: User.human_attribute_name(:phone_number), required: true, pattern: "^(514|551|555|557|558|559|568|570|571|574|577|591|592|593|595|596|597|598|599)+[0-9]{6}$", class: "form-control"
+        .form-group = f.text_field :address,                   placeholder: User.human_attribute_name(:address), required: true, class: "form-control"
+        .form-group = f.email_field :email,                    placeholder: User.human_attribute_name(:email), required: true,   class: "form-control"
+        .form-group = f.password_field :password,              placeholder: User.human_attribute_name(:password), class: "form-control"
+        .form-group = f.password_field :password_confirmation, placeholder: User.human_attribute_name(:password_confirmation), required: true, class: "form-control"
+        .form-group = f.submit t("devise.shared.links.sign_up"), class: "btn btn-primary btn-block btn-lg"
+
+  = render "shared/sign_in_up_footer"

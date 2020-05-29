@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    meta name="turbolinks-cache-control" content="no-preview"
+    = favicon_link_tag "/favicon.ico", rel: "favicon", type: "image/x-icon"
+    title = Rails.configuration.app_name
+
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload"
+    = javascript_pack_tag "application", "data-turbolinks-track": "reload", defer: true
+    = javascript_include_tag "http://cdn.cavernoftime.com/api/tooltip.js", "data-turbolinks-track": "reload", defer: true
+
+  body#overrider
+    / #before-page-spinner
+      .loader-wrapper
+        .loader
+
+    = alertifyjs_flash
+    = render "shared/header"
+
+    = yield
+
+    = render "shared/footer"
