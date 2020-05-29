@@ -1,6 +1,6 @@
 h2.text-center #{@data[:model].model_name.human.pluralize} Index
 
-= lasha_pagy_helper(@data[:pagy])
+= pagy_helper(@data[:pagy])
 = render partial: "lasha/shared/scope_filters"
 
 .row
@@ -27,6 +27,6 @@ h2.text-center #{@data[:model].model_name.human.pluralize} Index
               - (@data[:actions] - [:new]).each do |action|
                 td[style="width: 0"] = index_actions_link_helper(action, item, @data)
 
-= lasha_pagy_helper(@data[:pagy])
+= pagy_helper(@data[:pagy])
 
 = render partial: "lasha/crud/navigation"

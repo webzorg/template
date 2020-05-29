@@ -7,7 +7,7 @@
   - if current_user.admin?
     h2.text-center #{@data[:model].model_name.human.pluralize} Index
 
-    = lasha_pagy_helper(@data[:pagy])
+    = pagy_helper(@data[:pagy])
     = render partial: "lasha/shared/scope_filters"
 
     .row
@@ -34,6 +34,6 @@
                   - (@data[:actions] - [:new]).each do |action|
                     td[style="width: 0"] = index_actions_link_helper(action, item, @data)
 
-    = lasha_pagy_helper(@data[:pagy])
+    = pagy_helper(@data[:pagy])
 
     = render partial: "navigation"

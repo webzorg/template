@@ -44,6 +44,47 @@ yarn-debug.log*
 lasha/log/*.log
 lasha/pkg/
 
+
+# DUMMY APP
+dummy_app/.bundle
+
+# Ignore all logfiles and tempfiles.
+dummy_app/log/*
+dummy_app/tmp/*
+!dummy_app/log/.keep
+!dummy_app/tmp/.keep
+
+# Ignore uploaded files in development.
+dummy_app/storage/*
+!dummy_app/storage/.keep
+
+dummy_app/public/assets
+dummy_app/.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+dummy_app/config/master.key
+
+dummy_app/.env
+dummy_app/.env_staging
+dummy_app/.env_production
+
+dummy_app/public/sitemap.xml.gz/public/packs
+dummy_app/public/packs-test
+dummy_app/node_modules
+dummy_app/yarn-error.log
+dummy_app/yarn-debug.log*
+dummy_app/.yarn-integrity
+
+dummy_app/public/packs
+dummy_app/public/packs-test
+dummy_app/node_modules/
+dummy_app/yarn-error.log
+dummy_app/yarn-debug.log*
+dummy_app/.yarn-integrity
+
+dummy_app/lasha/log/*.log
+dummy_app/lasha/pkg/
+
 dummy_app/public/packs
 dummy_app/public/packs-test
 dummy_app/node_modules
