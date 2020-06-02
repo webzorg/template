@@ -14916,10 +14916,10 @@ wow_classic_items = [
 
 Wow::Item.insert_all(wow_classic_items)
 
-if Rails.env.development?
+if Rails.env.development? || Rails.env.test?
   User.create(
-    first_name: "Lasha",
-    last_name: "Abulashvili",
+    first_name: "First",
+    last_name: "Last",
     email: "user@email.com",
     password: "123456"
   )
@@ -14932,7 +14932,7 @@ if Rails.env.development?
       wow_role_id: 1,
       priority: index == 0 ? "main" : "alt",
       level: 60,
-      name: "Webgen-#{index}"
+      name: "char-name-#{index}"
     )
   end
 end
