@@ -14915,3 +14915,24 @@ wow_classic_items = [
 ]
 
 Wow::Item.insert_all(wow_classic_items)
+
+if Rails.env.development?
+  User.create(
+    first_name: "Lasha",
+    last_name: "Abulashvili",
+    email: "user@email.com",
+    password: "123456"
+  )
+
+  25.times.with_index do |index|
+    Wow::Character.create(
+      user_id: 1,
+      wow_class_id: 1,
+      wow_race_id: 1,
+      wow_role_id: 1,
+      priority: index == 0 ? "main" : "alt",
+      level: 60,
+      name: "Webgen-#{index}"
+    )
+  end
+end

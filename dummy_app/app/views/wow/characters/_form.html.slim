@@ -8,9 +8,18 @@
 
   - @data[:attributes].each do |column_name, column_data|
     = content_tag :div, class: form_group_wrapper_class(@data, column_name)
-      - if is_check_box?(@data, column_name)
+      - if column_data[:type] == :check_box
         = smart_form_field(f, @data, column_name)
         = f.label column_name, class: "custom-control-label"
+      - elsif column_data[:type] == :radio
+        = smart_form_field(f, @data, column_name)
+        / div = f.label column_name
+        / - column_data[:collection].each do |radio_key_value|
+        /   - label = radio_key_value[0]
+        /   - value = radio_key_value[1]
+        /   = content_tag :div, class: "form-check #{'form-check-inline' if column_data[:inline]}"
+        /     = f.radio_button(column_name, radio_key_value[1], checked: f.object.send(column_name) == label, id: "#{current_model(return_type: :symbol)}_#{label}", class: "form-check-input")
+        /     = f.label label, class: "form-check-label"
       - else
         div = f.label column_name
         = smart_form_field(f, @data, column_name)

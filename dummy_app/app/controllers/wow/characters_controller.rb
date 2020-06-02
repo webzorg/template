@@ -31,11 +31,17 @@ class Wow::CharactersController < ApplicationController
           collection: Wow::Role.all.pluck(:name, :id),
           skip_index: true
         },
+        # priority: {
+        #   type: :select,
+        #   collection: Wow::Character.priorities.to_a,
+        #   skip_index: false,
+        #   include_blank: false
+        # },
         priority: {
-          type: :select,
+          type: :radio,
           collection: Wow::Character.priorities.to_a,
-          skip_index: false,
-          include_blank: false
+          inline: true,
+          skip_index: false
         },
         level: {
           type: :select,

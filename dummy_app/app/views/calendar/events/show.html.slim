@@ -24,7 +24,7 @@
 
     - @event_signup_data[:attributes].each do |column_name, column_data|
       = content_tag :div, class: form_group_wrapper_class(@data, column_name)
-        - if is_check_box?(@event_signup_data, column_name)
+        - if column_data[:type] == :check_box
           = smart_form_field(f, @event_signup_data, column_name)
           = f.label column_name, class: "custom-control-label"
         - else

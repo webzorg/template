@@ -66,26 +66,27 @@ module LashaApplicationHelper
     end
   end
 
-  def index_actions_link_helper(action, item, data)
+  def index_actions_link_helper(action, item, data, permission_to_edit=true)
     case action
     when :show
       link_to action,
               object_path_generator(action, item, data),
-              class: "btn btn-info btn-xs btn-block"
+              class: "btn btn-info btn-xs btn-block #{'disabled' if !permission_to_edit}"
     when :edit
       link_to action,
               object_path_generator(action, item, data),
-              class: "btn btn-warning btn-xs btn-block"
+              class: "btn btn-warning btn-xs btn-block #{'disabled' if !permission_to_edit}"
     when :destroy
       link_to action,
               object_path_generator(action, item, data),
               method: :delete,
               data: { confirm: "Are you sure you want to delete #{data[:model]}?" },
-              class: "btn btn-danger btn-xs btn-block"
+              class: "btn btn-danger btn-xs btn-block #{'disabled' if !permission_to_edit}"
     end
   end
 
   def smart_form_field(f, data, column_name)
+    f.object = data[:object] if data[:object] && f.object.blank?
     column_data = data[:attributes][column_name]
     column_type = column_data ? column_data[:type] : :text_field
     html_options = {
@@ -103,12 +104,27 @@ module LashaApplicationHelper
       html_options[:class] = "form-control"
     when :check_box
       html_options[:class] = "custom-control-input"
+    when :radio
+      return (content_tag :div, f.label(column_name)) +
+        column_data[:collection].map { |radio_key_value|
+          label = radio_key_value[0]
+          content_tag :div, class: "form-check #{'form-check-inline' if column_data[:inline]}" do
+            f.radio_button(column_name, radio_key_value[1],
+              checked: f.object.send(column_name) == label,
+              id: "#{current_model(return_type: :symbol)}_#{label}",
+              class: "form-check-input"
+            ) + f.label(label, class: "form-check-label")
+          end
+        }.join.html_safe
     when :select
       html_options[:class] = "custom-select"
       field_options += [
-        options_for_select(column_data[:collection], selected: data[:object].public_send(column_name)),
-        { include_blank: true }
+        options_for_select(column_data[:collection], selected: data[:object].public_send("#{column_name}_before_type_cast")),
+        { include_blank: column_data[:include_blank].nil? ? true : column_data[:include_blank] }
       ]
+    when :collection_select
+      html_options[:class] = "custom-select"
+      field_options += column_data[:options]
     when :datetime_select
       field_options += [
         { ampm: false, minute_step: 15 }
@@ -127,13 +143,6 @@ module LashaApplicationHelper
     else
       "form-group"
     end
-  end
-
-  def is_check_box?(data, column_name)
-    column_data = data[:attributes][column_name]
-    column_type = column_data ? column_data[:type] : :text_field
-
-    true if column_type == :check_box
   end
 
   def object_path_generator(action, item, data)
