@@ -5,7 +5,7 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     meta name="turbolinks-cache-control" content="no-preview"
     = favicon_link_tag "/favicon.ico", rel: "favicon", type: "image/x-icon"
-    title = Rails.configuration.app_name
+    title = ENV["RAILS_APP_NAME"]
 
     = csrf_meta_tags
     = csp_meta_tag

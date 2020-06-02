@@ -2,7 +2,7 @@
 require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"
 
-require File.expand_path("dummy/config/environment", __dir__)
+require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
@@ -10,7 +10,7 @@ require "capybara/rails"
 require "capybara/rspec"
 require "factory_bot_rails"
 require "webdrivers"
-require "pry-byebug"
+require "pry-rails"
 
 FactoryBot.definition_file_paths << File.join("spec", "dummy", "spec", "factories")
 FactoryBot.find_definitions

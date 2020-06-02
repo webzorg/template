@@ -10,7 +10,6 @@ APPLICATION_RB = <<-'APPLICATION_RB'
       g.jbuilder          false
     end
 
-    config.app_name = ENV["RAILS_APP_NAME"]
     config.api_only_mode = ActiveModel::Type::Boolean.new.cast(ENV["API_ONLY_MODE"])
 
     config.i18n.default_locale = :en
@@ -21,7 +20,7 @@ APPLICATION_RB = <<-'APPLICATION_RB'
     config.generators.javascript_engine = :js
 
     config.active_job.queue_adapter = :sidekiq
-    config.active_job.queue_name_prefix = "#{Rails.configuration.app_name}_#{Rails.env}"
+    config.active_job.queue_name_prefix = "#{ENV['RAILS_APP_NAME']}_#{Rails.env}"
 
     config.action_mailer.delivery_method = :sendgrid_actionmailer
     config.action_mailer.sendgrid_actionmailer_settings = {
@@ -30,12 +29,12 @@ APPLICATION_RB = <<-'APPLICATION_RB'
     }
 
     config.action_mailer.default_url_options = {
-      host: Rails.application.credentials.send(Rails.env)[:host]
+      host: Rails.application.credentials.dig(Rails.env.to_sym, :host)
     }
 
     config.action_cable.allowed_request_origins = [
-      "https://#{Rails.application.credentials.send(Rails.env)[:host]}",
-      /https:\/\/#{Rails.application.credentials.send(Rails.env)[:host]}.*/
+      "https://#{Rails.application.credentials.dig(Rails.env.to_sym, :host)}",
+      /https:\/\/#{Rails.application.credentials.dig(Rails.env.to_sym, :host)}.*/
     ]
 
     config.cache_store = :redis_cache_store, {
@@ -189,6 +188,7 @@ def add_gems
     # gem 'shoulda-matchers'
     # gem 'rails-controller-testing'
     gem "dotenv-rails"
+    gem "webdrivers"
   end
 
   gem_group :development, :test, :staging do

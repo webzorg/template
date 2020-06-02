@@ -52,7 +52,7 @@ module DummyApp
     config.generators.javascript_engine = :js
 
     config.active_job.queue_adapter = :sidekiq
-    config.active_job.queue_name_prefix = "#{Rails.configuration.app_name}_#{Rails.env}"
+    config.active_job.queue_name_prefix = "#{ENV['RAILS_APP_NAME']}_#{Rails.env}"
 
     config.action_mailer.delivery_method = :sendgrid_actionmailer
     config.action_mailer.sendgrid_actionmailer_settings = {
@@ -61,12 +61,12 @@ module DummyApp
     }
 
     config.action_mailer.default_url_options = {
-      host: Rails.application.credentials.send(Rails.env)[:host]
+      host: Rails.application.credentials.dig(Rails.env.to_sym, :host)
     }
 
     config.action_cable.allowed_request_origins = [
-      "https://#{Rails.application.credentials.send(Rails.env)[:host]}",
-      %r{https://#{Rails.application.credentials.send(Rails.env)[:host]}.*}
+      "https://#{Rails.application.credentials.dig(Rails.env.to_sym, :host)}",
+      %r{https://#{Rails.application.credentials.dig(Rails.env.to_sym, :host)}.*}
     ]
 
     config.cache_store = :redis_cache_store, {
