@@ -18,9 +18,6 @@ class Admin::UsersController < Admin::ApplicationController
         phone_number: {
           skip_index: true
         },
-        users: {
-          skip_index: true
-        },
         provider: {
           skip_index: true
         },
@@ -81,14 +78,7 @@ class Admin::UsersController < Admin::ApplicationController
         last_activity_at: {
           skip_index: true
         },
-        address: {
-          skip_index: true
-        },
-        phone_number_verified: {
-          skip_index: true
-        },
-        # sms_verification_code
-        sms_last_sent: {
+        last_api_activity_at: {
           skip_index: true
         }
       },
