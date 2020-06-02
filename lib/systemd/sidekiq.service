@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 EnvironmentFile=/etc/environment
-WorkingDirectory=%h/leftovers/current
+WorkingDirectory=%h/dummy_app/current
 ExecStart=%h/.rvm/bin/rvm default do bundle exec sidekiq
 Restart=always
 RestartSec=10

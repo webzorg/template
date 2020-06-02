@@ -1,5 +1,5 @@
 {
-  "name": "leftovers",
+  "name": "dummy_app",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",

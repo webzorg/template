@@ -9,28 +9,28 @@ namespace :systemd do
   desc "Enable all systemd user services"
   task :enable_all do
     on roles(:app) do
-      execute "/var/www/leftovers/current/lib/capistrano/tasks/systemd_enable_script.sh"
+      execute "/var/www/dummy_app/current/lib/capistrano/tasks/systemd_enable_script.sh"
     end
   end
 
   desc "Start all systemd user services"
   task :start_all do
     on roles(:app) do
-      execute "/var/www/leftovers/current/lib/capistrano/tasks/systemd_start_script.sh"
+      execute "/var/www/dummy_app/current/lib/capistrano/tasks/systemd_start_script.sh"
     end
   end
 
   desc "Stop all systemd user services"
   task :stop_all do
     on roles(:app) do
-      execute "/var/www/leftovers/current/lib/capistrano/tasks/systemd_stop_script.sh"
+      execute "/var/www/dummy_app/current/lib/capistrano/tasks/systemd_stop_script.sh"
     end
   end
 
   desc "Restart all systemd user services"
   task :restart_all do
     on roles(:app) do
-      execute "/var/www/leftovers/current/lib/capistrano/tasks/systemd_restart_script.sh"
+      execute "/var/www/dummy_app/current/lib/capistrano/tasks/systemd_restart_script.sh"
     end
   end
 end
