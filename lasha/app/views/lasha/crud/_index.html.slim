@@ -2,6 +2,7 @@ h2.text-center #{@data[:model].model_name.human.pluralize} Index
 
 = pagy_helper(@data[:pagy])
 = render partial: "lasha/shared/scope_filters"
+= render partial: "lasha/shared/search_fields"
 
 .row
   .col-sm-12

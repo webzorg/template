@@ -14,7 +14,9 @@ class Admin::UsersController < Admin::ApplicationController
       attributes: {
         first_name: {},
         last_name: {},
-        company_name: {},
+        company_name: {
+          skip_index: true
+        },
         phone_number: {
           skip_index: true
         },
@@ -90,7 +92,8 @@ class Admin::UsersController < Admin::ApplicationController
         # }
       },
       pagy_items: 10,
-      scope_filters: true
+      scope_filters: true,
+      search_fields: [:attributes]
     },
     strong_params: %i[]
   }

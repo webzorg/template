@@ -5,6 +5,8 @@ class User < Lasha::User
   has_many :event_signups, class_name: "Wow::EventSignup"
   has_many :events_signed_up, through: :event_signups
 
+  ransack_alias :attributes, %i[first_name last_name company_name email].join("_or_")
+
   def web_notifications
     # # Notification.create(
     # #   notify_type: "",

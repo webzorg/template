@@ -36,7 +36,8 @@ module Lasha
       collection:,
       attributes:,
       pagy_items: 20,
-      scope_filters: false
+      scope_filters: false,
+      search_fields: false
     )
       data_hash = {
         namespace: set_or_guess_namespace(namespace, controller),
@@ -45,7 +46,8 @@ module Lasha
         attributes: attributes.with_indifferent_access,
         attributes_index: attributes.reject { |_key, value| value[:skip_index] }.keys,
         actions: set_or_guess_actions(actions, controller),
-        scope_filters: scope_filters
+        scope_filters: scope_filters,
+        search_fields: search_fields
       }
 
       # @object setter if it is defined
