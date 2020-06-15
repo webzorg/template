@@ -93,7 +93,7 @@ class Admin::UsersController < Admin::ApplicationController
       },
       pagy_items: 10,
       scope_filters: true,
-      search_fields: [:attributes]
+      search_fields: %i[attributes]
     },
     strong_params: %i[]
   }
