@@ -33,7 +33,7 @@ module Lasha
       when :string
         controller_path.singularize
       else
-        raise "current_model was given a wrong return type"
+        raise "current_model was given a wrong return_type"
       end
     end
 
