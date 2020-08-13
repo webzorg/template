@@ -182,7 +182,8 @@ def add_gems
     gem 'bullet'
     gem 'awesome_print'
     gem 'rspec-rails'
-    gem 'factory_bot_rails'
+    gem 'factory_bot_rails', require: false
+    gem "webmock", require: false
     gem 'capybara'
     gem 'database_cleaner'
     # gem 'shoulda-matchers'

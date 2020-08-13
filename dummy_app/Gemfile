@@ -60,7 +60,8 @@ group :development, :test do
   gem "capybara"
   gem "database_cleaner"
   gem "dotenv-rails"
-  gem "factory_bot_rails"
+  gem "factory_bot_rails", require: false
+  gem "webmock", require: false
   gem "pry-rails"
   gem "rspec-rails"
   gem "webdrivers"

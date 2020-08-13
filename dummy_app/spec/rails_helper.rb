@@ -11,9 +11,13 @@ require "capybara/rspec"
 require "factory_bot_rails"
 require "webdrivers"
 require "pry-rails"
+require "webmock/rspec"
 
-FactoryBot.definition_file_paths << File.join("spec", "dummy", "spec", "factories")
-FactoryBot.find_definitions
+WebMock.disable_net_connect!(allow_localhost: true)
+
+# # duplicates FactoryBot definitions.
+# FactoryBot.definition_file_paths << File.join("spec", "dummy", "spec", "factories")
+# FactoryBot.find_definitions
 
 Capybara.configure do |config|
   config.default_max_wait_time = 10 # seconds

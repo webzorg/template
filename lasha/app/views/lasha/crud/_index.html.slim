@@ -1,4 +1,4 @@
-h2.text-center #{@data[:model].model_name.human.pluralize} Index
+h2.text-center #{@data[:model].model_name.human} Index
 
 = pagy_helper(@data[:pagy])
 = render partial: "lasha/shared/scope_filters"
