@@ -1,4 +1,4 @@
-require "pry-byebug"
+# require "pry"
 source_paths.unshift(File.dirname(__FILE__))
 
 APPLICATION_RB = <<-'APPLICATION_RB'
@@ -53,7 +53,7 @@ APPLICATION_JS = <<~APPLICATION_JS
   window.PhotoSwipe = require("photoswipe/dist/photoswipe.min")
   window.PhotoSwipeUI_Default = require("photoswipe/dist/photoswipe-ui-default.min")
   window.autosize = require("autosize/dist/autosize.min.js")
-  require("bootstrap.native/dist/bootstrap-native-v4")
+  require("bootstrap.native/dist/bootstrap-native")
   require("modules/photo-swipe-dom-initializer")
 
   document.addEventListener("turbolinks:load", function() {
@@ -178,14 +178,14 @@ def add_gems
   # gem 'globalize', github: 'globalize/globalize'
 
   gem_group :development, :test do
-    gem 'pry-rails'
-    gem 'bullet'
-    gem 'awesome_print'
-    gem 'rspec-rails'
-    gem 'factory_bot_rails', require: false
+    gem "pry-rails"
+    gem "bullet"
+    gem "awesome_print"
+    gem "rspec-rails"
+    gem "factory_bot_rails", require: false
     gem "webmock", require: false
-    gem 'capybara'
-    gem 'database_cleaner'
+    gem "capybara"
+    gem "database_cleaner"
     # gem 'shoulda-matchers'
     # gem 'rails-controller-testing'
     gem "dotenv-rails"
@@ -193,7 +193,8 @@ def add_gems
   end
 
   gem_group :development, :test, :staging do
-    gem 'faker', '1.9.3'
+    gem "faker", "1.9.3"
+    gem "bullet"
   end
 
   gem_group :development do
@@ -204,16 +205,16 @@ def add_gems
     gem "capistrano-rvm",     require: false
     gem "capistrano3-puma",   require: false
 
-    gem 'derailed_benchmarks'
-    gem 'rails-erd', require: false
-    gem 'i18n-tasks', '~> 0.9.6'
-    gem 'i18n_generators', '~> 2.1', '>= 2.1.1'
-    gem 'rubocop'
-    gem 'rubocop-performance'
-    gem 'droplet_kit'
-    gem 'ed25519'
-    gem 'bcrypt_pbkdf'
-    gem 'mailcatcher'
+    gem "derailed_benchmarks"
+    gem "rails-erd", require: false
+    gem "i18n-tasks", "~> 0.9.6"
+    gem "i18n_generators", "~> 2.1", ">= 2.1.1"
+    gem "rubocop"
+    gem "rubocop-performance"
+    gem "droplet_kit"
+    gem "ed25519"
+    gem "bcrypt_pbkdf"
+    gem "mailcatcher"
   end
 end
 
@@ -263,7 +264,7 @@ remove_base_files
 
 rework_application_js
 
-# bundle_command "install"
+bundle_command "install"
 after_bundle do
   git :init
   git add: "."

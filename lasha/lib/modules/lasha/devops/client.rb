@@ -17,19 +17,20 @@ class Lasha::Devops::Client
     )
     # @volume_name = "geth-node-volume2"
 
+    # s-1vcpu-1gb $5, s-1vcpu-2gb $10, s-2vcpu-2gb $15, s-3vcpu-1gb $15, s-1vcpu-3gb $15
     @droplet_params = {
       name: Rails.application.config.app_name,
       region: "fra1",
-      size: "s-1vcpu-1gb", # (s-1vcpu-1gb $5) (s-2vcpu-2gb $15) (s-3vcpu-1gb $15) (s-1vcpu-3gb $15)
+      size: "s-1vcpu-2gb",
       image: "debian-10-x64", # images
       ssh_keys: [ssh_key_id],
       backups: true,
       ipv6: false,
-      private_networking: false,
+      private_networking: true,
       user_data: "#cloud-config\n#{cloud_config.to_yaml}",
       monitoring: true,
       # volumes: (volume ? [create_volume(volume_params)] : nil),
-      tags: [Rails.application.config.app_name]
+      tags: []
     }
 
     fetch_droplet && droplet_already_exists if droplet

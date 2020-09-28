@@ -69,6 +69,7 @@ end
 
 group :development, :test, :staging do
   gem "faker", "1.9.3"
+  gem "bullet"
 end
 
 group :development do

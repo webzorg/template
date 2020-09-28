@@ -291,8 +291,8 @@ runcmd:
 
 chpasswd:
   list: |
-    root:$6$3ic.5.JBEd$w4fiaUcuuNVYEPiIzt62VDzfQC/jw8891rTRgIGLT0YRAKYN.bvjUjDhB71xu1umYyLUzrciyemAS2qeSiTWJ1
-    devops:$6$JQY22uVQLzx$O/tXdevFnIDT0/72fxC.XelyMd4gLU7VHyTTqS4Ja1nl3UBwMN.CZ4MC6GO58BncNvGyvAe7j7M1hzqEdEYGw/
+    root:$6$QPea2Hu0gXVLzFoR$BAVuzTsc3fC7EWhXWG75zK7qOZoaIqgpWqkGHumonngar32iUvyCKm9swhwqe.JE8GJasQtPZZn5NuOWttzpF0
+    devops:$6$EEWzEGth$HG/2MKV/x3JOZ31cuEM/Q3qNoCmEBN4QJb5aFi7yIjOjn87JqEYIY4cK2d18WoaeQchKuRlKoDw4wKKhpqoS8.
 
 power_state:
   timeout: 0
