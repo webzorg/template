@@ -31,8 +31,6 @@ class Users::ProfilesController < ApplicationController
   end
 
   def clean_notifications
-    raise "wrong place" unless current_user
-
     Notification.where(user_id: current_user.id).delete_all
     redirect_back fallback_location: root_path
   end
