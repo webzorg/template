@@ -1,10 +1,10 @@
 # # quickly generate new project without js and bundling for speed
-# rm -rf test_rails_app; rails new test_rails_app --skip-spring --skip-test --database=postgresql --webpacker=stimulus --template=~/www/template/template.rb
-# rm -rf test_rails_app; rails new test_rails_app -J -B; ls -alh test_rails_app
+# rm -rf zorg; rails new zorg --skip-spring --skip-test --database=postgresql --webpacker=stimulus --template=~/www/template/template.rb
+# rm -rf zorg; rails new zorg -J -B; ls -alh zorg
 
 1
   create project with the template, example: # --skip-git
-  rails new test_rails_app --skip-spring --skip-test --database=postgresql --webpacker=stimulus --template=~/www/template/template.rb
+  rails new zorg --skip-spring --skip-test --database=postgresql --webpacker=stimulus --template=~/www/template/template.rb
 2
   (create github repo if doesn't exist)
   push project to github

@@ -219,7 +219,16 @@ def add_gems
 end
 
 def copy_base_files
-  files_to_copy = %w[.gitignore .rubocop.yml Procfile Procfile.dev .bundle/config Capfile]
+  # Procfile
+  # Procfile.dev
+  files_to_copy = %w[
+    .gitignore
+    .rubocop.yml
+    .bundle/config
+    Capfile
+    spec/rails_helper.rb
+    spec/spec_helper.rb
+  ]
   dirs_to_copy = %w[app config db lasha lib]
   force_overwrite = %[.gitignore]
 
