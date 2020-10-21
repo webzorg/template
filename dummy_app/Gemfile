@@ -56,7 +56,6 @@ gem "rails-i18n"
 # Mechanical Line
 group :development, :test do
   gem "awesome_print"
-  gem "bullet"
   gem "capybara"
   gem "database_cleaner"
   gem "dotenv-rails"
