@@ -15,12 +15,17 @@ module Rails
       class_option :api, type: :boolean,
                          desc: "Generates API controller"
 
+      class_option :jbuilder, type: :boolean
       class_option :skip_routes, type: :boolean, desc: "Don't add routes to config/routes.rb."
 
       argument :attributes, type: :array, default: [], banner: "field:type field:type"
 
       def create_controller_files
-        template_file = options.api? ? "api_controller.rb" : "controller.rb"
+        template_file = if options.jbuilder?
+                          options.api? ? "jbuilder/api_controller.rb" : "jbuilder/controller.rb"
+                        else
+                          options.api? ? "api_controller.rb" : "controller.rb"
+                        end
 
         self.class.source_root File.expand_path('templates', __dir__)
 
@@ -29,6 +34,10 @@ module Rails
 
       hook_for :template_engine, as: :scaffold do |template_engine|
         invoke template_engine unless options.api?
+      end
+
+      hook_for :jbuilder, required: true do |jbuilder|
+        invoke jbuilder unless options.skip_jbuilder?
       end
 
       hook_for :resource_route, required: true do |route|
