@@ -34,11 +34,13 @@ module DummyApp
     # the framework and any gems in your application.
 
     config.generators do |g|
-      g.assets            false
-      g.helper            false
-      # g.test_framework    nil
-      g.system_tests      nil
-      g.jbuilder          false
+      g.assets                    false
+      g.lasha_assets              true
+      g.helper                    false
+      # g.test_framework            nil
+      g.system_tests              nil
+      g.jbuilder                  false
+      g.lasha_scaffold_controller true
     end
 
     config.app_name = ENV["RAILS_APP_NAME"]

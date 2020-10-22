@@ -3,11 +3,13 @@ source_paths.unshift(File.dirname(__FILE__))
 
 APPLICATION_RB = <<-'APPLICATION_RB'
     config.generators do |g|
-      g.assets            false
-      g.helper            false
-      # g.test_framework    nil
-      g.system_tests      nil
-      g.jbuilder          false
+      g.assets                    false
+      g.lasha_assets              true
+      g.helper                    false
+      # g.test_framework            nil
+      g.system_tests              nil
+      g.jbuilder                  false
+      g.lasha_scaffold_controller true
     end
 
     config.api_only_mode = ActiveModel::Type::Boolean.new.cast(ENV["API_ONLY_MODE"])
