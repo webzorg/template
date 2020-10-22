@@ -39,7 +39,7 @@ module DummyApp
       g.helper                    false
       # g.test_framework            nil
       g.system_tests              nil
-      g.jbuilder                  false
+      g.jbuilder                  true
       g.lasha_scaffold_controller true
     end
 
