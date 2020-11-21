@@ -295,6 +295,9 @@ after_bundle do
   rails_command("generate paper_trail:install --with-changes")
   git commit: "-a -m 'add papertrail'"
 
+  git add: "."
+  git commit: "-a -m 'apply rubocop. install action_text. add papertrail'"
+
   git remote: "add origin git@github.com:webzorg/#{Dir.pwd.split('/').last}.git"
   git remote: "-v"
   git push: "origin master"
