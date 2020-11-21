@@ -236,6 +236,12 @@ def copy_base_files
   files_to_copy.each { |file| copy_file file, force: force_overwrite.include?(file) }
   dirs_to_copy.each  { |dir|  directory dir, force: true }
 
+  copy_file "tt_files_for_copy/api_controller.rb.tt",
+    "lib/rails/generators/rails/lasha_scaffold_controller/templates/api_controller.rb.tt"
+
+  copy_file "tt_files_for_copy/controller.rb.tt",
+    "lib/rails/generators/rails/lasha_scaffold_controller/templates/controller.rb.tt"
+
   # touch env & move master key
   env_touch("development")
   env_touch("production")
