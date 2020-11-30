@@ -1,15 +1,15 @@
 - sign_in_page = controller_name.eql?("sessions")
 - sign_up_page = controller_name.eql?("registrations")
+
 .row
   .col-lg-4.col-md-6.mx-auto
-    .container
+
       - if sign_in_page
         br
-        .form-group
-          .row= link_to t("devise.shared.links.forgot_your_password"), new_user_password_path, class: "btn btn-dark btn-block btn-sm"
-
-        .form-group
-          .row= link_to t("devise.shared.links.didn_t_receive_confirmation_instructions"), new_confirmation_path(@user), class: "btn btn-dark btn-block btn-sm"
+        .d-grid.mb-2
+          = link_to t("devise.shared.links.forgot_your_password"), new_user_password_path, class: "btn btn-dark btn-sm"
+        .d-grid
+          = link_to t("devise.shared.links.didn_t_receive_confirmation_instructions"), new_confirmation_path(@user), class: "btn btn-dark btn-sm"
 
       / allow social login only for clients
       - if sign_up_page || sign_in_page
@@ -26,11 +26,9 @@
 
       - if sign_up_page
         hr
-        .row.text-align-middle
-          = link_to t("devise.shared.links.sign_in"), new_user_session_path, class: "btn btn-warning btn-block btn-lg"
+        .d-grid = link_to t("devise.shared.links.sign_in"), new_user_session_path, class: "btn btn-warning btn-lg"
       - elsif sign_in_page
         hr
-        .row.text-align-middle
-          = link_to t("devise.shared.links.sign_up"), new_user_registration_path, class: "btn btn-warning btn-block btn-lg"
+        .d-grid = link_to t("devise.shared.links.sign_up"), new_user_registration_path, class: "btn btn-warning btn-lg"
 
 

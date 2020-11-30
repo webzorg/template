@@ -34,20 +34,18 @@
                   = t(:phone_number_unverified)
 
                 = form_with url: sms_send_verification_code_path, html: { class: "form-inline mt-2 collapse #{form_visible?(:send_verification_code, current_user)}", method: :patch, data: { type: :json, target: "general.smsSendCodeForm",   action: "ajax:success->general#smsSendSuccess   ajax:error->general#errors" } } do |f|
-                  .form-group = f.submit t(:send_verification_code), data: { disable_with: t(:please_wait) }, class: "btn btn-sm btn-primary btn-block"
+                  .mb-3 = f.submit t(:send_verification_code), data: { disable_with: t(:please_wait) }, class: "btn btn-sm btn-primary btn-block"
 
                 = form_with url: sms_verify_code_path, html: { class: "form-inline mt-2 collapse #{form_visible?(:verify_code, current_user)}", method: :patch, data: { type: :json, target: "general.smsVerifyCodeForm", action: "ajax:success->general#smsVerifySuccess ajax:error->general#errors" } } do |f|
-                  .form-group = f.text_field :verification_code, class: "form-control", placeholder: t(:verification_code)
-                  .form-group = f.submit t(:verify_verification_code), data: { disable_with: t(:please_wait) }, class: "btn btn-sm btn-success btn-block mt-2"
+                  .mb-3 = f.text_field :verification_code, class: "form-control", placeholder: t(:verification_code)
+                  .mb-3 = f.submit t(:verify_verification_code), data: { disable_with: t(:please_wait) }, class: "btn btn-sm btn-success btn-block mt-2"
 
                 = form_with url: sms_resend_verification_code_path, html: { class: "form-inline mt-2 collapse #{form_visible?(:resend_verification_code, current_user)}", method: :patch, data: { type: :json, target: "general.smsResendCodeForm", action: "ajax:success->general#smsResendSuccess ajax:error->general#errors" } } do |f|
-                  .form-group = f.submit t(:resend_verification_code), data: { disable_with: t(:please_wait) }, class: "btn btn-sm btn-warning btn-block"
+                  .mb-3 = f.submit t(:resend_verification_code), data: { disable_with: t(:please_wait) }, class: "btn btn-sm btn-warning btn-block"
 
         dt.col-sm-6 = t(:email)
         dd.col-sm-6 = @profile.email
 
-      .btn-toolbar
-        .btn-group.mr-2.mb-2
-          = link_to t(:change_password), profile_change_password_path, class: "btn btn-primary"
-        .btn-group.mr-2.mb-2
-          = link_to t(:edit_profile), edit_profile_path, class: "btn btn-primary"
+      .d-grid.gap-3
+        = link_to t(:change_password), profile_change_password_path, class: "btn btn-primary"
+        = link_to t(:edit_profile), edit_profile_path, class: "btn btn-primary"

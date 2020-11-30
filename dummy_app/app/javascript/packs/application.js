@@ -23,10 +23,9 @@ window.PhotoSwipe = require("photoswipe/dist/photoswipe.min")
 window.PhotoSwipeUI_Default = require("photoswipe/dist/photoswipe-ui-default.min")
 window.autosize = require("autosize/dist/autosize.min.js")
 require("modules/photo-swipe-dom-initializer")
-import BSN from "bootstrap.native/dist/bootstrap-native.esm.min.js";
+import "bootstrap"
 
 document.addEventListener("turbolinks:load", function() {
-  BSN.initCallback(document.body);
   // helpers.fadeOutEffectAndHide(document.getElementById("before-page-spinner"));
 
   autosize(document.querySelectorAll("textarea"));

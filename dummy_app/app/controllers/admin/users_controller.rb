@@ -106,6 +106,14 @@ class Admin::UsersController < Admin::ApplicationController
 
   private
 
+    def current_collection
+      User.all
+    end
+
+    def current_model
+      User
+    end
+
     def set_object
       @object = current_model.public_send(:find, params[:id])
     end

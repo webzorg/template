@@ -2,17 +2,14 @@
   h2.text-center = t("devise.passwords.new.forgot_your_password")
 
   .row
-    .col-lg-8.col-md-8.mx-auto
+    .col-lg-4.col-md-6.mx-auto
       = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
         = render "shared/errors", object: resource
 
-        .form-group
+        .mb-3.form-floating
+          = f.email_field :email, autofocus: true, placeholder: :email, class: "form-control", required: true
           = f.label :email
-          br
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
 
-        .btn-toolbar
-          .btn-group.mr-2.mb-2
-            = f.submit t("devise.passwords.new.send_me_reset_password_instructions"), class: "btn btn-primary"
-          .btn-group.mr-2.mb-2
-            = link_to t(:back), new_user_session_path, class: "btn btn-warning"
+        .d-grid.gap-3
+          = f.submit t("devise.passwords.new.send_me_reset_password_instructions"), class: "btn btn-primary btn-lg"
+          = link_to t(:back), new_user_session_path, class: "btn btn-warning btn-lg"
