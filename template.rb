@@ -212,6 +212,7 @@ def add_gems
     gem "i18n_generators", "~> 2.1", ">= 2.1.1"
     gem "rubocop"
     gem "rubocop-performance"
+    gem "solargraph"
     # gem "droplet_kit"
     # gem "ed25519"
     # gem "bcrypt_pbkdf"

@@ -1,6 +1,7 @@
 require: rubocop-performance
 
 AllCops:
+  NewCops: enable
   Exclude:
     - "**/*.slim"
     - "vendor/**/*"
@@ -19,5 +20,5 @@ Style/StringLiterals:
 Style/FormatString:
   AutoCorrect: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120

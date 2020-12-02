@@ -86,4 +86,5 @@ group :development do
   gem "rails-erd", require: false
   gem "rubocop"
   gem "rubocop-performance"
+  gem "solargraph"
 end
