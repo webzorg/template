@@ -14,7 +14,9 @@ class Admin::UsersController < Admin::ApplicationController
       attributes: {
         first_name: {},
         last_name: {},
-        company_name: {},
+        company_name: {
+          skip_index: true
+        },
         phone_number: {
           skip_index: true
         },
@@ -78,12 +80,20 @@ class Admin::UsersController < Admin::ApplicationController
         last_activity_at: {
           skip_index: true
         },
-        last_api_activity_at: {
-          skip_index: true
-        }
+        # address: {
+        #   skip_index: true
+        # },
+        # phone_number_verified: {
+        #   skip_index: true
+        # },
+        # sms_verification_code
+        # sms_last_sent: {
+        #   skip_index: true
+        # }
       },
       pagy_items: 10,
-      scope_filters: true
+      scope_filters: true,
+      search_fields: %i[attributes]
     },
     strong_params: %i[]
   }
@@ -95,6 +105,14 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   private
+
+    def current_collection
+      User.all
+    end
+
+    def current_model
+      User
+    end
 
     def set_object
       @object = current_model.public_send(:find, params[:id])
