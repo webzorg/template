@@ -74,18 +74,18 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
-    namespace :v1 do
-      if db_ready?
-        mount_devise_token_auth_for "User", at: "auth", skip: %i[omniauth_callbacks unlocks], controllers: {
-          confirmations: "api/v1/devise_token_auth/confirmations",
-          passwords: "api/v1/devise_token_auth/passwords",
-          # omniauth_callbacks: "devise_token_auth/omniauth_callbacks",
-          registrations: "api/v1/devise_token_auth/registrations",
-          sessions: "api/v1/devise_token_auth/sessions",
-          token_validations: "api/v1/devise_token_auth/token_validations"
-        }
-      end
-    end
-  end
+  # namespace :api do
+  #   namespace :v1 do
+  #     if db_ready?
+  #       mount_devise_token_auth_for "User", at: "auth", skip: %i[omniauth_callbacks unlocks], controllers: {
+  #         confirmations: "api/v1/devise_token_auth/confirmations",
+  #         passwords: "api/v1/devise_token_auth/passwords",
+  #         # omniauth_callbacks: "devise_token_auth/omniauth_callbacks",
+  #         registrations: "api/v1/devise_token_auth/registrations",
+  #         sessions: "api/v1/devise_token_auth/sessions",
+  #         token_validations: "api/v1/devise_token_auth/token_validations"
+  #       }
+  #     end
+  #   end
+  # end
 end

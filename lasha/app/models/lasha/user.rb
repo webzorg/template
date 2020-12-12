@@ -15,8 +15,8 @@ class Lasha::User < ApplicationRecord
          :omniauthable,
          omniauth_providers: %i[facebook google_oauth2]
 
-  include DeviseTokenAuth::Concerns::ActiveRecordSupport
-  include DeviseTokenAuth::Concerns::User
+  # include DeviseTokenAuth::Concerns::ActiveRecordSupport
+  # include DeviseTokenAuth::Concerns::User
   devise :omniauthable # , omniauth_providers: %i[facebook google_oauth2]
 
   has_one_attached :avatar

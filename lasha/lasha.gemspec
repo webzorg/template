@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "devise"
   spec.add_dependency "devise-async"
   spec.add_dependency "devise-i18n"
-  spec.add_dependency "devise_token_auth"
+  # spec.add_dependency "devise_token_auth"
   spec.add_dependency "hiredis"
   spec.add_dependency "image_processing", "~> 1.2"
   spec.add_dependency "omniauth-facebook"

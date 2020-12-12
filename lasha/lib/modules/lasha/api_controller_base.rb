@@ -2,7 +2,7 @@ module Lasha
   module ApiControllerBase
     extend ActiveSupport::Concern
 
-    include ::DeviseTokenAuth::Concerns::SetUserByToken
+    # include ::DeviseTokenAuth::Concerns::SetUserByToken
     include ::Lasha::ApiCommon
 
     included do

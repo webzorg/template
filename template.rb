@@ -56,10 +56,9 @@ APPLICATION_JS = <<~APPLICATION_JS
   window.PhotoSwipeUI_Default = require("photoswipe/dist/photoswipe-ui-default.min")
   window.autosize = require("autosize/dist/autosize.min.js")
   require("modules/photo-swipe-dom-initializer")
-  import BSN from "bootstrap.native/dist/bootstrap-native.esm.min.js";
+  import "bootstrap"
 
   document.addEventListener("turbolinks:load", function() {
-    BSN.initCallback(document.body);
     // helpers.fadeOutEffectAndHide(document.getElementById("before-page-spinner"));
 
     autosize(document.querySelectorAll("textarea"));
@@ -87,7 +86,7 @@ def inject_text_before(filename, comment, before)
 end
 
 def rework_application_rb
-  inject_into_file "config/application.rb", APPLICATION_RB, after: "# the framework and any gems in your application.\n\n"
+  inject_into_file "config/application.rb", APPLICATION_RB, before: "  end\nend"
   gsub_file "config/application.rb", "# Don't generate system test files.", ""
   gsub_file "config/application.rb", "config.generators.system_tests = nil", ""
 end
@@ -155,7 +154,6 @@ def add_gems
   gem 'rest-client'
   gem 'oj'
   gem 'font-awesome-sass', '~> 5.6.1'
-  gem 'paper_trail'
   gem 'notifications'
   gem "simple_calendar", "~> 2.0"
 
@@ -168,7 +166,6 @@ def add_gems
   # gem 'devise_masquerade'
   # gem 'devise-two-factor'
   # gem 'recaptcha'
-  gem "paper_trail"
 
   # Debugging & Optimization
   gem 'active_record_query_trace'
@@ -228,8 +225,6 @@ def copy_base_files
     .rubocop.yml
     .bundle/config
     Capfile
-    spec/rails_helper.rb
-    spec/spec_helper.rb
   ]
   dirs_to_copy = %w[app config db lasha lib]
   force_overwrite = %[.gitignore]
@@ -277,27 +272,27 @@ copy_base_files
 remove_base_files
 
 # add yarn packages
-`yarn add alertifyjs autosize bootstrap bootstrap.native lodash photoswipe`
+`yarn add alertifyjs autosize bootstrap@5.0.0-alpha3 popper.js lodash photoswipe`
 
 rework_application_js
 
 bundle_command "install"
 after_bundle do
   git :init
-  git add: "."
-  git commit: "-a -m 'Initial commit'"
+  git add: "-A"
+  git commit: "-m 'Initial commit'"
 
   bundle_command "exec rubocop --safe-auto-correct -c .rubocop.yml"
-  git commit: "-a -m 'apply rubocop safe-auto-correct'"
+  git add: "-A"
+  git commit: "-m 'apply rubocop safe-auto-correct'"
 
   rails_command("action_text:install")
-  git commit: "-a -m 'install action_text'"
+  git add: "-A"
+  git commit: "-m 'install action_text'"
 
-  rails_command("generate paper_trail:install --with-changes")
-  git commit: "-a -m 'add papertrail'"
-
-  git add: "."
-  git commit: "-a -m 'apply rubocop. install action_text. add papertrail'"
+  copy_file "spec/rails_helper.rb", force: true
+  git add: "-A"
+  git commit: "-m 'add custom spec/rails_helper'"
 
   git remote: "add origin git@github.com:webzorg/#{Dir.pwd.split('/').last}.git"
   git remote: "-v"
