@@ -1,6 +1,14 @@
 # starting from scratch
 gem install rails rubocop rubocop-performance
 
+# https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#create-an-organization-repository
+curl \
+  -X POST \
+  -H "Authorization: token $GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/user/repos \
+  -d '{"name":"name", "private":"true"}'
+
 # # quickly generate new project without js and bundling for speed
 # rm -rf zorg; rails new zorg --skip-spring --skip-test --database=postgresql --webpacker=stimulus --template=~/www/template/template.rb
 # rm -rf zorg; rails new zorg -J -B; ls -alh zorg
@@ -77,11 +85,11 @@ development:
   # db_url: "postgres://user:pass@host:5432/app_development"
 
 staging:
-  host: "dev.wishmaster.ge"
+  host: ""
   # db_url: "postgres://user:pass@host:5432/app_development"
 
 production:
-  host: "wishmaster.ge"
+  host: ""
   # db_url: "postgres://user:pass@host:5432/app_development"
 
 ###########################################################################################
