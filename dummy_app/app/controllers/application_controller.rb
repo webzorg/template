@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   include Lasha::ControllerBase
 
-  before_action :set_paper_trail_whodunnit
   before_action :api_only_mode, if: -> { Rails.configuration.api_only_mode }
 
   private

@@ -29,7 +29,6 @@ gem "lasha", path: "../lasha"
 gem "meta-tags"
 gem "notifications"
 gem "oj"
-gem "paper_trail"
 gem "rest-client"
 gem "simple_calendar", "~> 2.0"
 

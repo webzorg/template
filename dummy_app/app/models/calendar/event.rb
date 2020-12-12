@@ -1,6 +1,4 @@
 class Calendar::Event < ApplicationRecord
-  has_paper_trail
-
   belongs_to :user
   has_many :event_signups, class_name: "Wow::EventSignup", foreign_key: :calendar_event_id
   has_many :users, through: :event_signups
