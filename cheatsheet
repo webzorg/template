@@ -1,3 +1,6 @@
+# starting from scratch
+gem install rails rubocop rubocop-performance
+
 # # quickly generate new project without js and bundling for speed
 # rm -rf zorg; rails new zorg --skip-spring --skip-test --database=postgresql --webpacker=stimulus --template=~/www/template/template.rb
 # rm -rf zorg; rails new zorg -J -B; ls -alh zorg
