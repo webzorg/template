@@ -159,7 +159,7 @@ def add_gems
 
   # Services
   gem 'sendgrid-actionmailer'
-  gem 'aws-sdk-s3', '~> 1'
+  # gem 'aws-sdk-s3', '~> 1'
   gem 'gravatar_image_tag'
 
   # Security
