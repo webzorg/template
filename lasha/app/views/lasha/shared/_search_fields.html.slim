@@ -1,5 +1,0 @@
-- if @data[:search_fields].present?
-  = search_form_for @data[:ransack], url: url_for, class: "form-inline mb-2" do |f|
-    - @data[:search_fields].each do |field_name|
-      = f.search_field "#{field_name}_cont", placeholder: "Search by #{field_name.to_s.titleize}", class: "form-control input-sm"
-      = f.submit "Search", class: "btn btn-sm btn-secondary my-2"

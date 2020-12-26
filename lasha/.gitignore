@@ -1,6 +1,0 @@
-.env
-.bundle/
-log/*.log
-pkg/
-
-/node_modules

@@ -1,9 +1,0 @@
-- if @data[:scope_filters].present?
-  .row.scope_filters
-    .col-sm-12
-      .border.p-1.mb-1
-        = active_link_to t(:all), url_for, class: "mx-1 badge bg-secondary text-white", active: :exact, class_active: "badge-success"
-
-        - if @data[:model].respond_to?(:aasm) && @data[:model].aasm.states.present?
-          - @data[:model].aasm.states.map(&:name).each do |state|
-            = active_link_to state, url_for(q: { aasm_state_eq: state }), class: "mx-1 badge badge-secondary text-white", active: :exact, class_active: "badge-success"

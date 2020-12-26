@@ -1,6 +1,0 @@
-################ Sitemap ################
-# Run sitemap generator everyday at 5:00 AM
-sitemap_refresher:
-  cron: "0 5 * * *"
-  class: "SitemapWorker"
-  queue: scheduled_jobs
