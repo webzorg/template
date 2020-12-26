@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :systemd do
   desc "Reload systemd user daemon"
   task :daemon_reload do

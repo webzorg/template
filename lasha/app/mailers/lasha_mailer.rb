@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LashaMailer < LashaApplicationMailer
   def notify(destination_email, subject, body)
     @data = { subject: subject, body: body }

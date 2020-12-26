@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   rest_actions = %i[index create new edit show update destroy]
 

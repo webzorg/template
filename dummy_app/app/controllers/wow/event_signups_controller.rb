@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Wow::EventSignupsController < ApplicationController
   def create
     @event_signup = Wow::EventSignup.find_or_initialize_by(

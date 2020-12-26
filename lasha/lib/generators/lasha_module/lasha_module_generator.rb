@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LashaModuleGenerator < Rails::Generators::NamedBase
   def create_helper_file
     create_file "lib/modules/#{file_name}.rb",

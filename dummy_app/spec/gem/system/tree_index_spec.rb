@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe "table builder", type: :system do
   let(:admin_user) { u = create(:user); u.add_role(:admin); u.confirm; u }
   let(:users) { create_list(:user, 150) }

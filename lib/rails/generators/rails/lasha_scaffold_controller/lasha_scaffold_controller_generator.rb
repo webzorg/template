@@ -27,7 +27,7 @@ module Rails
                           options.api? ? "api_controller.rb" : "controller.rb"
                         end
 
-        self.class.source_root File.expand_path('templates', __dir__)
+        self.class.source_root File.expand_path("templates", __dir__)
 
         template template_file, File.join("app/controllers", controller_class_path, "#{controller_file_name}_controller.rb")
       end

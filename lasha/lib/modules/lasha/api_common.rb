@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Lasha
   module ApiCommon
     extend ActiveSupport::Concern

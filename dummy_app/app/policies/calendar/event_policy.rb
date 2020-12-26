@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Calendar::EventPolicy < ApplicationPolicy
   def index?
     return true if user

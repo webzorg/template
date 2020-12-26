@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Calendar::Event < ApplicationRecord
   belongs_to :user
 

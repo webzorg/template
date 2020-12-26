@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Wow::Character < ApplicationRecord
   enum priority: { main: "1", alt: "0" }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "lasha/engine"
 require "slim-rails"
 require "sassc-rails"

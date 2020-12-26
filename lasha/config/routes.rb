@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   def db_ready?
     database_exists? && ActiveRecord::Base.connection.table_exists?("users")

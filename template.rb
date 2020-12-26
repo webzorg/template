@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require "pry"
 source_paths.unshift(File.dirname(__FILE__))
 
@@ -97,8 +99,8 @@ end
 
 def rework_gemfile
   # remove sass-rails in favor of sassc-rails
-  gsub_file "Gemfile", /^# Use SCSS for stylesheets/, ''
-  gsub_file "Gemfile", /^gem\s+["']sass-rails["'].*$/, ''
+  gsub_file "Gemfile", /^# Use SCSS for stylesheets/, ""
+  gsub_file "Gemfile", /^gem\s+["']sass-rails["'].*$/, ""
 
   # remove comments from Gemfile
   gsub_file "Gemfile", /#\s.*\n/, "\n"  # remove comments
@@ -146,21 +148,21 @@ def env_touch(environment = "development")
 end
 
 def add_gems
-  gem 'lasha', path: 'lasha'
+  gem "lasha", path: "lasha"
 
   # General
-  gem 'meta-tags'
+  gem "meta-tags"
   # gem 'http'
-  gem 'rest-client'
-  gem 'oj'
-  gem 'font-awesome-sass', '~> 5.6.1'
-  gem 'notifications'
+  gem "rest-client"
+  gem "oj"
+  gem "font-awesome-sass", "~> 5.6.1"
+  gem "notifications"
   gem "simple_calendar", "~> 2.0"
 
   # Services
-  gem 'sendgrid-actionmailer'
+  gem "sendgrid-actionmailer"
   # gem 'aws-sdk-s3', '~> 1'
-  gem 'gravatar_image_tag'
+  gem "gravatar_image_tag"
 
   # Security
   # gem 'devise_masquerade'
@@ -168,12 +170,12 @@ def add_gems
   # gem 'recaptcha'
 
   # Debugging & Optimization
-  gem 'active_record_query_trace'
-  gem 'rack-utf8_sanitizer'
+  gem "active_record_query_trace"
+  gem "rack-utf8_sanitizer"
 
   # I18n
-  gem 'devise-i18n'
-  gem 'rails-i18n'
+  gem "devise-i18n"
+  gem "rails-i18n"
   # gem 'globalize', github: 'globalize/globalize'
 
   gem_group :development, :test do
@@ -282,7 +284,7 @@ after_bundle do
   git add: "-A"
   git commit: "-m 'Initial commit'"
 
-  bundle_command "exec rubocop --safe-auto-correct --only Style/StringLiterals"
+  bundle_command "exec rubocop --auto-correct --only Style/StringLiterals"
   bundle_command "exec rubocop -A --only Style/FrozenStringLiteralComment"
   bundle_command "exec rubocop -A --only Layout/EmptyLineAfterMagicComment"
 

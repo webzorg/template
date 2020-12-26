@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This migration comes from notifications (originally 20160328045436)
 class CreateNotifications < ActiveRecord::Migration[5.0]
   def change

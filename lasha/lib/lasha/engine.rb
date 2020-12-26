@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Lasha
   class Engine < ::Rails::Engine
     config.eager_load_paths << File.expand_path("../modules", __dir__)

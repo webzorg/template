@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Lasha
   module ControllerBase
     extend ActiveSupport::Concern

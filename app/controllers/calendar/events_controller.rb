@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Calendar::EventsController < ApplicationController
   before_action :set_object, only: %i[show edit update destroy]
   before_action do

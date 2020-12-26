@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Devise.setup do |config|
   config.mailer_sender = Rails.application.credentials[:info_mail]
   config.omniauth :facebook,

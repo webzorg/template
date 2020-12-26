@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :devops do
   desc "Setup deployment VPS"
   task setup: :environment do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Wow::Item < ApplicationRecord
   scope :filter_by_name, -> (name) {
     where(

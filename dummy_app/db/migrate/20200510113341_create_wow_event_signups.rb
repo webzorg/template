@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWowEventSignups < ActiveRecord::Migration[6.0]
   def change
     create_table :wow_event_signups do |t|

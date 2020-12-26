@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Wow::EventSignup < ApplicationRecord
   enum status: { attending: "1", cannot_attend: "0" }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Calendar::Event < ApplicationRecord
   belongs_to :user
   has_many :event_signups, class_name: "Wow::EventSignup", foreign_key: :calendar_event_id

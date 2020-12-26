@@ -1,9 +1,11 @@
-require 'rails/generators/erb/mailer/mailer_generator'
+# frozen_string_literal: true
+
+require "rails/generators/erb/mailer/mailer_generator"
 
 module Slim
   module Generators
     class MailerGenerator < Erb::Generators::MailerGenerator
-      source_root File.expand_path(File.join('..', 'templates'), __FILE__)
+      source_root File.expand_path(File.join("..", "templates"), __FILE__)
 
       protected
       def format

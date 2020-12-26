@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Wow::Client
   attr_reader :base_api_url, :user
   # attr_accessor :login_retries

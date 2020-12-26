@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Uploads
   class << self
     def jpeg?(blob)
@@ -58,7 +60,7 @@ class Uploads
         resize: resize,
         gravity: gravity,
         background: "rgba(255,255,255,0.0)",
-        extent: cols != width || rows != height ? "#{width}x#{height}" : ''
+        extent: cols != width || rows != height ? "#{width}x#{height}" : ""
       }.merge(optimize_hash(blob))
     end
 

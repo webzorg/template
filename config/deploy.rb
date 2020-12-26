@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 # config valid only for current version of Capistrano
 lock "~> 3.14.1"
 
-RAILS_APP_NAME = Dir.pwd.split('/').last
+RAILS_APP_NAME = Dir.pwd.split("/").last
 raise "RAILS_APP_NAME can't be blank" if RAILS_APP_NAME.nil?
 
 set :application, RAILS_APP_NAME

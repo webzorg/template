@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < Lasha::User
   has_many :notifications, dependent: :destroy
   has_many :events, class_name: "Calendar::Event"

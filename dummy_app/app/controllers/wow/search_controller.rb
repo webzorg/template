@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Wow::SearchController < ApplicationController
   def index
     authorize([:wow, :search])

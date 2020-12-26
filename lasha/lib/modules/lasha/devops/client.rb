@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Lasha::Devops::Client
   attr_reader :client, :ssh_key_id, :cloud_config
   attr_accessor :droplet_params, :droplet

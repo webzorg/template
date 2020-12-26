@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Wow
   def self.table_name_prefix
-    'wow_'
+    "wow_"
   end
 end
