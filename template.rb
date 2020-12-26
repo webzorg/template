@@ -205,6 +205,7 @@ def add_gems
     gem "capistrano-git-with-submodules", "~> 2.0"
     gem "capistrano-rails",   require: false
     gem "capistrano-rvm",     require: false
+    gem "capistrano-sidekiq"
 
     gem "derailed_benchmarks"
     # gem "droplet_kit"

@@ -5,17 +5,9 @@
   - default
   - mailers
 
-  - <%= Dir.pwd.split("/").last %>_development_default
-  - <%= Dir.pwd.split("/").last %>_development_mailers
-  - <%= Dir.pwd.split("/").last %>_development_active_storage_analysis
-
-  - <%= Dir.pwd.split("/").last %>_staging_default
-  - <%= Dir.pwd.split("/").last %>_staging_mailers
-  - <%= Dir.pwd.split("/").last %>_staging_active_storage_analysis
-
-  - <%= Dir.pwd.split("/").last %>_production_default
-  - <%= Dir.pwd.split("/").last %>_production_mailers
-  - <%= Dir.pwd.split("/").last %>_production_active_storage_analysis
+  - <%= ENV["RAILS_APP_NAME"] %>_<%= ENV["RAILS_ENV"] %>_default
+  - <%= ENV["RAILS_APP_NAME"] %>_<%= ENV["RAILS_ENV"] %>_mailers
+  - <%= ENV["RAILS_APP_NAME"] %>_<%= ENV["RAILS_ENV"] %>_active_storage_analysis
 
   - scheduled_jobs
 

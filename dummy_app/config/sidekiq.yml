@@ -5,17 +5,9 @@
   - default
   - mailers
 
-  - dummy_app_development_default
-  - dummy_app_development_mailers
-  - dummy_app_development_active_storage_analysis
-
-  - dummy_app_staging_default
-  - dummy_app_staging_mailers
-  - dummy_app_staging_active_storage_analysis
-
-  - dummy_app_production_default
-  - dummy_app_production_mailers
-  - dummy_app_production_active_storage_analysis
+  - <%= ENV["RAILS_APP_NAME"] %>_<%= ENV["RAILS_ENV"] %>_default
+  - <%= ENV["RAILS_APP_NAME"] %>_<%= ENV["RAILS_ENV"] %>_mailers
+  - <%= ENV["RAILS_APP_NAME"] %>_<%= ENV["RAILS_ENV"] %>_active_storage_analysis
 
   - scheduled_jobs
 
