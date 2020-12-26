@@ -193,26 +193,27 @@ def add_gems
   end
 
   gem_group :development, :test, :staging do
-    gem "faker", "1.9.3"
     gem "bullet"
+    gem "faker", "1.9.3"
   end
 
   gem_group :development do
     # capistrano
     gem "capistrano",         require: false
+    gem "capistrano3-puma",   require: false
     gem "capistrano-bundler", require: false
+    gem "capistrano-git-with-submodules", "~> 2.0"
     gem "capistrano-rails",   require: false
     gem "capistrano-rvm",     require: false
-    gem "capistrano3-puma",   require: false
 
     gem "derailed_benchmarks"
+    # gem "droplet_kit"
     gem "rails-erd", require: false
-    gem "i18n-tasks", "~> 0.9.6"
+    # gem "i18n-tasks", "~> 0.9.6"
     gem "i18n_generators", "~> 2.1", ">= 2.1.1"
     gem "rubocop"
     gem "rubocop-performance"
     gem "solargraph"
-    # gem "droplet_kit"
     # gem "ed25519"
     # gem "bcrypt_pbkdf"
     gem "mailcatcher"

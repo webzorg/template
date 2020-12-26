@@ -68,17 +68,18 @@ group :development, :test do
 end
 
 group :development, :test, :staging do
-  gem "faker", "1.9.3"
   gem "bullet"
+  gem "faker", "1.9.3"
 end
 
 group :development do
   gem "bcrypt_pbkdf"
   gem "capistrano", require: false
+  gem "capistrano3-puma", require: false
   gem "capistrano-bundler", require: false
+  gem "capistrano-git-with-submodules", "~> 2.0"
   gem "capistrano-rails", require: false
   gem "capistrano-rvm", require: false
-  gem "capistrano3-puma", require: false
   gem "derailed_benchmarks"
   # gem "droplet_kit"
   gem "ed25519"
