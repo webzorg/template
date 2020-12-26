@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::ApplicationController
   before_action :set_object, only: %i[show]
   before_action do
     Lasha.setup_data(
-      CONFIG[:data].merge!(
+      **CONFIG[:data].merge!(
         controller: self,
         collection: current_collection,
       )

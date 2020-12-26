@@ -2,7 +2,7 @@ class Calendar::EventsController < ApplicationController
   before_action :set_object, only: %i[show edit update destroy]
   before_action do
     Lasha.setup_data(
-      CONFIG[:data].merge!(
+      **CONFIG[:data].merge!(
         controller: self,
         collection: current_collection,
       )

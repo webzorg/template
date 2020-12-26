@@ -30,12 +30,12 @@ module Lasha
   class << self
     def setup_data(
       controller:,
-      namespace: nil,
-      model:     nil,
-      actions:   nil,
       collection:,
       attributes:,
-      pagy_items: 20,
+      namespace:     nil,
+      model:         nil,
+      actions:       nil,
+      pagy_items:    20,
       scope_filters: false,
       search_fields: false
     )

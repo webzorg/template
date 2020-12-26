@@ -282,7 +282,10 @@ after_bundle do
   git add: "-A"
   git commit: "-m 'Initial commit'"
 
-  bundle_command "exec rubocop --safe-auto-correct -c .rubocop.yml"
+  bundle_command "exec rubocop --safe-auto-correct --only Style/StringLiterals"
+  bundle_command "exec rubocop -A --only Style/FrozenStringLiteralComment"
+  bundle_command "exec rubocop -A --only Layout/EmptyLineAfterMagicComment"
+
   git add: "-A"
   git commit: "-m 'apply rubocop safe-auto-correct'"
 
