@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-ruby "2.7.2"
+ruby "3.0.0"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "jbuilder", "~> 2.7"
 gem "pg", ">= 0.18", "< 2.0"
@@ -22,7 +22,7 @@ end
 gem "tzinfo-data"
 
 ################################################################################
-gem "omniauth-bnet"
+# gem "omniauth-bnet"
 
 ################################################################################
 # General
@@ -35,7 +35,7 @@ gem "rest-client"
 gem "simple_calendar", "~> 2.0"
 
 # Services
-gem "aws-sdk-s3", "~> 1"
+# gem "aws-sdk-s3", "~> 1"
 gem "gravatar_image_tag"
 gem "sendgrid-actionmailer"
 
@@ -80,9 +80,9 @@ group :development do
   gem "capistrano-rvm", require: false
   gem "capistrano3-puma", require: false
   gem "derailed_benchmarks"
-  gem "droplet_kit"
+  # gem "droplet_kit"
   gem "ed25519"
-  gem "i18n-tasks", "~> 0.9.6"
+  # gem "i18n-tasks", "~> 0.9.6"
   gem "i18n_generators", "~> 2.1", ">= 2.1.1"
   gem "rails-erd", require: false
   gem "rubocop"
