@@ -276,7 +276,7 @@ copy_base_files
 remove_base_files
 
 # add yarn packages
-`yarn add alertifyjs autosize bootstrap@5.0.0-alpha3 popper.js lodash photoswipe`
+`yarn add alertifyjs autosize bootstrap@5.0.0-alpha3 popper.js lodash photoswipe sass sass-loader`
 
 rework_application_js
 
