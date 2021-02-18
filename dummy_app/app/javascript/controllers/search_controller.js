@@ -22,8 +22,6 @@ export default class extends Controller {
     url.searchParams.append("query", this.query)
     url.searchParams.append("item_name", this.itemNameTarget.value)
 
-    this.abortPreviousFetchRequest()
-
     this.abortController = new AbortController()
     fetch(url, { signal: this.abortController.signal })
       .then(response => response.text())
@@ -33,25 +31,13 @@ export default class extends Controller {
       .catch(() => {})
   }
 
-  // private
-
   reset() {
     this.resultsTarget.innerHTML = ""
     this.queryTarget.value = ""
     this.previousQuery = null
   }
 
-  abortPreviousFetchRequest() {
-    if(this.abortController) {
-      this.abortController.abort()
-    }
-  }
-
   get query() {
     return this.queryTarget.value
-  }
-
-  get searchResultsController() {
-    return this.application.getControllerForElementAndIdentifier(this.resultsTarget.firstElementChild, "search-results")
   }
 }
