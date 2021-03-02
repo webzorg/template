@@ -1,0 +1,15 @@
+.container
+  h2.text-center = t("devise.confirmations.new.resend_confirmation_instructions")
+
+  .row
+    .col-lg-4.col-md-6.mx-auto
+      = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+        = render "shared/errors", object: resource
+
+        .mb-3.form-floating
+          = f.email_field :email, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control"
+          = f.label :email
+
+        .d-grid.gap-3
+          = f.submit t(:resend), class: "btn btn-primary"
+          = link_to t(:back), new_user_session_path, class: "btn btn-warning"

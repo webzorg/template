@@ -12,7 +12,7 @@
           = link_to t("devise.shared.links.didn_t_receive_confirmation_instructions"), new_confirmation_path(@user), class: "btn btn-dark btn-sm"
 
       / allow social login only for clients
-      - if sign_up_page || sign_in_page
+      - if User.method_defined?(:omniauth_providers) && (sign_up_page || sign_in_page)
         .row
           - User.omniauth_providers.each do |provider|
             - provider_name = provider

@@ -1,5 +1,5 @@
 li.nav-item.dropdown.header-notifications
-  = link_to "#", class: "nav-link", data: { target: "header-notifications", toggle: "dropdown" }, aria: { haspopup: true, expanded: false } do
+  = link_to "#", class: "nav-link", "data-bs-target": "header-notifications", "data-bs-toggle": "dropdown", aria: { haspopup: true, expanded: false } do
     = bell_notification_with_conditional_counter
   ul.dropdown-menu.dropdown-menu-right.notifications aria-labelledby="header-notifications" role="menu"
     .notification-heading

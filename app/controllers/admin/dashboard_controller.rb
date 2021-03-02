@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class Admin::DashboardController < Admin::ApplicationController
-  def index
+module Admin
+  class DashboardController < Admin::ApplicationController
+    def index
+    end
   end
 end

@@ -4,15 +4,12 @@
 source_paths.unshift(File.dirname(__FILE__))
 
 APPLICATION_RB = <<-'APPLICATION_RB'
-    config.generators do |g|
-      g.assets                    false
-      g.lasha_assets              true
-      g.helper                    false
-      # g.test_framework            nil
-      g.system_tests              nil
-      g.jbuilder                  false
-      g.lasha_scaffold_controller true
-    end
+    # config.generators do |g|
+    #   g.assets                    false
+    #   g.helper                    false
+    #   g.jbuilder                  false
+    #   g.general_scaffold_controller true
+    # end
 
     config.api_only_mode = ActiveModel::Type::Boolean.new.cast(ENV["API_ONLY_MODE"])
 
@@ -53,20 +50,19 @@ APPLICATION_RB = <<-'APPLICATION_RB'
 APPLICATION_RB
 
 APPLICATION_JS = <<~APPLICATION_JS
-  window.alertify = require("alertifyjs")
-  window.PhotoSwipe = require("photoswipe/dist/photoswipe.min")
-  window.PhotoSwipeUI_Default = require("photoswipe/dist/photoswipe-ui-default.min")
-  window.autosize = require("autosize/dist/autosize.min.js")
-  require("modules/photo-swipe-dom-initializer")
-  import "bootstrap"
-
   document.addEventListener("turbolinks:load", function() {
     // helpers.fadeOutEffectAndHide(document.getElementById("before-page-spinner"));
-
-    autosize(document.querySelectorAll("textarea"));
-
+    // autosize(document.querySelectorAll("textarea"));
     // initPhotoSwipeFromDOM(".thumbnail-list-wrapper");
   });
+
+  window.alertify = require("alertifyjs")
+  import "bootstrap"
+
+  // window.PhotoSwipe = require("photoswipe/dist/photoswipe.min")
+  // window.PhotoSwipeUI_Default = require("photoswipe/dist/photoswipe-ui-default.min")
+  // window.autosize = require("autosize/dist/autosize.min.js")
+  // require("modules/photo-swipe-dom-initializer")
 APPLICATION_JS
 
 ########################################################################
@@ -97,35 +93,6 @@ def rework_application_js
   inject_into_file "app/javascript/packs/application.js", APPLICATION_JS
 end
 
-def rework_gemfile
-  # remove sass-rails in favor of sassc-rails
-  gsub_file "Gemfile", /^# Use SCSS for stylesheets/, ""
-  gsub_file "Gemfile", /^gem\s+["']sass-rails["'].*$/, ""
-
-  # remove comments from Gemfile
-  gsub_file "Gemfile", /#\s.*\n/, "\n"  # remove comments
-  gsub_file "Gemfile", /\n^\s*\n/, "\n" # remove multiple spaces
-
-  inject_text_before("Gemfile", "\n################################################################################", "gem 'lasha', path: 'lasha'")
-  inject_text_before("Gemfile", "# General", "gem 'lasha', path: 'lasha'")
-  inject_text_before("Gemfile", "\n# Services", "gem 'sendgrid-actionmailer'")
-  inject_text_after("Gemfile", "\n# Security", "gem 'gravatar_image_tag'")
-  security_commented_gems = <<~RUBY
-    # gem 'devise_masquerade'
-    # gem 'devise-two-factor'
-    # gem 'devise_token_auth', '~> 0.2'
-    # gem 'recaptcha'
-  RUBY
-  inject_text_after("Gemfile", security_commented_gems, "\n# Security")
-
-  inject_text_before("Gemfile", "# Debugging & Optimization", "gem 'active_record_query_trace'")
-
-  inject_text_after("Gemfile", "\n# I18n", "gem 'rack-utf8_sanitizer'")
-  inject_text_after("Gemfile", "\n# Mechanical Line", "gem 'rails-i18n'")
-  inject_text_after("Gemfile", "# gem 'globalize', github: 'globalize/globalize'", "gem 'rails-i18n'")
-  inject_text_after("Gemfile", " ", "end")
-end
-
 def env_touch(environment = "development")
   filename = case environment
              when "development" then ".env"
@@ -148,29 +115,20 @@ def env_touch(environment = "development")
 end
 
 def add_gems
-  gem "lasha", path: "lasha"
-
   # General
   gem "meta-tags"
   # gem 'http'
   gem "rest-client"
   gem "oj"
-  gem "font-awesome-sass", "~> 5.6.1"
   gem "notifications"
-  gem "simple_calendar", "~> 2.0"
 
   # Services
   gem "sendgrid-actionmailer"
   # gem 'aws-sdk-s3', '~> 1'
   gem "gravatar_image_tag"
 
-  # Security
-  # gem 'devise_masquerade'
-  # gem 'devise-two-factor'
-  # gem 'recaptcha'
-
   # Debugging & Optimization
-  gem "active_record_query_trace"
+  # gem "active_record_query_trace"
   gem "rack-utf8_sanitizer"
 
   # I18n
@@ -178,45 +136,59 @@ def add_gems
   gem "rails-i18n"
   # gem 'globalize', github: 'globalize/globalize'
 
+  gem "aasm"
+  gem "active_link_to"
+  gem "autoprefixer-rails"
+  gem "devise"
+  gem "devise-async"
+  # gem "devise_token_auth"
+  # gem 'devise_masquerade'
+  # gem 'devise-two-factor'
+  # gem 'recaptcha'
+  gem "hiredis"
+  gem "image_processing", "~> 1.2"
+  # gem "omniauth-facebook"
+  # gem "omniauth-google-oauth2"
+  gem "pagy"
+  gem "pundit"
+  gem "ransack"
+  gem "redis", "~> 4.0"
+  gem "rolify"
+  gem "sassc-rails"
+  gem "sidekiq"
+  gem "sidekiq-cron"
+  gem "sidekiq-failures"
+  gem "sitemap_generator"
+  gem "slim-rails"
+
   gem_group :development, :test do
     gem "pry-rails"
     gem "awesome_print"
-    gem "rspec-rails"
-    gem "factory_bot_rails", require: false
-    gem "webmock", require: false
-    gem "capybara"
-    gem "database_cleaner"
-    # gem 'shoulda-matchers'
-    # gem 'rails-controller-testing'
     gem "dotenv-rails"
-    gem "webdrivers"
   end
 
   gem_group :development, :test, :staging do
-    gem "bullet"
-    gem "faker", "1.9.3"
+    # gem "faker", "1.9.3"
   end
 
   gem_group :development do
+    gem "bcrypt_pbkdf"
+    gem "ed25519"
     # capistrano
-    gem "capistrano",         require: false
-    gem "capistrano3-puma",   require: false
-    gem "capistrano-bundler", require: false
-    gem "capistrano-git-with-submodules", "~> 2.0"
-    gem "capistrano-rails",   require: false
-    gem "capistrano-rvm",     require: false
-    gem "capistrano-sidekiq"
+    # gem "capistrano",         require: false
+    # gem "capistrano3-puma",   require: false
+    # gem "capistrano-bundler", require: false
+    # # gem "capistrano-git-with-submodules", "~> 2.0"
+    # gem "capistrano-rails",   require: false
+    # gem "capistrano-rvm",     require: false
+    # gem "capistrano-sidekiq"
 
-    gem "derailed_benchmarks"
     # gem "droplet_kit"
-    gem "rails-erd", require: false
     # gem "i18n-tasks", "~> 0.9.6"
-    gem "i18n_generators", "~> 2.1", ">= 2.1.1"
+    # gem "i18n_generators", "~> 2.1", ">= 2.1.1"
     gem "rubocop"
     gem "rubocop-performance"
     gem "solargraph"
-    # gem "ed25519"
-    # gem "bcrypt_pbkdf"
     gem "mailcatcher"
   end
 end
@@ -230,17 +202,17 @@ def copy_base_files
     .bundle/config
     Capfile
   ]
-  dirs_to_copy = %w[app config db lasha lib]
+  dirs_to_copy = %w[app config db lib]
   force_overwrite = %[.gitignore]
 
   files_to_copy.each { |file| copy_file file, force: force_overwrite.include?(file) }
   dirs_to_copy.each  { |dir|  directory dir, force: true }
 
   copy_file "tt_files_for_copy/api_controller.rb.tt",
-    "lib/rails/generators/rails/lasha_scaffold_controller/templates/api_controller.rb.tt"
+    "lib/rails/generators/rails/general_scaffold_controller/templates/api_controller.rb.tt"
 
   copy_file "tt_files_for_copy/controller.rb.tt",
-    "lib/rails/generators/rails/lasha_scaffold_controller/templates/controller.rb.tt"
+    "lib/rails/generators/rails/general_scaffold_controller/templates/controller.rb.tt"
 
   # touch env & move master key
   env_touch("development")
@@ -258,7 +230,6 @@ end
 ############################## Main Flow ###############################
 ########################################################################
 environment "config.require_master_key = true"
-environment "config.application_name = Rails.application.class.module_parent_name"
 rework_application_rb
 
 # development
@@ -270,21 +241,20 @@ environment "config.action_mailer.smtp_settings = { :address => '127.0.0.1', :po
 environment "config.action_mailer.delivery_method = :smtp", env: :development
 
 add_gems
-rework_gemfile
 
 copy_base_files
 remove_base_files
 
-# add yarn packages
-`yarn add alertifyjs autosize bootstrap@5.0.0-alpha3 popper.js lodash photoswipe sass sass-loader`
-
 rework_application_js
 
-bundle_command "install"
 after_bundle do
   git :init
   git add: "-A"
   git commit: "-m 'Initial commit'"
+
+  rails_command("action_text:install")
+  git add: "-A"
+  git commit: "-m 'install action_text'"
 
   bundle_command "exec rubocop --auto-correct --only Style/StringLiterals"
   bundle_command "exec rubocop -A --only Style/FrozenStringLiteralComment"
@@ -293,18 +263,16 @@ after_bundle do
   git add: "-A"
   git commit: "-m 'apply rubocop safe-auto-correct'"
 
-  rails_command("action_text:install")
-  git add: "-A"
-  git commit: "-m 'install action_text'"
+  rails_command("db:create")
+  rails_command("db:migrate")
+  rails_command("db:seed")
 
-  copy_file "spec/rails_helper.rb", force: true
-  git add: "-A"
-  git commit: "-m 'add custom spec/rails_helper'"
+  # add yarn packages
+  `yarn add alertifyjs autosize bootstrap@next @popperjs/core @fortawesome/fontawesome-free lodash sass sass-loader`
+  # photoswipe
 
   git remote: "add origin git@github.com:webzorg/#{Dir.pwd.split('/').last}.git"
   git remote: "-v"
   git push: "origin master"
 end
 
-rails_command("db:create")
-rails_command("db:migrate")

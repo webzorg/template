@@ -1,0 +1,24 @@
+.container
+  h2.text-center = t("devise.passwords.edit.change_your_password")
+
+  .row
+    .col-lg-8.col-md-8.mx-auto
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+        = render "shared/errors", object: resource
+
+        = f.hidden_field :reset_password_token
+
+        .mb-3.form-floating
+          - if @minimum_password_length
+            em = t("devise.shared.minimum_password_length", count: @minimum_password_length)
+            br
+          = f.password_field :password, autofocus: true, placeholder: "new-password", class: "form-control"
+          = f.label :password, t("devise.passwords.edit.new_password")
+
+        .mb-3.form-floating
+          = f.password_field :password_confirmation, placeholder: "new-password", class: "form-control"
+          = f.label :password_confirmation, t("devise.passwords.edit.confirm_new_password")
+
+        .d-grid.gap-3
+          = f.submit t("devise.passwords.edit.change_my_password"), class: "btn btn-primary btn-lg"
+          = link_to t(:back), new_user_session_path, class: "btn btn-warning btn-lg"

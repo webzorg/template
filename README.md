@@ -1,7 +1,7 @@
 # Template
 
 ## What does this project do
-The primary idea of this project is to leverage Rails template feature in order to jumpstart project with useful defaults. The project created by this template will include [lasha engine](https://github.com/webzorg/lasha/tree/master) This makes it possible to develop common core for the app separately, for a developer to be able to use it in another app in the future.
+The primary idea of this project is to leverage Rails template feature in order to jumpstart project with useful defaults.
 
 #### Install requried gems
 ```
@@ -87,7 +87,6 @@ rm -rf app_name; rails new app_name -J -B; ls -alh app_name
 ```
 
 ## Dependencies
-See [lasha engine](https://github.com/webzorg/lasha/tree/master#dependencies)'s dependencies
 
 ## Contributing
 PR will do. Also, you can contact me if you want to discuss large scale ideas.

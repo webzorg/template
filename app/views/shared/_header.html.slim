@@ -1,13 +1,11 @@
 nav.navbar.navbar-expand-md.navbar-light.bg-light
-  .container
+  .container.text-center
     = link_to ENV["RAILS_APP_NAME"].titleize, root_path, class: "navbar-brand"
-    button.navbar-toggler aria-controls="navbar" aria-expanded="false" aria-label=("Toggle navigation") data-target="#nav_main" data-toggle="collapse" type="button"
+    button.navbar-toggler aria-controls="navbar" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#nav_main" data-bs-toggle="collapse" type="button"
       span.navbar-toggler-icon
     #nav_main.collapse.navbar-collapse
-      ul.navbar-nav.mr-auto.mt-2.mt-md-0
-      ul.navbar-nav
+      ul.navbar-nav.ms-auto
         / - if current_user
-          li.nav-item = link_to t(:calendar), calendar_root_path, class: "nav-link"
         / li.nav-item = link_to t(:about),    about_path,    class: "nav-link"
         / li.nav-item = link_to t(:contact),  contact_path,  class: "nav-link"
         / li.nav-item.dropdown
@@ -20,7 +18,7 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
         - if user_signed_in?
           = render "shared/notifications"
           li.nav-item.dropdown
-            = link_to "#", id: "profile-menu", class: "nav-link dropdown-toggle", data: { target: "nav-account-dropdown", toggle: "dropdown" }, aria: { haspopup: true, expanded: false } do
+            = link_to "#", id: "profile-menu", class: "nav-link dropdown-toggle", data: { "bs-target": "nav-account-dropdown", "bs-toggle": "dropdown" }, aria: { haspopup: true, expanded: false } do
               i.fa.fa-flag-o aria-hidden="true" = current_user.full_name
               '
               = image_tag current_user.avatar_gravatar(40), width: 20, height: 20, class: "rounded"

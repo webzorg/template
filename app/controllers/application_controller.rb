@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include Lasha::ControllerBase
+  include ControllerBase
 
   before_action :api_only_mode, if: -> { Rails.configuration.api_only_mode }
 
