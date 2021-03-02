@@ -1,8 +1,0 @@
-h3.text-center=local_vars[:user_type_switcher_header]
-- if controller_name.eql?("registrations")
-  ul.nav.nav-pills.nav-fill
-    li.nav-item
-      =link_to t(:client), new_user_registration_path, class: "nav-link btn mr-1 #{@role.eql?(:client) ? 'btn-primary' : 'btn-outline-secondary'}"
-    li.nav-item
-      =link_to t(:partner), new_partner_registration_path, class: "nav-link btn #{@role.eql?(:partner) ? 'btn-primary' : 'btn-outline-secondary'}"
-hr

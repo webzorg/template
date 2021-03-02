@@ -1,8 +1,0 @@
-- if object.errors.any?
-  #error_explanation
-    p = t(:form_header_errors, count: object.errors.count)
-    ul
-      - object.errors.full_messages.each do |message|
-        li
-          span = message
-br
