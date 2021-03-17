@@ -85,8 +85,6 @@ end
 
 def rework_application_rb
   inject_into_file "config/application.rb", APPLICATION_RB, before: "  end\nend"
-  gsub_file "config/application.rb", "# Don't generate system test files.", ""
-  gsub_file "config/application.rb", "config.generators.system_tests = nil", ""
 end
 
 def rework_application_js
@@ -118,9 +116,9 @@ def add_gems
   # General
   gem "meta-tags"
   # gem 'http'
-  gem "rest-client"
-  gem "oj"
   gem "notifications"
+  gem "oj"
+  gem "rest-client"
 
   # Services
   gem "sendgrid-actionmailer"
@@ -162,9 +160,9 @@ def add_gems
   gem "slim-rails"
 
   gem_group :development, :test do
-    gem "pry-rails"
     gem "awesome_print"
     gem "dotenv-rails"
+    gem "pry-rails"
   end
 
   gem_group :development, :test, :staging do

@@ -11,10 +11,10 @@ class User < ApplicationRecord
          :trackable,
          :validatable,
          :confirmable
-         # :lockable,
-         # :timeoutable,
-        #  :omniauthable,
-        #  omniauth_providers: %i[facebook google_oauth2]
+  # :lockable,
+  # :timeoutable,
+  #  :omniauthable,
+  #  omniauth_providers: %i[facebook google_oauth2]
 
   # include DeviseTokenAuth::Concerns::ActiveRecordSupport
   # include DeviseTokenAuth::Concerns::User
@@ -48,12 +48,12 @@ class User < ApplicationRecord
     end
   end
 
-  def avatar_gravatar(size = 40)
-    avatar.attached? ? avatar.variant(resize: size) : gravatar_image_url(email, size: size)
-  end
-
   def admin?
     has_role?(:admin)
+  end
+
+  def avatar_gravatar(size = 40)
+    avatar.attached? ? avatar.variant(resize: size) : gravatar_image_url(email, size: size)
   end
 
   def self.new_with_session(params, session)
@@ -75,15 +75,15 @@ class User < ApplicationRecord
       file = Tempfile.new("tmp_file", Rails.root.join("tmp"))
       begin
         file.binmode
-        file.write(HTTP.follow.get("#{auth.info.image}?type=large&width=800&height=800"))
+        file.write(HTTP.follow.get(auth.info.image))
         file.rewind
-        user.avatar.attach(io: file, filename: "avatar.jpg")
+        user.avatar.attach(io: File.open(file), filename: "avatar.jpg")
       ensure
         file.close
         file.unlink
       end
 
-      user.validate_and_initialize_role(:client)
+      # user.validate_and_initialize_role(:client)
       user.confirm
     rescue ActiveRecord::RecordNotUnique => _e
       user
@@ -99,15 +99,15 @@ class User < ApplicationRecord
       file = Tempfile.new("tmp_file", Rails.root.join("tmp"))
       begin
         file.binmode
-        file.write(HTTP.follow.get("#{auth.info.image}?type=large&width=800&height=800"))
+        file.write(HTTP.follow.get(auth.info.image))
         file.rewind
-        user.avatar.attach(io: file, filename: "avatar.jpg")
+        user.avatar.attach(io: File.open(file), filename: "avatar.jpg")
       ensure
         file.close
         file.unlink
       end
 
-      user.validate_and_initialize_role(:client)
+      # user.validate_and_initialize_role(:client)
       user.confirm
     rescue ActiveRecord::RecordNotUnique => _e
       user
@@ -116,17 +116,17 @@ class User < ApplicationRecord
 
   private
 
-    def gravatar_image_url(email, gravatar_overrides = {})
-      email = email.strip.downcase if email.is_a? String
-      GravatarImageTag.gravatar_url(email, gravatar_overrides)
-    end
+  def gravatar_image_url(email, gravatar_overrides = {})
+    email = email.strip.downcase if email.is_a? String
+    GravatarImageTag.gravatar_url(email, gravatar_overrides)
+  end
 
-    def touch_last_activity
-      touch :last_activity_at
-    end
+  def touch_last_activity
+    touch :last_activity_at
+  end
 
-    # monkey patch for devise_token_auth
-    def send_confirmation_notification?
-      true
-    end
+  # monkey patch for devise_token_auth
+  def send_confirmation_notification?
+    true
+  end
 end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module ApplicationHelper
+module BaseHelper
   include Pagy::Frontend
 
   def pagy_helper(pagy, smart_hide: true)
-    render partial: "admin/crud/bootstrap_nav", locals: { pagy: pagy, smart_hide: smart_hide }
+    render partial: "admin/shared/crud/bootstrap_nav", locals: { pagy: pagy, smart_hide: smart_hide }
   end
 
   def alertifyjs_flash

@@ -1,8 +1,8 @@
 h2.text-center #{@data[:model].model_name.human} Index
 
 = pagy_helper(@data[:pagy])
-= render partial: "admin/crud/scope_filters"
-= render partial: "admin/crud/search_fields"
+= render partial: "admin/shared/crud/scope_filters"
+= render partial: "admin/shared/crud/search_fields"
 
 .row
   .col-sm-12
@@ -30,4 +30,4 @@ h2.text-center #{@data[:model].model_name.human} Index
 
 = pagy_helper(@data[:pagy])
 
-= render partial: "admin/crud/navigation"
+= render partial: "admin/shared/crud/navigation"

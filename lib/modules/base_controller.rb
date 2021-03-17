@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ControllerBase
+module BaseController
   extend ActiveSupport::Concern
 
   include Pundit

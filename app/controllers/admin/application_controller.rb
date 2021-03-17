@@ -12,7 +12,7 @@ module Admin
       def verify_admin
         return if current_user.admin?
 
-        raise "Not Found"
+        not_found
       end
   end
 end
