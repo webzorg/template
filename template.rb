@@ -200,7 +200,7 @@ def copy_base_files
     .bundle/config
     Capfile
   ]
-  dirs_to_copy = %w[app config db lib]
+  dirs_to_copy = %w[app config db lib test]
   force_overwrite = %[.gitignore]
 
   files_to_copy.each { |file| copy_file file, force: force_overwrite.include?(file) }

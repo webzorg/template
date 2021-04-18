@@ -1,0 +1,15 @@
+---
+role_1:
+  id: 1
+  name: admin
+  resource_type: 
+  resource_id: 
+  created_at: 2021-01-23 13:34:21.578707000 Z
+  updated_at: 2021-01-23 13:34:21.578707000 Z
+role_2:
+  id: 2
+  name: archivist
+  resource_type: 
+  resource_id: 
+  created_at: 2021-02-05 20:46:09.205914000 Z
+  updated_at: 2021-02-05 20:46:09.205914000 Z

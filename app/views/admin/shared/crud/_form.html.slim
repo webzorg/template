@@ -1,7 +1,7 @@
 = form_for @data[:object], html: { class: "col-sm-12" } do |f|
   - if @data[:object].errors.any?
     #error_explanation
-      h2 = "#{pluralize(@data[:object].errors.count, "error")} prohibited this tree from being saved:"
+      h2 = t("errors.template.header", count: @data[:object].errors.count, model: @data[:object].model_name.human)
       ul
         - @data[:object].errors.full_messages.each do |message|
           li = message

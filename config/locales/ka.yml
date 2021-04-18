@@ -6,19 +6,35 @@ ka:
       # long: "%d %B %Y, %H:%M"
       # short: "%d %b, %H:%M"
       subscription_expiration: "%d %b %y"
-  '':
     send_instructions: Send instructions
   about: About
   activerecord:
     models:
-      wish_category: სურვილის კატეგორია
-      user: User
+      user:
+        one: მომხმარებელი
+        other: მომხმარებლები
       wish_urgency: Wish urgency
       payment: Payment
+      item:
+        one: საბიბლიოთეკო ერთეული
+        other: საბიბლიოთეკო ერთეულები
+      tag: ტაგი
+      item_tag: ტაგი
     attributes:
-      evaluation:
-        response_comment: Response comment
-      wish_category:
+      item:
+        title: სათაური
+        subtitle: ქვესათაური
+        category: კატეგორია
+        category_id: კატეგორია
+        author: ავტორი
+        translator: მთარგმნელი
+        publisher: გამომცემლობა
+        isbn: ISBN
+        public: საჯარო
+        cover: ყდა
+        attachments: ფაილები
+        comment: კომენტარი
+        tags: ტაგები
       user:
         first_name: სახელი
         last_name: გვარი
@@ -32,9 +48,26 @@ ka:
         aasm_state: სტატუსი
         amount: რაოდენობა
         paid_at: გადახდის თარიღი
+      tag:
+        tag_type: ტაგის ტიპი
+        content: შინაარსი
+      item_tag:
+        item: საბიბლიოთეკო ერთეული
+        tag: ტაგი
+      item_tags:
+        tag: "ტაგი"
+    helpers:
+      placeholder:
+        message:
+          name: ""
+  controller_name:
+    update:
+      notice: "Message was successfully updated."
+      alert: "Unable to update message."
+  app_name: არესი
   add_more_images: Add more images
   additional_tenants: Additional tenants
-  admin_panel: Admin panel
+  admin_panel: ადმინ პანელი
   already_signed_up: Already signed up
   are_you_sure_partner_satisfied: დარწმუნებული ხართ რომ '%{partner}'-მა დააკმაყოფილა თქვენი სურვილი?
   back: დაბრუნება
@@ -45,16 +78,17 @@ ka:
   client: Client
   client_sign_in: Client sign in
   client_sign_up: Client sign up
-  contact: Contact
+  contact: კონტაქტი
   create: Create
   description: Description
   duration_in_hours: Duration in hours
-  edit: Edit
+  show: ჩვენება
+  edit: რედაქტირება
   edit_profile: Edit profile
   edit_your_wish: Edit your wish
   editing_profile: Editing %{role}-ის profile
   elapsed_time: Elapsed time
-  en: En
+  en: English
   evaluation: Evaluation
   evaluations: Evaluations
   evaluator: Evaluator
@@ -65,12 +99,12 @@ ka:
   hello: Hello world
   incorrect_email: Incorrect email
   is_now_verified: Is now verified
-  ka: Ka
-  language: Language
-  login: Login
-  logout: Logout
+  ka: ქართული
+  language: GE | EN
+  login: შესვლა
+  logout: გამოსვლა
   name: Name
-  new: New %{object_name}
+  new: ახალი %{object_name}
   new_code_was_resent_to: New code was resent to
   not_authorized: Not authorized
   not_signed_up: Not signed up
@@ -97,28 +131,19 @@ ka:
   profile_updated: Profile updated
   rating: Rating
   registration_successful: Registration successful
-  registrations:
-    new:
-      sign_up: Sign up
-    new_partner:
-      sign_up: Sign up
-    registration_footer:
-      didn_t_receive_confirmation_instructions: Didn't receive confirmation instructions
   remove_all: Remove all
   resend_verification_code: Resend verification code
   resend: ხელახლა გაგზავნა
   satisfy: Satisfy
   save: Save
   send_verification_code: Send verification code
-  settings: Settings
+  settings: პარამეტრები
   shared:
     sign_in_up_footer:
       didn_t_receive_confirmation_instructions: Didn't receive confirmation instructions
   show_details: Show details
-  sign_in: Sign in
   sign_in_to_view_partners: Sign in to view partners
   sign_in_with_provider: Sign in with %{provider}
-  sign_up: Sign up
   sms_could_not_be_sent_to: Sms could not be sent to
   sms_was_successfully_send_to: Sms was successfully send to
   sms_was_successfully_sent_to: Sms was successfully sent to
@@ -141,6 +166,9 @@ ka:
   please_select_category_you_wish_to_subscribe_to: Please Select Category you wish to subscribe to
   pay_for_subscription:
   pay_for_subscription_again:
+  library: ბიბლიოთეკა
+  search: ძებნა
+  other: სხვა
   titles:
     my_subscriptions: ჩემი გამოწერილი კატეგორიები
     payments_history: Payments History
@@ -152,3 +180,9 @@ ka:
     payment_successfull:
     payment_failed:
     payment_failed_contact_support:
+    search_placeholder: "სათაური, მწერალი, მთარგმნელი..."
+    library_items_index: "%{model_name}ს ძებნა"
+    no_results: შედეგები არ მოიძებნა
+  admin:
+    library_items_index: საბიბლიოთეკო ერთეულების ინდექსი
+    tags_index: ტეგების ინდექსი

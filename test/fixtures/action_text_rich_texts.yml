@@ -1,0 +1,282 @@
+---
+action_text_rich_text_1:
+  id: 1
+  name: comment
+  body: ტელ. 915101 www.logospress.com.ge
+  record_type: Item
+  record_id: 12
+  created_at: 2021-02-11 01:59:46.662582000 Z
+  updated_at: 2021-02-11 01:59:46.662582000 Z
+action_text_rich_text_2:
+  id: 2
+  name: comment
+  body: ტელ. 915101 www.logospress.com.ge
+  record_type: Item
+  record_id: 13
+  created_at: 2021-02-11 01:59:46.691047000 Z
+  updated_at: 2021-02-11 01:59:46.691047000 Z
+action_text_rich_text_3:
+  id: 3
+  name: comment
+  body: თბილისი - 1973
+  record_type: Item
+  record_id: 15
+  created_at: 2021-02-11 01:59:46.735788000 Z
+  updated_at: 2021-02-11 01:59:46.735788000 Z
+action_text_rich_text_4:
+  id: 4
+  name: comment
+  body: თბილისი - 1983
+  record_type: Item
+  record_id: 17
+  created_at: 2021-02-11 01:59:47.060174000 Z
+  updated_at: 2021-02-11 01:59:47.060174000 Z
+action_text_rich_text_5:
+  id: 5
+  name: comment
+  body: 'პარალელურად ნათარგმნია: John Carew Rolfe -ს წიგნიდან. <br> ტელ. 39 07 27,
+    ელ-ფოსტა book@pegasus.ge. გამომცემლობა „პეგასი“, 2011'
+  record_type: Item
+  record_id: 18
+  created_at: 2021-02-11 01:59:47.166663000 Z
+  updated_at: 2021-02-11 01:59:47.166663000 Z
+action_text_rich_text_6:
+  id: 6
+  name: comment
+  body: თბილისი - 1926
+  record_type: Item
+  record_id: 20
+  created_at: 2021-02-11 01:59:47.334664000 Z
+  updated_at: 2021-02-11 01:59:47.334664000 Z
+action_text_rich_text_7:
+  id: 7
+  name: comment
+  body: თბილისი - 1984
+  record_type: Item
+  record_id: 21
+  created_at: 2021-02-11 01:59:47.395711000 Z
+  updated_at: 2021-02-11 01:59:47.395711000 Z
+action_text_rich_text_8:
+  id: 8
+  name: comment
+  body: 'წინასიტყვაობა და კომენტარები: რისმაგ გორდეზიანი'
+  record_type: Item
+  record_id: 23
+  created_at: 2021-02-11 01:59:47.458719000 Z
+  updated_at: 2021-02-11 01:59:47.458719000 Z
+action_text_rich_text_9:
+  id: 9
+  name: comment
+  body: თბილისი - 1938
+  record_type: Item
+  record_id: 24
+  created_at: 2021-02-11 01:59:47.478680000 Z
+  updated_at: 2021-02-11 01:59:47.478680000 Z
+action_text_rich_text_10:
+  id: 10
+  name: comment
+  body: თბილისი - 1948 <br> ფასი 8 მან.
+  record_type: Item
+  record_id: 27
+  created_at: 2021-02-11 01:59:47.568159000 Z
+  updated_at: 2021-02-11 01:59:47.568159000 Z
+action_text_rich_text_11:
+  id: 11
+  name: comment
+  body: თბილისი - 1976
+  record_type: Item
+  record_id: 28
+  created_at: 2021-02-11 01:59:47.625562000 Z
+  updated_at: 2021-02-11 01:59:47.625562000 Z
+action_text_rich_text_12:
+  id: 12
+  name: comment
+  body: თბილისი - 2017 <br> info@sulakauri.ge <br> www.sulakauri.ge
+  record_type: Item
+  record_id: 31
+  created_at: 2021-02-11 01:59:47.767995000 Z
+  updated_at: 2021-02-11 01:59:47.767995000 Z
+action_text_rich_text_13:
+  id: 13
+  name: comment
+  body: თბილისი - 1995 <br> საქართველოს მეცნიერებათა აკადემია <br> ფილოსოფიის ინსტიტუტი
+  record_type: Item
+  record_id: 32
+  created_at: 2021-02-11 01:59:47.798251000 Z
+  updated_at: 2021-02-11 01:59:47.798251000 Z
+action_text_rich_text_14:
+  id: 14
+  name: comment
+  body: თბილისი - 2013 <br> info@sulakauri.ge <br> www.sulakauri.ge
+  record_type: Item
+  record_id: 33
+  created_at: 2021-02-11 01:59:47.960249000 Z
+  updated_at: 2021-02-11 01:59:47.960249000 Z
+action_text_rich_text_15:
+  id: 15
+  name: comment
+  body: თბილისი - 2015 <br> რედაქტირება, სამეცნიერო კომენტარები და შესავალი - ნიკა
+    ხოფერია
+  record_type: Item
+  record_id: 36
+  created_at: 2021-02-11 01:59:48.068461000 Z
+  updated_at: 2021-02-11 01:59:48.068461000 Z
+action_text_rich_text_16:
+  id: 16
+  name: comment
+  body: თბილისი - 2011 <br> ტელ. 390727 book@pegasus.ge, www.pegasus.ge
+  record_type: Item
+  record_id: 37
+  created_at: 2021-02-11 01:59:48.157772000 Z
+  updated_at: 2021-02-11 01:59:48.157772000 Z
+action_text_rich_text_17:
+  id: 17
+  name: comment
+  body: გამომცემლობა 'საბჭოთა საქართველო', 1972, <br> გამომცემლობა 'მერანი', 1984
+    <br> გამომცემლობა Capre diem, 2008 <br> info@meridianpub.com
+  record_type: Item
+  record_id: 38
+  created_at: 2021-02-11 01:59:48.277544000 Z
+  updated_at: 2021-02-11 01:59:48.277544000 Z
+action_text_rich_text_18:
+  id: 18
+  name: comment
+  body: info@sulakauri.ge <br> www.sulakauri.ge
+  record_type: Item
+  record_id: 39
+  created_at: 2021-02-11 01:59:48.311122000 Z
+  updated_at: 2021-02-11 01:59:48.311122000 Z
+action_text_rich_text_19:
+  id: 19
+  name: comment
+  body: '2017'
+  record_type: Item
+  record_id: 40
+  created_at: 2021-02-11 01:59:48.335738000 Z
+  updated_at: 2021-02-11 01:59:48.335738000 Z
+action_text_rich_text_20:
+  id: 20
+  name: comment
+  body: '2011 <br> ტელ. 225-02-58 <br> ელ. ფოსტა: logos@greekstudies-tsu.ge'
+  record_type: Item
+  record_id: 42
+  created_at: 2021-02-11 01:59:48.452483000 Z
+  updated_at: 2021-02-11 01:59:48.452483000 Z
+action_text_rich_text_21:
+  id: 21
+  name: comment
+  body: '1994'
+  record_type: Item
+  record_id: 44
+  created_at: 2021-02-11 01:59:48.502692000 Z
+  updated_at: 2021-02-11 01:59:48.502692000 Z
+action_text_rich_text_22:
+  id: 22
+  name: comment
+  body: 'თარგმნისას ხელთ გვქონდა „ნადიმის“ შემდეგი გამოცემები: <br> Platonis Dialogi,
+    ex recensione Caroli Friderici Hermani, Lipsiae, 1877. <br> Platonis Dialogi,
+    ex recensione Immanuelis Bekkeri, Ber. 1817. <br> Platon, Oeuvres complètes, t.
+    IV, partie 2: Le Banquet. Texte établi et trad. par Léon <br> Robin, Paris, 1929.
+    <br> გარდა ამისა, ვეყრდნობოდით „ნადიმის“ 12 სხვადასხვა თარგმანს ლათინურ, <br>
+    ფრანგულ, რუსულ, იტალიურ, გერმანულ და ესპანურ ენებზე'
+  record_type: Item
+  record_id: 45
+  created_at: 2021-02-11 01:59:48.548307000 Z
+  updated_at: 2021-02-11 01:59:48.548307000 Z
+action_text_rich_text_23:
+  id: 23
+  name: comment
+  body: '2003'
+  record_type: Item
+  record_id: 47
+  created_at: 2021-02-11 01:59:48.605732000 Z
+  updated_at: 2021-02-11 01:59:48.605732000 Z
+action_text_rich_text_24:
+  id: 24
+  name: comment
+  body: თბილისი - 1976
+  record_type: Item
+  record_id: 49
+  created_at: 2021-02-11 01:59:48.820901000 Z
+  updated_at: 2021-02-11 01:59:48.820901000 Z
+action_text_rich_text_25:
+  id: 25
+  name: comment
+  body: თბილისი 2009 <br> მეორე შესწორებული და გავრცობილი გამოცემა <br> თსუ ბიბლიოთეკა
+    - 900000924497 <br> ტელ. 25-02-58, logos@caucasus.net
+  record_type: Item
+  record_id: 50
+  created_at: 2021-02-11 01:59:48.859474000 Z
+  updated_at: 2021-02-11 01:59:48.859474000 Z
+action_text_rich_text_26:
+  id: 26
+  name: comment
+  body: თბილისი - 1980
+  record_type: Item
+  record_id: 51
+  created_at: 2021-02-11 01:59:49.076298000 Z
+  updated_at: 2021-02-11 01:59:49.076298000 Z
+action_text_rich_text_27:
+  id: 27
+  name: comment
+  body: თბილისი - 1961
+  record_type: Item
+  record_id: 56
+  created_at: 2021-02-11 01:59:49.216482000 Z
+  updated_at: 2021-02-11 01:59:49.216482000 Z
+action_text_rich_text_28:
+  id: 28
+  name: comment
+  body: მსოფლიო ლიტერატურის ბიბლიოთეკა
+  record_type: Item
+  record_id: 57
+  created_at: 2021-02-11 01:59:49.259640000 Z
+  updated_at: 2021-02-11 01:59:49.259640000 Z
+action_text_rich_text_29:
+  id: 29
+  name: comment
+  body: თბილისი - 1957
+  record_type: Item
+  record_id: 58
+  created_at: 2021-02-11 01:59:49.309845000 Z
+  updated_at: 2021-02-11 01:59:49.309845000 Z
+action_text_rich_text_30:
+  id: 30
+  name: comment
+  body: თბილისი - 1957
+  record_type: Item
+  record_id: 59
+  created_at: 2021-02-11 01:59:49.498685000 Z
+  updated_at: 2021-02-11 01:59:49.498685000 Z
+action_text_rich_text_32:
+  id: 32
+  name: comment
+  body: 'თებერვალი, 2018 <br> ref: arilimag.ge/მალხაზ-ხარბედია-პაიდეუო'
+  record_type: Item
+  record_id: 62
+  created_at: 2021-02-12 20:49:43.586965000 Z
+  updated_at: 2021-02-12 20:49:43.586965000 Z
+action_text_rich_text_33:
+  id: 33
+  name: comment
+  body: 'აპრილი 20, 2020 <br> ref: arilimag.ge/ტომას-სტერნზ-ელიოტი-თანა'
+  record_type: Item
+  record_id: 63
+  created_at: 2021-02-12 20:49:43.619532000 Z
+  updated_at: 2021-02-12 20:49:43.619532000 Z
+action_text_rich_text_34:
+  id: 34
+  name: comment
+  body: 'ნოემბერი 26, 2017 <br> ref: arilimag.ge/მალხაზ-ხარბედია-პეტრონ'
+  record_type: Item
+  record_id: 64
+  created_at: 2021-02-12 20:49:43.640127000 Z
+  updated_at: 2021-02-12 20:49:43.640127000 Z
+action_text_rich_text_35:
+  id: 35
+  name: comment
+  body: ნოემბერი 17, 2020 <br> arilimag.ge/გრეგორი-ნაჟი-ბიბლიოთეკი
+  record_type: Item
+  record_id: 65
+  created_at: 2021-02-12 20:49:43.661414000 Z
+  updated_at: 2021-02-12 20:49:43.661414000 Z

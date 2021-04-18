@@ -1,0 +1,10 @@
+---
+users_role_001:
+  user_id: 2
+  role_id: 2
+users_role_002:
+  user_id: 27
+  role_id: 1
+users_role_003:
+  user_id: 28
+  role_id: 2

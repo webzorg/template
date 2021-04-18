@@ -1,0 +1,727 @@
+---
+item_25:
+  id: 25
+  title: ელინური მითები
+  author: 
+  isbn: 
+  created_at: 2021-02-11 01:59:47.500638000 Z
+  updated_at: 2021-03-15 10:03:59.593547000 Z
+  translator: ალექსანდრე მიქაბერიძე
+  publisher: 
+  subtitle: ტომი I-II
+  public: false
+item_3:
+  id: 3
+  title: ანტიკური ლიტერატურა
+  author: რისმაგ გორდეზიანი, ნანა ტონია
+  isbn: 978-99940-31-46-7
+  created_at: 2021-02-11 01:59:46.279890000 Z
+  updated_at: 2021-03-15 10:03:59.517836000 Z
+  translator: 
+  publisher: ლოგოსი
+  subtitle: ''
+  public: false
+item_4:
+  id: 4
+  title: არგონავტიკა
+  author: აპოლონიოს როდოსელი
+  isbn: ''
+  created_at: 2021-02-11 01:59:46.314020000 Z
+  updated_at: 2021-03-15 10:03:59.519308000 Z
+  translator: აკაკი ურუშაძე
+  publisher: სახელგამი
+  subtitle: ''
+  public: true
+item_28:
+  id: 28
+  title: ენეიდა
+  author: პუბლიუს ვერგილიუს მარო
+  isbn: 
+  created_at: 2021-02-11 01:59:47.623717000 Z
+  updated_at: 2021-02-11 01:59:47.713046000 Z
+  translator: რომან მიმინოშვილი
+  publisher: საბჭოთა საქართველო
+  subtitle: 
+  public: false
+item_6:
+  id: 6
+  title: არგონავტების თქმულება და ოდისეა
+  author: რუდოლფ შტაინერი
+  isbn: 99940-737-2-9
+  created_at: 2021-02-11 01:59:46.363218000 Z
+  updated_at: 2021-03-15 10:03:59.521560000 Z
+  translator: ნოდარ ბელქანია
+  publisher: აწმყო
+  subtitle: ''
+  public: true
+item_16:
+  id: 16
+  title: ფილოსოფიის ნუგეში
+  author: ბოეთიუსი
+  isbn: 
+  created_at: 2021-02-11 01:59:47.025623000 Z
+  updated_at: 2021-02-11 01:59:47.053895000 Z
+  translator: გვანცა ფოფხაძე
+  publisher: 
+  subtitle: 
+  public: false
+item_9:
+  id: 9
+  title: ევდემოსის ეთიკა
+  author: არისტოტელე
+  isbn: 978-9941-0-8606-9
+  created_at: 2021-02-11 01:59:46.445755000 Z
+  updated_at: 2021-03-15 10:03:59.525103000 Z
+  translator: ნოდარ შანიძე
+  publisher: მერანი
+  subtitle: 
+  public: true
+item_15:
+  id: 15
+  title: ბიზანტიური ლიტერატურის ისტორია
+  author: სიმონ ყაუხჩიშვილი
+  isbn: 
+  created_at: 2021-02-11 01:59:46.733641000 Z
+  updated_at: 2021-03-15 10:03:59.559924000 Z
+  translator: 
+  publisher: განათლება
+  subtitle: ტომი III - ბიძანტიური პერიოდის ლიტერატურა
+  public: false
+item_5:
+  id: 5
+  title: ოქროს ვირი
+  author: აპულეუსი
+  isbn: 
+  created_at: 2021-02-11 01:59:46.337015000 Z
+  updated_at: 2021-02-11 01:59:46.359347000 Z
+  translator: თამარ ყიფიანი
+  publisher: ibooks.ge
+  subtitle: 
+  public: false
+item_11:
+  id: 11
+  title: ბაყაყები
+  author: არისტოფანე
+  isbn: 
+  created_at: 2021-02-11 01:59:46.618060000 Z
+  updated_at: 2021-03-15 10:03:59.527036000 Z
+  translator: ლევან ბერძენიშვილი
+  publisher: არილი
+  subtitle: 
+  public: true
+item_12:
+  id: 12
+  title: კომედიები - ტომი I
+  author: არისტოფანე
+  isbn: 99928-924-3-9
+  created_at: 2021-02-11 01:59:46.652279000 Z
+  updated_at: 2021-03-15 10:03:59.549480000 Z
+  translator: ლევან ბერძენიშვილი
+  publisher: ლოგოს პრესი
+  subtitle: აქარნელები, მხედრები
+  public: false
+item_8:
+  id: 8
+  title: მეტაფიზიკა
+  author: არისტოტელე
+  isbn: 
+  created_at: 2021-02-11 01:59:46.424536000 Z
+  updated_at: 2021-02-11 01:59:46.442257000 Z
+  translator: თამარ კუკავა
+  publisher: 
+  subtitle: 
+  public: false
+item_17:
+  id: 17
+  title: ბერძენი ფილოსოფოსები
+  author: უილიამ გათრი
+  isbn: 
+  created_at: 2021-02-11 01:59:47.058691000 Z
+  updated_at: 2021-03-15 10:03:59.564934000 Z
+  translator: გიორგი ნოდია
+  publisher: საბჭოთა საქართველო
+  subtitle: თალესიდან არისტოტელემდე
+  public: false
+item_13:
+  id: 13
+  title: კომედიები - ტომი II
+  author: არისტოფანე
+  isbn: 99928-924-4-7
+  created_at: 2021-02-11 01:59:46.689786000 Z
+  updated_at: 2021-03-15 10:03:59.554866000 Z
+  translator: ლევან ბერძენიშვილი
+  publisher: ლოგოს პრესი
+  subtitle: ღრუბლები, კრაზანები
+  public: false
+item_10:
+  id: 10
+  title: ნიკომაქეს ეთიკა
+  author: არისტოტელე
+  isbn: 
+  created_at: 2021-02-11 01:59:46.483819000 Z
+  updated_at: 2021-02-11 01:59:46.613063000 Z
+  translator: თამარ კუკავა
+  publisher: 
+  subtitle: 
+  public: false
+item_22:
+  id: 22
+  title: იფიგენია ავლისში
+  author: ევრიპიდე
+  isbn: 
+  created_at: 2021-02-11 01:59:47.435505000 Z
+  updated_at: 2021-03-15 10:03:59.582975000 Z
+  translator: ლევან ბერძენიშვილი
+  publisher: არილი
+  subtitle: 
+  public: true
+item_20:
+  id: 20
+  title: ანტიკური ფილოსოფია
+  author: დანელია ს
+  isbn: 
+  created_at: 2021-02-11 01:59:47.333172000 Z
+  updated_at: 2021-03-15 10:03:59.575844000 Z
+  translator: 
+  publisher: საუნივერსიტეტო გამოცემა
+  subtitle: სოკრატის წინ
+  public: false
+item_14:
+  id: 14
+  title: ბიზანტიის იმპერიის ისტორია
+  author: შარლ დილი
+  isbn: 
+  created_at: 2021-02-11 01:59:46.708802000 Z
+  updated_at: 2021-02-11 01:59:46.727534000 Z
+  translator: ბაჩანა ბრეგვაძე
+  publisher: ნეკერი
+  subtitle: 
+  public: false
+item_19:
+  id: 19
+  title: ჰანიბალი
+  author: არსენ გვიმრაძე
+  isbn: 
+  created_at: 2021-02-11 01:59:47.294693000 Z
+  updated_at: 2021-03-15 10:03:59.571975000 Z
+  translator: 
+  publisher: 
+  subtitle: კაცი, რომელიც ვერ იტანდა რომს
+  public: false
+item_23:
+  id: 23
+  title: მედეა
+  author: ევრიპიდე
+  isbn: 
+  created_at: 2021-02-11 01:59:47.456849000 Z
+  updated_at: 2021-02-11 01:59:47.473626000 Z
+  translator: ბაჩანა ბრეგვაძე
+  publisher: 
+  subtitle: 
+  public: false
+item_18:
+  id: 18
+  title: თორმეტი კეისრის ცხოვრება
+  author: გაიუს სვეტონიუს ტრანკვილუსი
+  isbn: 
+  created_at: 2021-02-11 01:59:47.164384000 Z
+  updated_at: 2021-02-11 01:59:47.291715000 Z
+  translator: მიხო მოსულიშვილი
+  publisher: პეგასი
+  subtitle: 
+  public: false
+item_21:
+  id: 21
+  title: ფილიპიკები
+  author: დემოსთენე
+  isbn: ''
+  created_at: 2021-02-11 01:59:47.394201000 Z
+  updated_at: 2021-03-15 10:03:59.580440000 Z
+  translator: გიგლა სარიშვილი
+  publisher: განათლება
+  subtitle: ''
+  public: false
+item_24:
+  id: 24
+  title: ელინური მითები
+  author: ''
+  isbn: ''
+  created_at: 2021-02-11 01:59:47.477176000 Z
+  updated_at: 2021-03-15 10:03:59.591100000 Z
+  translator: ''
+  publisher: საქ. ალკკ ცენტრალური კომიტეტი საბავშვო და ახალგაზრდობის ლიტგამომცემლობა
+  subtitle: ნაწილი I
+  public: true
+item_1:
+  id: 1
+  title: ანტიგონე
+  author: სოფოკლე
+  isbn: ''
+  created_at: 2021-02-11 01:59:46.098875000 Z
+  updated_at: 2021-03-05 10:00:22.471749000 Z
+  translator: ''
+  publisher: Philos, ibooks.ge
+  subtitle: 
+  public: false
+item_29:
+  id: 29
+  title: თასი, დიოგენე და შვიდი ბრძენი
+  author: ზურაბ კიკნაძე
+  isbn: 
+  created_at: 2021-02-11 01:59:47.716713000 Z
+  updated_at: 2021-02-11 01:59:47.732224000 Z
+  translator: 
+  publisher: 
+  subtitle: 
+  public: false
+item_32:
+  id: 32
+  title: ანტიკური ფილოსოფია
+  author: გურამ თევზაძე
+  isbn: ''
+  created_at: 2021-02-11 01:59:47.794836000 Z
+  updated_at: 2021-03-15 10:03:59.614194000 Z
+  translator: ''
+  publisher: მეცნიერება
+  subtitle: ''
+  public: false
+item_26:
+  id: 26
+  title: სპარსელები
+  author: ესქილე
+  isbn: 
+  created_at: 2021-02-11 01:59:47.547389000 Z
+  updated_at: 2021-02-11 01:59:47.560580000 Z
+  translator: ლევან ბერძენიშვილი
+  publisher: 
+  subtitle: 
+  public: false
+item_27:
+  id: 27
+  title: მიჯაჭვული პრომეთე
+  author: ესქილე
+  isbn: 
+  created_at: 2021-02-11 01:59:47.566078000 Z
+  updated_at: 2021-02-11 01:59:47.619971000 Z
+  translator: ქუთათელი ა.
+  publisher: სახელგამი
+  subtitle: 
+  public: false
+item_31:
+  id: 31
+  title: საბოლოო ფილოსოფია
+  author: გიგი თევზაძე
+  isbn: 978-9941-23-805-5
+  created_at: 2021-02-11 01:59:47.765181000 Z
+  updated_at: 2021-02-11 01:59:47.788484000 Z
+  translator: 
+  publisher: ბაკურ სულაკაურის გამომცემლობა
+  subtitle: 
+  public: false
+item_30:
+  id: 30
+  title: თანამედროვე დასავლური ფილოსოფიის სათავეებთან
+  author: თამაზ ბუაჩიძე
+  isbn: 
+  created_at: 2021-02-11 01:59:47.736784000 Z
+  updated_at: 2021-02-11 01:59:47.760394000 Z
+  translator: 
+  publisher: 
+  subtitle: 
+  public: false
+item_2:
+  id: 2
+  title: ანტიკური საბერძნეთი
+  author: ანა კლდიაშვილი
+  isbn: 978-9941-0-7233-8
+  created_at: 2021-02-11 01:59:46.149013000 Z
+  updated_at: 2021-03-15 10:03:59.515394000 Z
+  translator: 
+  publisher: 
+  subtitle: ხელოვნების ისტორია
+  public: false
+item_49:
+  id: 49
+  title: ენეიდა
+  author: პუბლიუს ვერგილიუს მარო
+  isbn: 
+  created_at: 2021-02-11 01:59:48.819304000 Z
+  updated_at: 2021-02-11 01:59:48.853451000 Z
+  translator: რომან მიმინოშვილი
+  publisher: საბჭოთა საქართველო
+  subtitle: 
+  public: false
+item_50:
+  id: 50
+  title: ბერძნული ლიტერატურა
+  author: რისმაგ გორდეზიანი
+  isbn: 978-9941-401-42-8
+  created_at: 2021-02-11 01:59:48.857349000 Z
+  updated_at: 2021-03-15 10:03:59.683609000 Z
+  translator: 
+  publisher: ლოგოსი
+  subtitle: I
+  public: false
+item_42:
+  id: 42
+  title: მეშვიდე წერილი
+  author: პლატონი
+  isbn: 
+  created_at: 2021-02-11 01:59:48.449895000 Z
+  updated_at: 2021-02-11 01:59:48.471100000 Z
+  translator: ლელა ალექსიძე
+  publisher: ლოგოსი
+  subtitle: 
+  public: false
+item_34:
+  id: 34
+  title: ილიადა
+  author: ჰომეროსი
+  isbn: 
+  created_at: 2021-02-11 01:59:48.010223000 Z
+  updated_at: 2021-02-11 01:59:48.040299000 Z
+  translator: რომან მიმინოშვილი
+  publisher: 
+  subtitle: 
+  public: false
+item_35:
+  id: 35
+  title: კალიგულა
+  author: ალბერტ კამიუ
+  isbn: 
+  created_at: 2021-02-11 01:59:48.046640000 Z
+  updated_at: 2021-02-11 01:59:48.062848000 Z
+  translator: 
+  publisher: 
+  subtitle: 
+  public: false
+item_64:
+  id: 64
+  title: პეტრონიუსი, „ტრიმალქიონის ნადიმი“
+  author: მალხაზ ხარბედია
+  isbn: 
+  created_at: 2021-02-12 20:49:43.638658000 Z
+  updated_at: 2021-03-15 10:03:59.783938000 Z
+  translator: 
+  publisher: არილი
+  subtitle: 
+  public: true
+item_43:
+  id: 43
+  title: პოლიტიკოსი
+  author: პლატონი
+  isbn: 
+  created_at: 2021-02-11 01:59:48.475655000 Z
+  updated_at: 2021-02-11 01:59:48.498068000 Z
+  translator: მაია შუხოშვილი
+  publisher: 
+  subtitle: 
+  public: false
+item_58:
+  id: 58
+  title: ძველი რომი
+  author: წერეთელი ა.
+  isbn: 
+  created_at: 2021-02-11 01:59:49.307606000 Z
+  updated_at: 2021-03-15 10:03:59.703783000 Z
+  translator: 
+  publisher: სამეცნიერო-მეთოდური კაბინეტის გამომცემლობა
+  subtitle: I
+  public: false
+item_55:
+  id: 55
+  title: ოიდიპოს მეფე
+  author: სოფოკლე
+  isbn: 
+  created_at: 2021-02-11 01:59:49.194197000 Z
+  updated_at: 2021-02-11 01:59:49.211372000 Z
+  translator: 
+  publisher: 
+  subtitle: 
+  public: false
+item_37:
+  id: 37
+  title: ძველი ბერძნული მითოლოგია
+  author: ნიკოლაი კუნი
+  isbn: 978-9941-9234-1-8
+  created_at: 2021-02-11 01:59:48.155912000 Z
+  updated_at: 2021-02-11 01:59:48.268052000 Z
+  translator: ბუაჩიძე შ.
+  publisher: პეგასი
+  subtitle: 
+  public: false
+item_59:
+  id: 59
+  title: ძველი რომი
+  author: წერეთელი ა.
+  isbn: 
+  created_at: 2021-02-11 01:59:49.496785000 Z
+  updated_at: 2021-03-15 10:03:59.719101000 Z
+  translator: 
+  publisher: სამეცნიერო-მეთოდური კაბინეტის გამომცემლობა
+  subtitle: II - სამოქალაქო ომების ეპოქა
+  public: false
+item_44:
+  id: 44
+  title: ტიმეოსი
+  author: პლატონი
+  isbn: 
+  created_at: 2021-02-11 01:59:48.501346000 Z
+  updated_at: 2021-02-11 01:59:48.540711000 Z
+  translator: ბაჩანა ბრეგვაძე
+  publisher: 
+  subtitle: 
+  public: false
+item_38:
+  id: 38
+  title: ფიქრები
+  author: მარკუს ავრელიუსი
+  isbn: 978-9941-0-0726-2
+  created_at: 2021-02-11 01:59:48.273988000 Z
+  updated_at: 2021-02-11 01:59:48.305912000 Z
+  translator: ბაჩანა ბრეგვაძე
+  publisher: CAPRE DIEM
+  subtitle: 
+  public: false
+item_39:
+  id: 39
+  title: სექსტუს როსციუსის დასაცავად
+  author: მარკუს ტულიუს ციცერონი
+  isbn: 
+  created_at: 2021-02-11 01:59:48.309494000 Z
+  updated_at: 2021-02-11 01:59:48.330755000 Z
+  translator: იამზე გაგუა
+  publisher: ბაკურ სულაკაურის გამომცემლობა
+  subtitle: 
+  public: false
+item_45:
+  id: 45
+  title: ნადიმი
+  author: პლატონი
+  isbn: 
+  created_at: 2021-02-11 01:59:48.544644000 Z
+  updated_at: 2021-02-11 01:59:48.578968000 Z
+  translator: ბაჩანა ბრეგვაძე
+  publisher: 
+  subtitle: 
+  public: false
+item_40:
+  id: 40
+  title: ოიდიპოსი კოლონოსში
+  author: სოფოკლე
+  isbn: 
+  created_at: 2021-02-11 01:59:48.334309000 Z
+  updated_at: 2021-02-11 01:59:48.356738000 Z
+  translator: 
+  publisher: ibooks.ge
+  subtitle: 
+  public: false
+item_41:
+  id: 41
+  title: ორესტეა
+  author: ესქილე
+  isbn: 
+  created_at: 2021-02-11 01:59:48.360944000 Z
+  updated_at: 2021-02-11 01:59:48.445355000 Z
+  translator: 
+  publisher: 
+  subtitle: 
+  public: false
+item_46:
+  id: 46
+  title: სოკრატეს აპოლოგია
+  author: პლატონი
+  isbn: 
+  created_at: 2021-02-11 01:59:48.581821000 Z
+  updated_at: 2021-02-11 01:59:48.600213000 Z
+  translator: პეტრე ქავთარაძე
+  publisher: არიფიონი
+  subtitle: 
+  public: false
+item_51:
+  id: 51
+  title: ეტრუსკული და ქართველური
+  author: რისმაგ გორდეზიანი
+  isbn: 
+  created_at: 2021-02-11 01:59:49.074293000 Z
+  updated_at: 2021-02-11 01:59:49.105946000 Z
+  translator: 
+  publisher: თბილისის უნივერსიტეტის გამომცემლობა
+  subtitle: 
+  public: false
+item_47:
+  id: 47
+  title: სახელმწიფო
+  author: პლატონი
+  isbn: 
+  created_at: 2021-02-11 01:59:48.604292000 Z
+  updated_at: 2021-02-11 01:59:48.633350000 Z
+  translator: ბაჩანა ბრეგვაძე
+  publisher: ნეკერი
+  subtitle: 
+  public: false
+item_63:
+  id: 63
+  title: თანამედროვე განათლება და კლასიკური ფილოლოგია
+  author: ტომას სტერნზ ელიოტი
+  isbn: 
+  created_at: 2021-02-12 20:49:43.618031000 Z
+  updated_at: 2021-03-15 10:03:59.760196000 Z
+  translator: მალხაზ ხარბედია
+  publisher: არილი
+  subtitle: 
+  public: true
+item_48:
+  id: 48
+  title: რჩეული ბიოგრაფები
+  author: პლუტარქე
+  isbn: 
+  created_at: 2021-02-11 01:59:48.636854000 Z
+  updated_at: 2021-02-11 01:59:48.814806000 Z
+  translator: აკაკი ურუშაძე
+  publisher: საბჭოთა საქართველო
+  subtitle: 
+  public: false
+item_52:
+  id: 52
+  title: ანტიგონე
+  author: სოფოკლე
+  isbn: 
+  created_at: 2021-02-11 01:59:49.109538000 Z
+  updated_at: 2021-02-11 01:59:49.145071000 Z
+  translator: 
+  publisher: 
+  subtitle: 
+  public: false
+item_56:
+  id: 56
+  title: მოგზაურობა შავი ზღვის გარშემო
+  author: ფლავიუს არიანე
+  isbn: 
+  created_at: 2021-02-11 01:59:49.214956000 Z
+  updated_at: 2021-02-11 01:59:49.254759000 Z
+  translator: ნათელა კეჭაღმაძე
+  publisher: საქართველოს სსრ მეცნიერებათა აკადემიის გამომცემლობა
+  subtitle: 
+  public: false
+item_53:
+  id: 53
+  title: ოიდიპოს მეფე
+  author: სოფოკლე
+  isbn: 
+  created_at: 2021-02-11 01:59:49.148875000 Z
+  updated_at: 2021-02-11 01:59:49.166887000 Z
+  translator: 
+  publisher: 
+  subtitle: 
+  public: false
+item_54:
+  id: 54
+  title: ოიდიპოს მეფე
+  author: სოფოკლე
+  isbn: 
+  created_at: 2021-02-11 01:59:49.172067000 Z
+  updated_at: 2021-02-11 01:59:49.191164000 Z
+  translator: სიმონ ყაუხჩიშვილის
+  publisher: 
+  subtitle: 
+  public: false
+item_62:
+  id: 62
+  title: პაიდეუო, პაიდეუეის, პაიდეუეი
+  author: მალხაზ ხარბედია
+  isbn: 
+  created_at: 2021-02-12 20:49:43.583121000 Z
+  updated_at: 2021-02-12 20:49:43.614342000 Z
+  translator: 
+  publisher: არილი, ლოგოსი
+  subtitle: 
+  public: false
+item_57:
+  id: 57
+  title: სიტყვები და დიალოგები
+  author: მარკუს ტულიუს ციცერონი
+  isbn: 
+  created_at: 2021-02-11 01:59:49.258286000 Z
+  updated_at: 2021-02-11 01:59:49.301418000 Z
+  translator: 
+  publisher: 
+  subtitle: 
+  public: false
+item_60:
+  id: 60
+  title: ისტორია
+  author: ჰეროდოტე
+  isbn: 
+  created_at: 2021-02-11 01:59:49.678608000 Z
+  updated_at: 2021-02-11 01:59:49.714903000 Z
+  translator: 
+  publisher: 
+  subtitle: 
+  public: false
+item_61:
+  id: 61
+  title: ოდისეა
+  author: ჰომეროსი
+  isbn: 
+  created_at: 2021-02-11 01:59:49.720116000 Z
+  updated_at: 2021-02-12 19:48:43.427963000 Z
+  translator: ზურაბ კიკნაძე, თამაზ ჩხენკელი
+  publisher: 
+  subtitle: 
+  public: false
+item_7:
+  id: 7
+  title: არეოპაგიტიკა
+  author: მიხეილ მახარაძე
+  isbn: 978-9941-439-00-1
+  created_at: 2021-02-11 01:59:46.394005000 Z
+  updated_at: 2021-03-15 10:03:59.523037000 Z
+  translator: 
+  publisher: ინტელექტი
+  subtitle: ფილოსოფიური მსოფლმხედველობა, ფილოსოფიური და თეოლოგიური წყაროები, გავლენა
+  public: false
+item_65:
+  id: 65
+  title: ბიბლიოთეკის იდეა, როგორც ევროპული კულტურის კლასიკური მოდელი
+  author: გრეგორი ნაჟი
+  isbn: 
+  created_at: 2021-02-12 20:49:43.659658000 Z
+  updated_at: 2021-03-15 10:03:59.816629000 Z
+  translator: მალხაზ ხარბედია
+  publisher: არილი
+  subtitle: 
+  public: true
+item_66:
+  id: 66
+  title: ანტიგონე
+  author: სოფოკლე
+  isbn: 
+  created_at: 2021-03-05 09:58:21.250724000 Z
+  updated_at: 2021-03-05 09:58:21.299445000 Z
+  translator: 
+  publisher: Philos, ibooks.ge
+  subtitle: 
+  public: false
+item_36:
+  id: 36
+  title: კომენტარები გალიის ომის შესახებ
+  author: კეისარი
+  isbn: 978-9941-0-8232-0
+  created_at: 2021-02-11 01:59:48.066175000 Z
+  updated_at: 2021-03-15 10:03:59.627949000 Z
+  translator: თეოდორა ყარალაშვილი
+  publisher: 
+  subtitle: წიგნი I-II
+  public: false
+item_33:
+  id: 33
+  title: ისტორია
+  author: თუკიდიდე
+  isbn: 978-9941-15-837-7
+  created_at: 2021-02-11 01:59:47.957729000 Z
+  updated_at: 2021-03-15 10:03:59.620858000 Z
+  translator: ლევან გორდეზიანი
+  publisher: 
+  subtitle: ანტიკური მწერლობა
+  public: false
