@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GeneralMailer < ActionMailer::Base
+  default from: Rails.application.credentials[:from_email]
   layout "general_mailer_layout"
 
   def notify(destination_email, subject, body)
