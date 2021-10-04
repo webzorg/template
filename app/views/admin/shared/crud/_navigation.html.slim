@@ -8,7 +8,7 @@
         = link_to t(:back), url_for(action: :index), class: "mx-2 btn btn-md btn-secondary"
 
       - if action_name.to_sym.eql?(:show) && @data[:actions].include?(:edit)
-        = link_to t(:edit), object_path_generator(:edit, @data[:object], @data), class: "mx-2 btn btn-md btn-warning"
+        = link_to t(:edit, object_name: current_model.model_name.human), object_path_generator(:edit, @data[:object], @data), class: "mx-2 btn btn-md btn-warning"
 
       - elsif action_name.to_sym.eql?(:edit) && @data[:actions].include?(:show)
-        = link_to t(:show), object_path_generator(:show, @data[:object], @data), class: "mx-2 btn btn-md btn-info"
+        = link_to t(:show, object_name: current_model.model_name.human, object_id: @data[:object].id), object_path_generator(:show, @data[:object], @data), class: "mx-2 btn btn-md btn-info"
