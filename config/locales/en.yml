@@ -19,6 +19,9 @@ en:
   about: About
   activerecord:
     models:
+      asset:
+        one: Asset
+        other: Assets
       wish_category: Wish Category
       user: User
       wish_urgency: Wish urgency
@@ -57,7 +60,10 @@ en:
   create: Create
   description: Description
   duration_in_hours: Duration in hours
-  edit: Edit
+  index: "%{object_name} Index"
+  edit: "Edit %{object_name}"
+  new: "New %{object_name}"
+  show: "%{object_name} - %{object_id}"
   edit_profile: Edit profile
   edit_your_wish: Edit your wish
   editing_profile: Editing %{role} profile
@@ -78,7 +84,6 @@ en:
   login: Login
   logout: Logout
   name: Name
-  new: New %{object_name}
   new_code_was_resent_to: New code was resent to
   not_authorized: Not authorized
   not_signed_up: Not signed up
@@ -160,3 +165,6 @@ en:
     payment_successfull:
     payment_failed:
     payment_failed_contact_support:
+    search_placeholder: "Title, Subtitle, Tags..."
+    assets_index: "%{model_name} Search"
+    no_results: No Results
