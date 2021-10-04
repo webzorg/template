@@ -84,7 +84,7 @@ module BaseHelper
   def smart_form_field(f, data, column_name)
     f.object = data[:object] if data[:object] && f.object.blank?
     column_data = data[:attributes][column_name]
-    column_type = column_data ? column_data[:type] : :text_field
+    column_type = column_data[:type] || :text_field
     html_options = {
       # id: "fg_#{column_name}",
       disabled: column_data[:disabled] && action_name == "edit"
@@ -113,13 +113,13 @@ module BaseHelper
           end
         }.join.html_safe
     when :select
-      html_options[:class] = "custom-select"
+      html_options[:class] = "form-control"
       field_options += [
         options_for_select(column_data[:collection], selected: data[:object].public_send("#{column_name}_before_type_cast")),
         { include_blank: column_data[:include_blank].nil? ? true : column_data[:include_blank] }
       ]
     when :collection_select
-      html_options[:class] = "custom-select"
+      html_options[:class] = "form-control"
       field_options += column_data[:options]
     when :datetime_select
       field_options += [
